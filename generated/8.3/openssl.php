@@ -191,13 +191,9 @@ function openssl_cms_verify(string $input_filename, int $flags = 0, ?string $cer
  * Signing Request represented by csr and saves it
  * in PEM format into the file named by output_filename.
  *
- * @param \OpenSSLCertificateSigningRequest|string $csr See CSR parameters for a list of valid values.
+ * @param \OpenSSLCertificateSigningRequest|string $csr
  * @param string $output_filename Path to the output file.
  * @param bool $no_text
- * The optional parameter notext affects
- * the verbosity of the output; if it is FALSE, then additional human-readable
- * information is included in the output. The default value of
- * notext is TRUE.
  * @throws OpensslException
  *
  */
@@ -217,13 +213,9 @@ function openssl_csr_export_to_file($csr, string $output_filename, bool $no_text
  * PEM format in output, which is passed by
  * reference.
  *
- * @param \OpenSSLCertificateSigningRequest|string $csr See CSR parameters for a list of valid values.
+ * @param \OpenSSLCertificateSigningRequest|string $csr
  * @param null|string $output on success, this string will contain the PEM encoded CSR
  * @param bool $no_text
- * The optional parameter notext affects
- * the verbosity of the output; if it is FALSE, then additional human-readable
- * information is included in the output. The default value of
- * notext is TRUE.
  * @throws OpensslException
  *
  */
@@ -241,7 +233,7 @@ function openssl_csr_export($csr, ?string &$output, bool $no_text = true): void
  * openssl_csr_get_public_key extracts the public key
  * from csr and prepares it for use by other functions.
  *
- * @param \OpenSSLCertificateSigningRequest|string $csr See CSR parameters for a list of valid values.
+ * @param \OpenSSLCertificateSigningRequest|string $csr
  * @param bool $short_names This parameter is ignored
  * @return \OpenSSLAsymmetricKey Returns an OpenSSLAsymmetricKey on success.
  * @throws OpensslException
@@ -263,7 +255,7 @@ function openssl_csr_get_public_key($csr, bool $short_names = true): \OpenSSLAsy
  * distinguished name information encoded in the csr
  * including fields commonName (CN), organizationName (O), countryName (C) etc.
  *
- * @param \OpenSSLCertificateSigningRequest|string $csr See CSR parameters for a list of valid values.
+ * @param \OpenSSLCertificateSigningRequest|string $csr
  * @param bool $short_names shortnames controls how the data is indexed in the
  * array - if shortnames is TRUE (the default) then
  * fields will be indexed with the short name form, otherwise, the long name
@@ -661,7 +653,7 @@ function openssl_pbkdf2(string $password, string $salt, int $key_length, int $it
  * certificate into a file named by
  * output_filename in a PKCS#12 file format.
  *
- * @param \OpenSSLCertificate|string $certificate See Key/Certificate parameters for a list of valid values.
+ * @param \OpenSSLCertificate|string $certificate
  * @param string $output_filename Path to the output file.
  * @param \OpenSSLAsymmetricKey|\OpenSSLCertificate|array|string $private_key Private key component of PKCS#12 file.
  * See Public/Private Key parameters for a list of valid values.
@@ -672,7 +664,7 @@ function openssl_pbkdf2(string $password, string $salt, int $key_length, int $it
  *
  *
  * Key
- * Description
+ * &Description;
  *
  *
  *
@@ -705,7 +697,7 @@ function openssl_pkcs12_export_to_file($certificate, string $output_filename, $p
  * certificate into a string named by
  * output in a PKCS#12 file format.
  *
- * @param \OpenSSLCertificate|string $certificate See Key/Certificate parameters for a list of valid values.
+ * @param \OpenSSLCertificate|string $certificate
  * @param null|string $output On success, this will hold the PKCS#12.
  * @param \OpenSSLAsymmetricKey|\OpenSSLCertificate|array|string $private_key Private key component of PKCS#12 file.
  * See Public/Private Key parameters for a list of valid values.
@@ -716,7 +708,7 @@ function openssl_pkcs12_export_to_file($certificate, string $output_filename, $p
  *
  *
  * Key
- * Description
+ * &Description;
  *
  *
  *
@@ -1465,13 +1457,9 @@ function openssl_x509_checkpurpose($certificate, int $purpose, array $ca_info = 
  * certificate into a file named by
  * output_filename in a PEM encoded format.
  *
- * @param \OpenSSLCertificate|string $certificate See Key/Certificate parameters for a list of valid values.
+ * @param \OpenSSLCertificate|string $certificate
  * @param string $output_filename Path to the output file.
  * @param bool $no_text
- * The optional parameter notext affects
- * the verbosity of the output; if it is FALSE, then additional human-readable
- * information is included in the output. The default value of
- * notext is TRUE.
  * @throws OpensslException
  *
  */
@@ -1490,13 +1478,9 @@ function openssl_x509_export_to_file($certificate, string $output_filename, bool
  * certificate into a string named by
  * output in a PEM encoded format.
  *
- * @param \OpenSSLCertificate|string $certificate See Key/Certificate parameters for a list of valid values.
+ * @param \OpenSSLCertificate|string $certificate
  * @param null|string $output On success, this will hold the PEM.
  * @param bool $no_text
- * The optional parameter notext affects
- * the verbosity of the output; if it is FALSE, then additional human-readable
- * information is included in the output. The default value of
- * notext is TRUE.
  * @throws OpensslException
  *
  */
@@ -1514,7 +1498,7 @@ function openssl_x509_export($certificate, ?string &$output, bool $no_text = tru
  * openssl_x509_fingerprint returns the digest of
  * certificate as a string.
  *
- * @param \OpenSSLCertificate|string $certificate See Key/Certificate parameters for a list of valid values.
+ * @param \OpenSSLCertificate|string $certificate
  * @param string $digest_algo The digest method or hash algorithm to use, e.g. "sha256", one of openssl_get_md_methods.
  * @param bool $binary When set to TRUE, outputs raw binary data. FALSE outputs lowercase hexits.
  * @return string Returns a string containing the calculated certificate fingerprint as lowercase hexits unless binary is set to TRUE in which case the raw binary representation of the message digest is returned.

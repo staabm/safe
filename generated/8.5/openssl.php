@@ -81,11 +81,11 @@ function openssl_cms_decrypt(string $input_filename, string $output_filename, $c
  * @param int $flags Flags to be passed to CMS_sign.
  * @param int $encoding An encoding to output. One of OPENSSL_ENCODING_SMIME,
  * OPENSSL_ENCODING_DER or OPENSSL_ENCODING_PEM.
- * @param int $cipher_algo A cypher to use.
+ * @param int|string $cipher_algo A cipher to use.
  * @throws OpensslException
  *
  */
-function openssl_cms_encrypt(string $input_filename, string $output_filename, $certificate, ?array $headers, int $flags = 0, int $encoding = OPENSSL_ENCODING_SMIME, int $cipher_algo = OPENSSL_CIPHER_AES_128_CBC): void
+function openssl_cms_encrypt(string $input_filename, string $output_filename, $certificate, ?array $headers, int $flags = 0, int $encoding = OPENSSL_ENCODING_SMIME, $cipher_algo = OPENSSL_CIPHER_AES_128_CBC): void
 {
     error_clear_last();
     $safeResult = \openssl_cms_encrypt($input_filename, $output_filename, $certificate, $headers, $flags, $encoding, $cipher_algo);
@@ -192,13 +192,9 @@ function openssl_cms_verify(string $input_filename, int $flags = 0, ?string $cer
  * in PEM format into the file named by
  * output_filename.
  *
- * @param \OpenSSLCertificateSigningRequest|string $csr See CSR parameters for a list of valid values.
+ * @param \OpenSSLCertificateSigningRequest|string $csr
  * @param string $output_filename Path to the output file.
  * @param bool $no_text
- * The optional parameter notext affects
- * the verbosity of the output; if it is FALSE, then additional human-readable
- * information is included in the output. The default value of
- * notext is TRUE.
  * @throws OpensslException
  *
  */
@@ -218,14 +214,10 @@ function openssl_csr_export_to_file($csr, string $output_filename, bool $no_text
  * PEM format in output, which is passed by
  * reference.
  *
- * @param \OpenSSLCertificateSigningRequest|string $csr See CSR parameters for a list of valid values.
+ * @param \OpenSSLCertificateSigningRequest|string $csr
  * @param null|string $output on success, this string will contain the PEM
  * encoded CSR
  * @param bool $no_text
- * The optional parameter notext affects
- * the verbosity of the output; if it is FALSE, then additional human-readable
- * information is included in the output. The default value of
- * notext is TRUE.
  * @throws OpensslException
  *
  */
@@ -243,7 +235,7 @@ function openssl_csr_export($csr, ?string &$output, bool $no_text = true): void
  * openssl_csr_get_public_key extracts the public key
  * from csr and prepares it for use by other functions.
  *
- * @param \OpenSSLCertificateSigningRequest|string $csr See CSR parameters for a list of valid values.
+ * @param \OpenSSLCertificateSigningRequest|string $csr
  * @param bool $short_names This parameter is ignored
  * @return \OpenSSLAsymmetricKey Returns an OpenSSLAsymmetricKey on success.
  * @throws OpensslException
@@ -265,7 +257,7 @@ function openssl_csr_get_public_key($csr, bool $short_names = true): \OpenSSLAsy
  * distinguished name information encoded in the csr
  * including fields commonName (CN), organizationName (O), countryName (C) etc.
  *
- * @param \OpenSSLCertificateSigningRequest|string $csr See CSR parameters for a list of valid values.
+ * @param \OpenSSLCertificateSigningRequest|string $csr
  * @param bool $short_names short_names controls how the data is indexed in the
  * array - if short_names is TRUE (the default) then
  * fields will be indexed with the short name form, otherwise, the long name
@@ -475,10 +467,7 @@ function openssl_csr_sign($csr, $ca_certificate, $private_key, int $days, ?array
  * @param string $passphrase The passphrase. If the passphrase is shorter than expected, it is silently padded with
  * NUL characters; if the passphrase is longer than expected, it is
  * silently truncated.
- * @param int $options options can be one of
- * OPENSSL_RAW_DATA,
- * OPENSSL_ZERO_PADDING
- * or OPENSSL_DONT_ZERO_PAD_KEY.
+ * @param int $options
  * @param string $iv A non-NULL Initialization Vector. If the IV is shorter than expected, it is padded with
  * NUL characters and warning is emitted; if the passphrase is longer
  * than expected, it is truncated and warning is emitted.
@@ -658,7 +647,7 @@ function openssl_open(string $data, ?string &$output, string $encrypted_key, $pr
  * a key derivation function defined in PKCS5 v2.
  *
  * @param string $password Password from which the derived key is generated.
- * @param string $salt PBKDF2 recommends a crytographic salt of at least 128 bits (16 bytes).
+ * @param string $salt
  * @param int $key_length Length of desired output key.
  * @param int $iterations The number of iterations desired.
  * NIST
@@ -686,7 +675,7 @@ function openssl_pbkdf2(string $password, string $salt, int $key_length, int $it
  * certificate into a file named by
  * output_filename in a PKCS#12 file format.
  *
- * @param \OpenSSLCertificate|string $certificate See Key/Certificate parameters for a list of valid values.
+ * @param \OpenSSLCertificate|string $certificate
  * @param string $output_filename Path to the output file.
  * @param \OpenSSLAsymmetricKey|\OpenSSLCertificate|array|string $private_key Private key component of PKCS#12 file.
  * See Public/Private Key parameters for a list of valid values.
@@ -697,7 +686,7 @@ function openssl_pbkdf2(string $password, string $salt, int $key_length, int $it
  *
  *
  * Key
- * Description
+ * &Description;
  *
  *
  *
@@ -730,7 +719,7 @@ function openssl_pkcs12_export_to_file($certificate, string $output_filename, $p
  * certificate into a string named by
  * output in a PKCS#12 file format.
  *
- * @param \OpenSSLCertificate|string $certificate See Key/Certificate parameters for a list of valid values.
+ * @param \OpenSSLCertificate|string $certificate
  * @param null|string $output On success, this will hold the PKCS#12.
  * @param \OpenSSLAsymmetricKey|\OpenSSLCertificate|array|string $private_key Private key component of PKCS#12 file.
  * See Public/Private Key parameters for a list of valid values.
@@ -741,7 +730,7 @@ function openssl_pkcs12_export_to_file($certificate, string $output_filename, $p
  *
  *
  * Key
- * Description
+ * &Description;
  *
  *
  *
@@ -771,7 +760,7 @@ function openssl_pkcs12_export($certificate, ?string &$output, $private_key, str
 
 /**
  * openssl_pkcs12_read parses the PKCS#12 certificate store supplied by
- * pkcs12 into a array named
+ * pkcs12 into an array named
  * certificates.
  *
  * @param string $pkcs12 The certificate store contents, not its file name.
@@ -1247,10 +1236,10 @@ function openssl_pkey_get_public($public_key): \OpenSSLAsymmetricKey
  *
  *
  * Options
- * Type
+ * &Type;
  * Format
  * Required
- * Description
+ * &Description;
  *
  *
  *
@@ -1295,10 +1284,10 @@ function openssl_pkey_get_public($public_key): \OpenSSLAsymmetricKey
  *
  *
  * Options
- * Type
+ * &Type;
  * Format
  * Required
- * Description
+ * &Description;
  *
  *
  *
@@ -1408,10 +1397,10 @@ function openssl_pkey_get_public($public_key): \OpenSSLAsymmetricKey
  *
  *
  * Options
- * Type
+ * &Type;
  * Format
  * Required
- * Description
+ * &Description;
  *
  *
  *
@@ -1471,13 +1460,18 @@ function openssl_pkey_new(?array $options = null): \OpenSSLAsymmetricKey
  * OPENSSL_SSLV23_PADDING,
  * OPENSSL_PKCS1_OAEP_PADDING,
  * OPENSSL_NO_PADDING.
+ * @param null|string $digest_algo
  * @throws OpensslException
  *
  */
-function openssl_private_decrypt(string $data, ?string &$decrypted_data, $private_key, int $padding = OPENSSL_PKCS1_PADDING): void
+function openssl_private_decrypt(string $data, ?string &$decrypted_data, $private_key, int $padding = OPENSSL_PKCS1_PADDING, ?string $digest_algo = null): void
 {
     error_clear_last();
-    $safeResult = \openssl_private_decrypt($data, $decrypted_data, $private_key, $padding);
+    if ($digest_algo !== null) {
+        $safeResult = \openssl_private_decrypt($data, $decrypted_data, $private_key, $padding, $digest_algo);
+    } else {
+        $safeResult = \openssl_private_decrypt($data, $decrypted_data, $private_key, $padding);
+    }
     if ($safeResult === false) {
         throw OpensslException::createFromPhpError();
     }
@@ -1561,13 +1555,18 @@ function openssl_public_decrypt(string $data, ?string &$decrypted_data, $public_
  * OPENSSL_SSLV23_PADDING,
  * OPENSSL_PKCS1_OAEP_PADDING,
  * OPENSSL_NO_PADDING.
+ * @param null|string $digest_algo
  * @throws OpensslException
  *
  */
-function openssl_public_encrypt(string $data, ?string &$encrypted_data, $public_key, int $padding = OPENSSL_PKCS1_PADDING): void
+function openssl_public_encrypt(string $data, ?string &$encrypted_data, $public_key, int $padding = OPENSSL_PKCS1_PADDING, ?string $digest_algo = null): void
 {
     error_clear_last();
-    $safeResult = \openssl_public_encrypt($data, $encrypted_data, $public_key, $padding);
+    if ($digest_algo !== null) {
+        $safeResult = \openssl_public_encrypt($data, $encrypted_data, $public_key, $padding, $digest_algo);
+    } else {
+        $safeResult = \openssl_public_encrypt($data, $encrypted_data, $public_key, $padding);
+    }
     if ($safeResult === false) {
         throw OpensslException::createFromPhpError();
     }
@@ -1657,13 +1656,14 @@ function openssl_seal(string $data, ?string &$sealed_data, ?array &$encrypted_ke
  * @param int|string $algorithm int - one of these Signature Algorithms.
  *
  * string - a valid string returned by openssl_get_md_methods example, "sha256WithRSAEncryption" or "sha384".
+ * @param int $padding
  * @throws OpensslException
  *
  */
-function openssl_sign(string $data, ?string &$signature, $private_key, $algorithm = OPENSSL_ALGO_SHA1): void
+function openssl_sign(string $data, ?string &$signature, $private_key, $algorithm = OPENSSL_ALGO_SHA1, int $padding = 0): void
 {
     error_clear_last();
-    $safeResult = \openssl_sign($data, $signature, $private_key, $algorithm);
+    $safeResult = \openssl_sign($data, $signature, $private_key, $algorithm, $padding);
     if ($safeResult === false) {
         throw OpensslException::createFromPhpError();
     }
@@ -1766,15 +1766,16 @@ function openssl_spki_verify(string $spki): void
  * @param int|string $algorithm int - one of these Signature Algorithms.
  *
  * string - a valid string returned by openssl_get_md_methods example, "sha1WithRSAEncryption" or "sha512".
+ * @param int $padding
  * @return int Returns 1 if the signature is correct, 0 if it is incorrect, and
  * -1.
  * @throws OpensslException
  *
  */
-function openssl_verify(string $data, string $signature, $public_key, $algorithm = OPENSSL_ALGO_SHA1): int
+function openssl_verify(string $data, string $signature, $public_key, $algorithm = OPENSSL_ALGO_SHA1, int $padding = 0): int
 {
     error_clear_last();
-    $safeResult = \openssl_verify($data, $signature, $public_key, $algorithm);
+    $safeResult = \openssl_verify($data, $signature, $public_key, $algorithm, $padding);
     if ($safeResult === false) {
         throw OpensslException::createFromPhpError();
     }
@@ -1863,13 +1864,9 @@ function openssl_x509_checkpurpose($certificate, int $purpose, array $ca_info = 
  * certificate into a file named by
  * output_filename in a PEM encoded format.
  *
- * @param \OpenSSLCertificate|string $certificate See Key/Certificate parameters for a list of valid values.
+ * @param \OpenSSLCertificate|string $certificate
  * @param string $output_filename Path to the output file.
  * @param bool $no_text
- * The optional parameter notext affects
- * the verbosity of the output; if it is FALSE, then additional human-readable
- * information is included in the output. The default value of
- * notext is TRUE.
  * @throws OpensslException
  *
  */
@@ -1888,13 +1885,9 @@ function openssl_x509_export_to_file($certificate, string $output_filename, bool
  * certificate into a string named by
  * output in a PEM encoded format.
  *
- * @param \OpenSSLCertificate|string $certificate See Key/Certificate parameters for a list of valid values.
+ * @param \OpenSSLCertificate|string $certificate
  * @param null|string $output On success, this will hold the PEM.
  * @param bool $no_text
- * The optional parameter notext affects
- * the verbosity of the output; if it is FALSE, then additional human-readable
- * information is included in the output. The default value of
- * notext is TRUE.
  * @throws OpensslException
  *
  */
@@ -1912,7 +1905,7 @@ function openssl_x509_export($certificate, ?string &$output, bool $no_text = tru
  * openssl_x509_fingerprint returns the digest of
  * certificate as a string.
  *
- * @param \OpenSSLCertificate|string $certificate See Key/Certificate parameters for a list of valid values.
+ * @param \OpenSSLCertificate|string $certificate
  * @param string $digest_algo The digest method or hash algorithm to use, e.g. "sha256", one of openssl_get_md_methods.
  * @param bool $binary When set to TRUE, outputs raw binary data. FALSE outputs lowercase hexits.
  * @return string Returns a string containing the calculated certificate fingerprint as lowercase hexits unless binary is set to TRUE in which case the raw binary representation of the message digest is returned.

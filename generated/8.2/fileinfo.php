@@ -7,7 +7,7 @@ use Safe\Exceptions\FileinfoException;
 /**
  * This function closes the instance opened by finfo_open.
  *
- * @param \finfo $finfo An finfo instance, returned by finfo_open.
+ * @param \finfo $finfo
  * @throws FileinfoException
  *
  */

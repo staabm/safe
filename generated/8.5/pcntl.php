@@ -5,18 +5,44 @@ namespace Safe;
 use Safe\Exceptions\PcntlException;
 
 /**
+ * Executes the program with the given arguments.
  *
- *
- * @param int|null $pid
- * @return array|bool
+ * @param string $path path must be the path to a binary executable or a
+ * script with a valid path pointing to an executable in the shebang (
+ * #!/usr/local/bin/perl for example) as the first line.  See your system's
+ * man execve(2) page for additional information.
+ * @param array $args args is an array of argument strings passed to the
+ * program.
+ * @param array $env_vars env_vars is an array of strings which are passed as
+ * environment to the program.  The array is in the format of name =&gt; value,
+ * the key being the name of the environmental variable and the value being
+ * the value of that variable.
  * @throws PcntlException
  *
  */
-function pcntl_getcpuaffinity(?int $pid = null)
+function pcntl_exec(string $path, array $args = [], array $env_vars = []): void
 {
     error_clear_last();
-    if ($pid !== null) {
-        $safeResult = \pcntl_getcpuaffinity($pid);
+    $safeResult = \pcntl_exec($path, $args, $env_vars);
+    if ($safeResult === false) {
+        throw PcntlException::createFromPhpError();
+    }
+}
+
+
+/**
+ *
+ *
+ * @param int|null $process_id
+ * @return array
+ * @throws PcntlException
+ *
+ */
+function pcntl_getcpuaffinity(?int $process_id = null): array
+{
+    error_clear_last();
+    if ($process_id !== null) {
+        $safeResult = \pcntl_getcpuaffinity($process_id);
     } else {
         $safeResult = \pcntl_getcpuaffinity();
     }
@@ -62,20 +88,44 @@ function pcntl_getpriority(?int $process_id = null, int $mode = PRIO_PROCESS): i
 /**
  *
  *
- * @param int|null $pid
- * @param array $hmask
+ * @param int|null $process_id
+ * @param array $cpu_ids
  * @throws PcntlException
  *
  */
-function pcntl_setcpuaffinity(?int $pid = null, ?array $hmask = null): void
+function pcntl_setcpuaffinity(?int $process_id = null, array $cpu_ids = []): void
 {
     error_clear_last();
-    if ($hmask !== null) {
-        $safeResult = \pcntl_setcpuaffinity($pid, $hmask);
-    } elseif ($pid !== null) {
-        $safeResult = \pcntl_setcpuaffinity($pid);
+    if ($cpu_ids !== []) {
+        $safeResult = \pcntl_setcpuaffinity($process_id, $cpu_ids);
+    } elseif ($process_id !== null) {
+        $safeResult = \pcntl_setcpuaffinity($process_id);
     } else {
         $safeResult = \pcntl_setcpuaffinity();
+    }
+    if ($safeResult === false) {
+        throw PcntlException::createFromPhpError();
+    }
+}
+
+
+/**
+ *
+ *
+ * @param int|null $process_id
+ * @param int $nstype
+ * @throws PcntlException
+ *
+ */
+function pcntl_setns(?int $process_id = null, int $nstype = CLONE_NEWNET): void
+{
+    error_clear_last();
+    if ($nstype !== CLONE_NEWNET) {
+        $safeResult = \pcntl_setns($process_id, $nstype);
+    } elseif ($process_id !== null) {
+        $safeResult = \pcntl_setns($process_id);
+    } else {
+        $safeResult = \pcntl_setns();
     }
     if ($safeResult === false) {
         throw PcntlException::createFromPhpError();
@@ -299,4 +349,34 @@ function pcntl_sigwaitinfo(array $signals, ?array &$info = []): int
         throw PcntlException::createFromPhpError();
     }
     return $safeResult;
+}
+
+
+/**
+ * pcntl_unshare allows a process to disassociate parts of its execution context that are
+ * currently being shared with other processes.
+ * The main use of pcntl_unshare is to allow a process to control
+ * its shared execution context without creating a new process.
+ *
+ * @param int $flags The flags parameter is a bitmask that specifies which parts of the execution context should be unshared.
+ * This parameter is specified by ORing together zero or more of the CLONE_* constants:
+ *
+ * CLONE_NEWNS
+ * CLONE_NEWIPC
+ * CLONE_NEWUTS
+ * CLONE_NEWNET
+ * CLONE_NEWPID
+ * CLONE_NEWUSER
+ * CLONE_NEWCGROUP
+ *
+ * @throws PcntlException
+ *
+ */
+function pcntl_unshare(int $flags): void
+{
+    error_clear_last();
+    $safeResult = \pcntl_unshare($flags);
+    if ($safeResult === false) {
+        throw PcntlException::createFromPhpError();
+    }
 }

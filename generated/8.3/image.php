@@ -101,8 +101,7 @@ function image_type_to_extension(int $image_type, bool $include_dot = true): str
 /**
  *
  *
- * @param \GdImage $image A GdImage object, returned by one of the image creation functions,
- * such as imagecreatetruecolor.
+ * @param \GdImage $image
  * @param array $affine Array with keys 0 to 5.
  * @param array|null $clip Array with keys "x", "y", "width" and "height"; or NULL.
  * @return \GdImage Return affined image object on success.
@@ -189,8 +188,7 @@ function imageaffinematrixget(int $type, $options): array
  * information, replacing the destination pixel.  Blending mode is not available
  * when drawing on palette images.
  *
- * @param \GdImage $image A GdImage object, returned by one of the image creation functions,
- * such as imagecreatetruecolor.
+ * @param \GdImage $image
  * @param bool $enable Whether to enable the blending mode or not. On true color images
  * the default value is TRUE otherwise the default value is FALSE
  * @throws ImageException
@@ -218,8 +216,7 @@ function imagealphablending(\GdImage $image, bool $enable): void
  * other colors. The lack of alpha component support does not allow an alpha
  * based antialiasing method.
  *
- * @param \GdImage $image A GdImage object, returned by one of the image creation functions,
- * such as imagecreatetruecolor.
+ * @param \GdImage $image
  * @param bool $enable Whether to enable antialiasing or not.
  * @throws ImageException
  *
@@ -238,8 +235,7 @@ function imageantialias(\GdImage $image, bool $enable): void
  * imagearc draws an arc of circle centered at the given
  * coordinates.
  *
- * @param \GdImage $image A GdImage object, returned by one of the image creation functions,
- * such as imagecreatetruecolor.
+ * @param \GdImage $image
  * @param int $center_x x-coordinate of the center.
  * @param int $center_y y-coordinate of the center.
  * @param int $width The arc width.
@@ -265,8 +261,7 @@ function imagearc(\GdImage $image, int $center_x, int $center_y, int $width, int
 /**
  * Outputs or saves a AVIF Raster image from the given image.
  *
- * @param \GdImage $image A GdImage object, returned by one of the image creation functions,
- * such as imagecreatetruecolor.
+ * @param \GdImage $image
  * @param null|resource|string $file The path or an open stream resource (which is automatically closed after this function returns) to save the file to. If not set or NULL, the raw image stream will be output directly.
  * @param int $quality quality is optional, and ranges from 0 (worst quality, smaller file)
  * to 100 (best quality, larger file).
@@ -298,8 +293,7 @@ function imageavif(\GdImage $image, $file = null, int $quality = -1, int $speed 
 /**
  * Outputs or saves a BMP version of the given image.
  *
- * @param \GdImage $image A GdImage object, returned by one of the image creation functions,
- * such as imagecreatetruecolor.
+ * @param \GdImage $image
  * @param null|resource|string $file The path or an open stream resource (which is automatically closed after this function returns) to save the file to. If not set or NULL, the raw image stream will be output directly.
  *
  * NULL is invalid if the compressed arguments is
@@ -331,11 +325,8 @@ function imagebmp(\GdImage $image, $file = null, bool $compressed = true): void
  * x,y (top left is 0,
  * 0) with the color color.
  *
- * @param \GdImage $image A GdImage object, returned by one of the image creation functions,
- * such as imagecreatetruecolor.
- * @param int $font Can be 1, 2, 3, 4, 5 for built-in
- * fonts in latin2 encoding (where higher numbers corresponding to larger fonts) or GdFont instance,
- * returned by imageloadfont.
+ * @param \GdImage $image
+ * @param int $font
  * @param int $x x-coordinate of the start.
  * @param int $y y-coordinate of the start.
  * @param string $char The character to draw.
@@ -357,11 +348,8 @@ function imagechar(\GdImage $image, int $font, int $x, int $y, string $char, int
  * Draws the character char vertically at the specified
  * coordinate on the given image.
  *
- * @param \GdImage $image A GdImage object, returned by one of the image creation functions,
- * such as imagecreatetruecolor.
- * @param int $font Can be 1, 2, 3, 4, 5 for built-in
- * fonts in latin2 encoding (where higher numbers corresponding to larger fonts) or GdFont instance,
- * returned by imageloadfont.
+ * @param \GdImage $image
+ * @param int $font
  * @param int $x x-coordinate of the start.
  * @param int $y y-coordinate of the start.
  * @param string $char The character to draw.
@@ -388,8 +376,7 @@ function imagecharup(\GdImage $image, int $font, int $x, int $y, string $char, i
  * integer. Use bitshifting and masking to access the distinct red, green and blue
  * component values:
  *
- * @param \GdImage $image A GdImage object, returned by one of the image creation functions,
- * such as imagecreatetruecolor.
+ * @param \GdImage $image
  * @param int $x x-coordinate of the point.
  * @param int $y y-coordinate of the point.
  * @return int Returns the index of the color.
@@ -412,8 +399,7 @@ function imagecolorat(\GdImage $image, int $x, int $y): int
  * imagecolorallocate or
  * imagecolorallocatealpha.
  *
- * @param \GdImage $image A GdImage object, returned by one of the image creation functions,
- * such as imagecreatetruecolor.
+ * @param \GdImage $image
  * @param int $color The color identifier.
  * @throws ImageException
  *
@@ -453,8 +439,7 @@ function imagecolormatch(\GdImage $image1, \GdImage $image2): void
  * palleted images without the overhead of performing the actual
  * flood-fill.
  *
- * @param \GdImage $image A GdImage object, returned by one of the image creation functions,
- * such as imagecreatetruecolor.
+ * @param \GdImage $image
  * @param int $color An index in the palette.
  * @param int $red Value of red component.
  * @param int $green Value of green component.
@@ -476,8 +461,7 @@ function imagecolorset(\GdImage $image, int $color, int $red, int $green, int $b
 /**
  * Gets the color for a specified index.
  *
- * @param \GdImage $image A GdImage object, returned by one of the image creation functions,
- * such as imagecreatetruecolor.
+ * @param \GdImage $image
  * @param int $color The color index.
  * @return int Returns an associative array with red, green, blue and alpha keys that
  * contain the appropriate values for the specified color index.
@@ -495,8 +479,7 @@ function imagecolorsforindex(\GdImage $image, int $color): int
  * Applies a convolution matrix on the image, using the given coefficient and
  * offset.
  *
- * @param \GdImage $image A GdImage object, returned by one of the image creation functions,
- * such as imagecreatetruecolor.
+ * @param \GdImage $image
  * @param array $matrix A 3x3 matrix: an array of three arrays of three floats.
  * @param float $divisor The divisor of the result of the convolution, used for normalization.
  * @param float $offset Color offset.
@@ -1049,8 +1032,7 @@ function imagecreatetruecolor(int $width, int $height): \GdImage
  * Crops an image to the given rectangular area and returns the resulting image.
  * The given image is not modified.
  *
- * @param \GdImage $image A GdImage object, returned by one of the image creation functions,
- * such as imagecreatetruecolor.
+ * @param \GdImage $image
  * @param array $rectangle The cropping rectangle as array with keys
  * x, y, width and
  * height.
@@ -1073,8 +1055,7 @@ function imagecrop(\GdImage $image, array $rectangle): \GdImage
  * Automatically crops an image according to the given
  * mode.
  *
- * @param \GdImage $image A GdImage object, returned by one of the image creation functions,
- * such as imagecreatetruecolor.
+ * @param \GdImage $image
  * @param int $mode One of the following constants:
  * @param float $threshold
  * @param int $color
@@ -1099,8 +1080,7 @@ function imagecropauto(\GdImage $image, int $mode = IMG_CROP_DEFAULT, float $thr
  * imagesetstyle and imageline
  * instead.
  *
- * @param \GdImage $image A GdImage object, returned by one of the image creation functions,
- * such as imagecreatetruecolor.
+ * @param \GdImage $image
  * @param int $x1 Upper left x coordinate.
  * @param int $y1 Upper left y coordinate 0, 0 is the top left corner of the image.
  * @param int $x2 Bottom right x coordinate.
@@ -1123,8 +1103,7 @@ function imagedashedline(\GdImage $image, int $x1, int $y1, int $x2, int $y2, in
  * Prior to PHP 8.0.0, imagedestroy freed any memory associated
  * with image image.
  *
- * @param \GdImage $image A GdImage object, returned by one of the image creation functions,
- * such as imagecreatetruecolor.
+ * @param \GdImage $image
  * @throws ImageException
  *
  */
@@ -1141,8 +1120,7 @@ function imagedestroy(\GdImage $image): void
 /**
  * Draws an ellipse centered at the specified coordinates.
  *
- * @param \GdImage $image A GdImage object, returned by one of the image creation functions,
- * such as imagecreatetruecolor.
+ * @param \GdImage $image
  * @param int $center_x x-coordinate of the center.
  * @param int $center_y y-coordinate of the center.
  * @param int $width The ellipse width.
@@ -1166,8 +1144,7 @@ function imageellipse(\GdImage $image, int $center_x, int $center_y, int $width,
  * with the given color in the
  * image.
  *
- * @param \GdImage $image A GdImage object, returned by one of the image creation functions,
- * such as imagecreatetruecolor.
+ * @param \GdImage $image
  * @param int $x x-coordinate of start point.
  * @param int $y y-coordinate of start point.
  * @param int $color The fill color. A color identifier created with imagecolorallocate.
@@ -1188,8 +1165,7 @@ function imagefill(\GdImage $image, int $x, int $y, int $color): void
  * Draws a partial arc centered at the specified coordinate in the
  * given image.
  *
- * @param \GdImage $image A GdImage object, returned by one of the image creation functions,
- * such as imagecreatetruecolor.
+ * @param \GdImage $image
  * @param int $center_x x-coordinate of the center.
  * @param int $center_y y-coordinate of the center.
  * @param int $width The arc width.
@@ -1232,8 +1208,7 @@ function imagefilledarc(\GdImage $image, int $center_x, int $center_y, int $widt
  * Draws an ellipse centered at the specified coordinate on the given
  * image.
  *
- * @param \GdImage $image A GdImage object, returned by one of the image creation functions,
- * such as imagecreatetruecolor.
+ * @param \GdImage $image
  * @param int $center_x x-coordinate of the center.
  * @param int $center_y y-coordinate of the center.
  * @param int $width The ellipse width.
@@ -1257,8 +1232,7 @@ function imagefilledellipse(\GdImage $image, int $center_x, int $center_y, int $
  * image starting at point 1 and ending at point 2.
  * 0, 0 is the top left corner of the image.
  *
- * @param \GdImage $image A GdImage object, returned by one of the image creation functions,
- * such as imagecreatetruecolor.
+ * @param \GdImage $image
  * @param int $x1 x-coordinate for point 1.
  * @param int $y1 y-coordinate for point 1.
  * @param int $x2 x-coordinate for point 2.
@@ -1284,8 +1258,7 @@ function imagefilledrectangle(\GdImage $image, int $x1, int $y1, int $x2, int $y
  * y (top left is 0, 0) and the region is
  * filled with color color.
  *
- * @param \GdImage $image A GdImage object, returned by one of the image creation functions,
- * such as imagecreatetruecolor.
+ * @param \GdImage $image
  * @param int $x x-coordinate of start.
  * @param int $y y-coordinate of start.
  * @param int $border_color The border color. A color identifier created with imagecolorallocate.
@@ -1307,8 +1280,7 @@ function imagefilltoborder(\GdImage $image, int $x, int $y, int $border_color, i
  * imagefilter applies the given filter
  * filter on the image.
  *
- * @param \GdImage $image A GdImage object, returned by one of the image creation functions,
- * such as imagecreatetruecolor.
+ * @param \GdImage $image
  * @param int $filter filter can be one of the following:
  *
  *
@@ -1457,8 +1429,7 @@ function imagefilter(\GdImage $image, int $filter, int ...$args): void
  * Flips the image image using the given
  * mode.
  *
- * @param \GdImage $image A GdImage object, returned by one of the image creation functions,
- * such as imagecreatetruecolor.
+ * @param \GdImage $image
  * @param int $mode Flip mode, this can be one of the IMG_FLIP_* constants:
  *
  *
@@ -1599,8 +1570,7 @@ function imageftbbox(float $size, float $angle, string $font_filename, string $s
 /**
  *
  *
- * @param \GdImage $image A GdImage object, returned by one of the image creation functions,
- * such as imagecreatetruecolor.
+ * @param \GdImage $image
  * @param float $size The font size to use in points.
  * @param float $angle The angle in degrees, with 0 degrees being left-to-right reading text.
  * Higher values represent a counter-clockwise rotation. For example, a
@@ -1709,8 +1679,7 @@ function imagefttext(\GdImage $image, float $size, float $angle, int $x, int $y,
  * Applies gamma correction to the given gd image
  * given an input and an output gamma.
  *
- * @param \GdImage $image A GdImage object, returned by one of the image creation functions,
- * such as imagecreatetruecolor.
+ * @param \GdImage $image
  * @param float $input_gamma The input gamma.
  * @param float $output_gamma The output gamma.
  * @throws ImageException
@@ -1729,8 +1698,7 @@ function imagegammacorrect(\GdImage $image, float $input_gamma, float $output_ga
 /**
  * Outputs a GD image to the given file.
  *
- * @param \GdImage $image A GdImage object, returned by one of the image creation functions,
- * such as imagecreatetruecolor.
+ * @param \GdImage $image
  * @param null|resource|string $file The path or an open stream resource (which is automatically closed after this function returns) to save the file to. If not set or NULL, the raw image stream will be output directly.
  * @throws ImageException
  *
@@ -1752,8 +1720,7 @@ function imagegd(\GdImage $image, $file = null): void
 /**
  * Outputs a GD2 image to the given file.
  *
- * @param \GdImage $image A GdImage object, returned by one of the image creation functions,
- * such as imagecreatetruecolor.
+ * @param \GdImage $image
  * @param null|resource|string $file The path or an open stream resource (which is automatically closed after this function returns) to save the file to. If not set or NULL, the raw image stream will be output directly.
  * @param int $chunk_size Chunk size.
  * @param int $mode Either IMG_GD2_RAW or
@@ -1792,8 +1759,7 @@ function imagegd2(\GdImage $image, $file = null, int $chunk_size = 128, int $mod
  * imagecolortransparent, in which case the
  * image format will be GIF89a.
  *
- * @param \GdImage $image A GdImage object, returned by one of the image creation functions,
- * such as imagecreatetruecolor.
+ * @param \GdImage $image
  * @param null|resource|string $file The path or an open stream resource (which is automatically closed after this function returns) to save the file to. If not set or NULL, the raw image stream will be output directly.
  * @throws ImageException
  *
@@ -1854,8 +1820,7 @@ function imagegrabwindow(int $handle, bool $client_area = false): \GdImage
  * imagejpeg creates a JPEG file from
  * the given image.
  *
- * @param \GdImage $image A GdImage object, returned by one of the image creation functions,
- * such as imagecreatetruecolor.
+ * @param \GdImage $image
  * @param null|resource|string $file The path or an open stream resource (which is automatically closed after this function returns) to save the file to. If not set or NULL, the raw image stream will be output directly.
  * @param int $quality quality is optional, and ranges from 0 (worst
  * quality, smaller file) to 100 (best quality, biggest file). The
@@ -1882,8 +1847,7 @@ function imagejpeg(\GdImage $image, $file = null, int $quality = -1): void
 /**
  * Set the alpha blending flag to use layering effects.
  *
- * @param \GdImage $image A GdImage object, returned by one of the image creation functions,
- * such as imagecreatetruecolor.
+ * @param \GdImage $image
  * @param int $effect One of the following constants:
  *
  *
@@ -1947,8 +1911,7 @@ function imagelayereffect(\GdImage $image, int $effect): void
 /**
  * Draws a line between the two given points.
  *
- * @param \GdImage $image A GdImage object, returned by one of the image creation functions,
- * such as imagecreatetruecolor.
+ * @param \GdImage $image
  * @param int $x1 x-coordinate for first point.
  * @param int $y1 y-coordinate for first point.
  * @param int $x2 x-coordinate for second point.
@@ -2038,8 +2001,7 @@ function imageloadfont(string $filename): int
  * Outputs or saves a PNG image from the given
  * image.
  *
- * @param \GdImage $image A GdImage object, returned by one of the image creation functions,
- * such as imagecreatetruecolor.
+ * @param \GdImage $image
  * @param null|resource|string $file The path or an open stream resource (which is automatically closed after this function returns) to save the file to. If not set or NULL, the raw image stream will be output directly.
  *
  * NULL is invalid if the quality and
@@ -2078,8 +2040,7 @@ function imagepng(\GdImage $image, $file = null, int $quality = -1, int $filters
  * imagerectangle creates a rectangle starting at
  * the specified coordinates.
  *
- * @param \GdImage $image A GdImage object, returned by one of the image creation functions,
- * such as imagecreatetruecolor.
+ * @param \GdImage $image
  * @param int $x1 Upper left x coordinate.
  * @param int $y1 Upper left y coordinate
  * 0, 0 is the top left corner of the image.
@@ -2112,8 +2073,7 @@ function imagerectangle(\GdImage $image, int $x1, int $y1, int $x2, int $y2, int
  * JPEG). It does not affect any drawing operations. The default resolution
  * for new images is 96 DPI.
  *
- * @param \GdImage $image A GdImage object, returned by one of the image creation functions,
- * such as imagecreatetruecolor.
+ * @param \GdImage $image
  * @param int|null $resolution_x The horizontal resolution in DPI.
  * @param int|null $resolution_y The vertical resolution in DPI.
  * @return mixed When used as getter,
@@ -2148,8 +2108,7 @@ function imageresolution(\GdImage $image, ?int $resolution_x = null, ?int $resol
  * The center of rotation is the center of the image, and the rotated
  * image may have different dimensions than the original image.
  *
- * @param \GdImage $image A GdImage object, returned by one of the image creation functions,
- * such as imagecreatetruecolor.
+ * @param \GdImage $image
  * @param float $angle Rotation angle, in degrees. The rotation angle is interpreted as the
  * number of degrees to rotate the image anticlockwise.
  * @param int $background_color Specifies the color of the uncovered zone after the rotation
@@ -2177,8 +2136,7 @@ function imagerotate(\GdImage $image, float $angle, int $background_color, bool 
  * Alphablending has to be disabled (imagealphablending($im, false))
  * to retain the alpha-channel in the first place.
  *
- * @param \GdImage $image A GdImage object, returned by one of the image creation functions,
- * such as imagecreatetruecolor.
+ * @param \GdImage $image
  * @param bool $enable Whether to save the alpha channel or not. Defaults to FALSE.
  * @throws ImageException
  *
@@ -2197,8 +2155,7 @@ function imagesavealpha(\GdImage $image, bool $enable): void
  * imagescale scales an image using the given
  * interpolation algorithm.
  *
- * @param \GdImage $image A GdImage object, returned by one of the image creation functions,
- * such as imagecreatetruecolor.
+ * @param \GdImage $image
  * @param int $width The width to scale the image to.
  * @param int $height The height to scale the image to. If omitted or negative, the aspect
  * ratio will be preserved.
@@ -2234,8 +2191,7 @@ function imagescale(\GdImage $image, int $width, int $height = -1, int $mode = I
  * colors IMG_COLOR_BRUSHED or
  * IMG_COLOR_STYLEDBRUSHED.
  *
- * @param \GdImage $image A GdImage object, returned by one of the image creation functions,
- * such as imagecreatetruecolor.
+ * @param \GdImage $image
  * @param \GdImage $brush An image object.
  * @throws ImageException
  *
@@ -2254,8 +2210,7 @@ function imagesetbrush(\GdImage $image, \GdImage $brush): void
  * imagesetclip sets the current clipping rectangle, i.e.
  * the area beyond which no pixels will be drawn.
  *
- * @param \GdImage $image A GdImage object, returned by one of the image creation functions,
- * such as imagecreatetruecolor.
+ * @param \GdImage $image
  * @param int $x1 The x-coordinate of the upper left corner.
  * @param int $y1 The y-coordinate of the upper left corner.
  * @param int $x2 The x-coordinate of the lower right corner.
@@ -2277,8 +2232,7 @@ function imagesetclip(\GdImage $image, int $x1, int $y1, int $x2, int $y2): void
  * Sets the interpolation method, setting an interpolation method affects the rendering
  * of various functions in GD, such as the imagerotate function.
  *
- * @param \GdImage $image A GdImage object, returned by one of the image creation functions,
- * such as imagecreatetruecolor.
+ * @param \GdImage $image
  * @param int $method The interpolation method, which can be one of the following:
  *
  *
@@ -2404,8 +2358,7 @@ function imagesetinterpolation(\GdImage $image, int $method = IMG_BILINEAR_FIXED
  * imagesetpixel draws a pixel at the specified
  * coordinate.
  *
- * @param \GdImage $image A GdImage object, returned by one of the image creation functions,
- * such as imagecreatetruecolor.
+ * @param \GdImage $image
  * @param int $x x-coordinate.
  * @param int $y y-coordinate.
  * @param int $color A color identifier created with imagecolorallocate.
@@ -2429,8 +2382,7 @@ function imagesetpixel(\GdImage $image, int $x, int $y, int $color): void
  * color IMG_COLOR_STYLED or lines of images with color
  * IMG_COLOR_STYLEDBRUSHED.
  *
- * @param \GdImage $image A GdImage object, returned by one of the image creation functions,
- * such as imagecreatetruecolor.
+ * @param \GdImage $image
  * @param array $style An array of pixel colors. You can use the
  * IMG_COLOR_TRANSPARENT constant to add a
  * transparent pixel.
@@ -2453,8 +2405,7 @@ function imagesetstyle(\GdImage $image, array $style): void
  * drawn when drawing rectangles, polygons, arcs etc. to
  * thickness pixels.
  *
- * @param \GdImage $image A GdImage object, returned by one of the image creation functions,
- * such as imagecreatetruecolor.
+ * @param \GdImage $image
  * @param int $thickness Thickness, in pixels.
  * @throws ImageException
  *
@@ -2480,8 +2431,7 @@ function imagesetthickness(\GdImage $image, int $thickness): void
  * image with imagecolortransparent, a tile allows certain parts
  * of the underlying area to shine through can be created.
  *
- * @param \GdImage $image A GdImage object, returned by one of the image creation functions,
- * such as imagecreatetruecolor.
+ * @param \GdImage $image
  * @param \GdImage $tile The image object to be used as a tile.
  * @throws ImageException
  *
@@ -2499,11 +2449,8 @@ function imagesettile(\GdImage $image, \GdImage $tile): void
 /**
  * Draws a string at the given coordinates.
  *
- * @param \GdImage $image A GdImage object, returned by one of the image creation functions,
- * such as imagecreatetruecolor.
- * @param int $font Can be 1, 2, 3, 4, 5 for built-in
- * fonts in latin2 encoding (where higher numbers corresponding to larger fonts) or GdFont instance,
- * returned by imageloadfont.
+ * @param \GdImage $image
+ * @param int $font
  * @param int $x x-coordinate of the upper left corner.
  * @param int $y y-coordinate of the upper left corner.
  * @param string $string The string to be written.
@@ -2525,11 +2472,8 @@ function imagestring(\GdImage $image, int $font, int $x, int $y, string $string,
  * Draws a string vertically at the given
  * coordinates.
  *
- * @param \GdImage $image A GdImage object, returned by one of the image creation functions,
- * such as imagecreatetruecolor.
- * @param int $font Can be 1, 2, 3, 4, 5 for built-in
- * fonts in latin2 encoding (where higher numbers corresponding to larger fonts) or GdFont instance,
- * returned by imageloadfont.
+ * @param \GdImage $image
+ * @param int $font
  * @param int $x x-coordinate of the bottom left corner.
  * @param int $y y-coordinate of the bottom left corner.
  * @param string $string The string to be written.
@@ -2550,8 +2494,7 @@ function imagestringup(\GdImage $image, int $font, int $x, int $y, string $strin
 /**
  * Returns the width of the given image object.
  *
- * @param \GdImage $image A GdImage object, returned by one of the image creation functions,
- * such as imagecreatetruecolor.
+ * @param \GdImage $image
  * @return int Return the width of the images.
  * @throws ImageException
  *
@@ -2570,8 +2513,7 @@ function imagesx(\GdImage $image): int
 /**
  * Returns the height of the given image object.
  *
- * @param \GdImage $image A GdImage object, returned by one of the image creation functions,
- * such as imagecreatetruecolor.
+ * @param \GdImage $image
  * @return int Return the height of the images.
  * @throws ImageException
  *
@@ -2597,8 +2539,7 @@ function imagesy(\GdImage $image): int
  * usually best to simply produce a truecolor output image instead, which
  * guarantees the highest output quality.
  *
- * @param \GdImage $image A GdImage object, returned by one of the image creation functions,
- * such as imagecreatetruecolor.
+ * @param \GdImage $image
  * @param bool $dither Indicates if the image should be dithered - if it is TRUE then
  * dithering will be used which will result in a more speckled image but
  * with better color approximation.
@@ -2622,29 +2563,12 @@ function imagetruecolortopalette(\GdImage $image, bool $dither, int $num_colors)
  *
  * @param float $size The font size in points.
  * @param float $angle Angle in degrees in which string will be measured.
- * @param string $font_filename The path to the TrueType font you wish to use.
- *
- * Depending on which version of the GD library PHP is using, when
- * fontfile does not begin with a leading
- * / then .ttf will be appended
- * to the filename and the library will attempt to search for that
- * filename along a library-defined font path.
- *
- * When using versions of the GD library lower than 2.0.18, a space character,
- * rather than a semicolon, was used as the 'path separator' for different font files.
- * Unintentional use of this feature will result in the warning message:
- * Warning: Could not find/open font. For these affected versions, the
- * only solution is moving the font to a path which does not contain spaces.
- *
- * In many cases where a font resides in the same directory as the script using it
+ * @param string $font_filename In many cases where a font resides in the same directory as the script using it
  * the following trick will alleviate any include problems.
  *
  *
  * ]]>
  *
- *
- * Note that open_basedir does
- * not apply to fontfile.
  * @param string $string The string to be measured.
  * @param array $options
  * @return array imagettfbbox returns an array with 8
@@ -2716,8 +2640,7 @@ function imagettfbbox(float $size, float $angle, string $font_filename, string $
  * Writes the given text into the image using TrueType
  * fonts.
  *
- * @param \GdImage $image A GdImage object, returned by one of the image creation functions,
- * such as imagecreatetruecolor.
+ * @param \GdImage $image
  * @param float $size The font size in points.
  * @param float $angle The angle in degrees, with 0 degrees being left-to-right reading text.
  * Higher values represent a counter-clockwise rotation. For example, a
@@ -2733,29 +2656,12 @@ function imagettfbbox(float $size, float $angle, string $font_filename, string $
  * very bottom of the character.
  * @param int $color The color index. Using the negative of a color index has the effect of
  * turning off antialiasing. See imagecolorallocate.
- * @param string $font_filename The path to the TrueType font you wish to use.
- *
- * Depending on which version of the GD library PHP is using, when
- * fontfile does not begin with a leading
- * / then .ttf will be appended
- * to the filename and the library will attempt to search for that
- * filename along a library-defined font path.
- *
- * When using versions of the GD library lower than 2.0.18, a space character,
- * rather than a semicolon, was used as the 'path separator' for different font files.
- * Unintentional use of this feature will result in the warning message:
- * Warning: Could not find/open font. For these affected versions, the
- * only solution is moving the font to a path which does not contain spaces.
- *
- * In many cases where a font resides in the same directory as the script using it
+ * @param string $font_filename In many cases where a font resides in the same directory as the script using it
  * the following trick will alleviate any include problems.
  *
  *
  * ]]>
  *
- *
- * Note that open_basedir does
- * not apply to fontfile.
  * @param string $text The text string in UTF-8 encoding.
  *
  * May include decimal numeric character references (of the form:
@@ -2793,8 +2699,7 @@ function imagettftext(\GdImage $image, float $size, float $angle, int $x, int $y
  * imagewbmp outputs or save a WBMP
  * version of the given image.
  *
- * @param \GdImage $image A GdImage object, returned by one of the image creation functions,
- * such as imagecreatetruecolor.
+ * @param \GdImage $image
  * @param null|resource|string $file The path or an open stream resource (which is automatically closed after this function returns) to save the file to. If not set or NULL, the raw image stream will be output directly.
  * @param int|null $foreground_color You can set the foreground color with this parameter by setting an
  * identifier obtained from imagecolorallocate.
@@ -2821,8 +2726,7 @@ function imagewbmp(\GdImage $image, $file = null, ?int $foreground_color = null)
 /**
  * Outputs or saves a WebP version of the given image.
  *
- * @param \GdImage $image A GdImage object, returned by one of the image creation functions,
- * such as imagecreatetruecolor.
+ * @param \GdImage $image
  * @param null|resource|string $file The path or an open stream resource (which is automatically closed after this function returns) to save the file to. If not set or NULL, the raw image stream will be output directly.
  * @param int $quality quality ranges from 0 (worst
  * quality, smaller file) to 100 (best quality, biggest file).
@@ -2849,8 +2753,7 @@ function imagewebp(\GdImage $image, $file = null, int $quality = -1): void
  * Outputs or save an XBM version of the given
  * image.
  *
- * @param \GdImage $image A GdImage object, returned by one of the image creation functions,
- * such as imagecreatetruecolor.
+ * @param \GdImage $image
  * @param null|resource|string $filename The path to save the file to, given as string. If NULL, the raw image stream will be output directly.
  *
  * The filename (without the .xbm extension) is also

@@ -291,13 +291,6 @@ function posix_getpwuid(int $user_id): array
  * posix_getrlimit returns an array
  * of information about the current resource's soft and hard limits.
  *
- *
- * Each resource has an associated soft and hard limit.  The soft
- * limit is the value that the kernel enforces for the corresponding
- * resource.  The hard limit acts as a ceiling for the soft limit.
- * An unprivileged process may only set its soft limit to a value
- * from 0 to the hard limit, and irreversibly lower its hard limit.
- *
  * @return array Returns an associative array of elements for each
  * limit that is defined. Each limit has a soft and a hard limit.
  *
@@ -588,13 +581,6 @@ function posix_setpgid(int $process_id, int $process_group_id): void
 /**
  * posix_setrlimit sets the soft and hard limits for a
  * given system resource.
- *
- *
- * Each resource has an associated soft and hard limit.  The soft
- * limit is the value that the kernel enforces for the corresponding
- * resource.  The hard limit acts as a ceiling for the soft limit.
- * An unprivileged process may only set its soft limit to a value
- * from 0 to the hard limit, and irreversibly lower its hard limit.
  *
  * @param int $resource The
  * resource limit constant

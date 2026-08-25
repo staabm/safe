@@ -127,11 +127,9 @@ function assert_options(int $option, $value = null)
 
 
 /**
- * Sets the process title visible in tools such as top and
- * ps. This function is available only in
- * CLI mode.
  *
- * @param string $title The new title.
+ *
+ * @param string $title
  * @throws InfoException
  *
  */
@@ -397,9 +395,7 @@ function getrusage(int $mode = 0): array
  * Returns the value of the configuration option on success.
  *
  * @param string $option The configuration option name.
- * @return string Returns the value of the configuration option as a string on success, or an
- * empty string for null values. Returns FALSE if the
- * configuration option doesn't exist.
+ * @return string
  * @throws InfoException
  *
  */

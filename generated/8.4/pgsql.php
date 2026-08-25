@@ -10,7 +10,7 @@ use Safe\Exceptions\PgsqlException;
  * or pg_send_execute. You cannot cancel a query executed using
  * pg_query.
  *
- * @param \PgSql\Connection $connection An PgSql\Connection instance.
+ * @param \PgSql\Connection $connection
  * @throws PgsqlException
  *
  */
@@ -86,7 +86,7 @@ function pg_connect(string $connection_string, int $flags = 0): \PgSql\Connectio
  * pg_connection_reset resets the connection.
  * It is useful for error recovery.
  *
- * @param \PgSql\Connection $connection An PgSql\Connection instance.
+ * @param \PgSql\Connection $connection
  * @throws PgsqlException
  *
  */
@@ -110,7 +110,7 @@ function pg_connection_reset(\PgSql\Connection $connection): void
  * values and the corresponding datatypes must be
  * compatible. Returns an array with the converted values on success.
  *
- * @param \PgSql\Connection $connection An PgSql\Connection instance.
+ * @param \PgSql\Connection $connection
  * @param string $table_name Name of the table against which to convert types.
  * @param array $values Data to be converted.
  * @param int $flags Any number of PGSQL_CONV_IGNORE_DEFAULT,
@@ -136,7 +136,7 @@ function pg_convert(\PgSql\Connection $connection, string $table_name, array $va
  * rows. It issues a COPY FROM SQL command
  * internally to insert records.
  *
- * @param \PgSql\Connection $connection An PgSql\Connection instance.
+ * @param \PgSql\Connection $connection
  * @param string $table_name Name of the table into which to copy the rows.
  * @param array $rows An array of data to be copied into table_name.
  * Each value in rows becomes a row in table_name.
@@ -164,7 +164,7 @@ function pg_copy_from(\PgSql\Connection $connection, string $table_name, array $
  * issues COPY TO SQL command internally to
  * retrieve records.
  *
- * @param \PgSql\Connection $connection An PgSql\Connection instance.
+ * @param \PgSql\Connection $connection
  * @param string $table_name Name of the table from which to copy the data into rows.
  * @param string $separator The token that separates values for each field in each element of
  * rows.  Default is \t.
@@ -203,7 +203,7 @@ function pg_copy_to(\PgSql\Connection $connection, string $table_name, string $s
  * JSON, Array, Regex, etc. These parameters should be handled
  * according to their contexts. i.e. Escape/validate values.
  *
- * @param \PgSql\Connection $connection An PgSql\Connection instance.
+ * @param \PgSql\Connection $connection
  * @param string $table_name Name of the table from which to delete rows.
  * @param array $conditions An array whose keys are field names in the table table_name,
  * and whose values are the values of those fields that are to be deleted.
@@ -320,8 +320,7 @@ function pg_execute(?\PgSql\Connection $connection = null, ?string $stmtname = n
  * field number that corresponds to the
  * field in the given result instance.
  *
- * @param \PgSql\Result $result An PgSql\Result instance, returned by pg_query,
- * pg_query_params or pg_execute(among others).
+ * @param \PgSql\Result $result
  * @param string $field The name of the field.
  * The given name is treated like an identifier in an SQL command,
  * that is, it is downcased unless double-quoted.
@@ -344,8 +343,7 @@ function pg_field_num(\PgSql\Result $result, string $field): int
  * pg_field_table returns the name of the table that field
  * belongs to, or the table's oid if oid_only is TRUE.
  *
- * @param \PgSql\Result $result An PgSql\Result instance, returned by pg_query,
- * pg_query_params or pg_execute(among others).
+ * @param \PgSql\Result $result
  * @param int $field Field number, starting from 0.
  * @param bool $oid_only By default the tables name that field belongs to is returned but
  * if oid_only is set to TRUE, then the
@@ -369,7 +367,7 @@ function pg_field_table(\PgSql\Result $result, int $field, bool $oid_only = fals
  * pg_flush flushes any outbound query data waiting to be
  * sent on the connection.
  *
- * @param \PgSql\Connection $connection An PgSql\Connection instance.
+ * @param \PgSql\Connection $connection
  * @return mixed Returns TRUE if the flush was successful or no data was waiting to be
  * flushed, 0 if part of the pending data was flushed but
  * more remains.
@@ -395,8 +393,7 @@ function pg_flush(\PgSql\Connection $connection)
  * consumption during script execution is a problem.   Otherwise, all result memory will
  * be automatically freed when the script ends.
  *
- * @param \PgSql\Result $result An PgSql\Result instance, returned by pg_query,
- * pg_query_params or pg_execute(among others).
+ * @param \PgSql\Result $result
  * @throws PgsqlException
  *
  */
@@ -459,7 +456,7 @@ function pg_host(?\PgSql\Connection $connection = null): string
  * JSON, Array, Regex, etc. These parameters should be handled
  * according to their contexts. i.e. Escape/validate values.
  *
- * @param \PgSql\Connection $connection An PgSql\Connection instance.
+ * @param \PgSql\Connection $connection
  * @param string $table_name Name of the table into which to insert rows.  The table table_name must at least
  * have as many columns as values has elements.
  * @param array $values An array whose keys are field names in the table table_name,
@@ -508,8 +505,7 @@ function pg_insert(\PgSql\Connection $connection, string $table_name, array $val
  * the value of the most recently used sequence in the session.  This avoids
  * the need for naming the sequence, table or column altogether.
  *
- * @param \PgSql\Result $result An PgSql\Result instance, returned by pg_query,
- * pg_query_params or pg_execute(among others).
+ * @param \PgSql\Result $result
  * @return string An int or string containing the OID assigned to the most recently inserted
  * row in the specified connection or
  * no available OID.
@@ -533,7 +529,7 @@ function pg_last_oid(\PgSql\Result $result): string
  * To use the large object interface, it is necessary to
  * enclose it within a transaction block.
  *
- * @param \PgSql\Lob $lob An PgSql\Lob instance, returned by pg_lo_open.
+ * @param \PgSql\Lob $lob
  * @throws PgsqlException
  *
  */
@@ -665,7 +661,7 @@ function pg_lo_open(\PgSql\Connection $connection, int $oid, string $mode): \PgS
  * To use the large object interface, it is necessary to
  * enclose it within a transaction block.
  *
- * @param \PgSql\Lob $lob An PgSql\Lob instance, returned by pg_lo_open.
+ * @param \PgSql\Lob $lob
  * @param int $length An optional maximum number of bytes to return.
  * @return string A string containing length bytes from the
  * large object.
@@ -689,7 +685,7 @@ function pg_lo_read(\PgSql\Lob $lob, int $length = 8192): string
  * To use the large object interface, it is necessary to
  * enclose it within a transaction block.
  *
- * @param \PgSql\Lob $lob An PgSql\Lob instance, returned by pg_lo_open.
+ * @param \PgSql\Lob $lob
  * @param int $offset The number of bytes to seek.
  * @param int $whence One of the constants PGSQL_SEEK_SET (seek from object start),
  * PGSQL_SEEK_CUR (seek from current position)
@@ -713,7 +709,7 @@ function pg_lo_seek(\PgSql\Lob $lob, int $offset, int $whence = SEEK_CUR): void
  * To use the large object interface, it is necessary to
  * enclose it within a transaction block.
  *
- * @param \PgSql\Lob $lob An PgSql\Lob instance, returned by pg_lo_open.
+ * @param \PgSql\Lob $lob
  * @param int $size The number of bytes to truncate.
  * @throws PgsqlException
  *
@@ -761,7 +757,7 @@ function pg_lo_unlink(\PgSql\Connection $connection, int $oid): void
  * To use the large object interface, it is necessary to
  * enclose it within a transaction block.
  *
- * @param \PgSql\Lob $lob An PgSql\Lob instance, returned by pg_lo_open.
+ * @param \PgSql\Lob $lob
  * @param string $data The data to be written to the large object.  If length is
  * an int and is less than the length of data, only
  * length bytes will be written.
@@ -791,7 +787,7 @@ function pg_lo_write(\PgSql\Lob $lob, string $data, ?int $length = null): int
  * pg_meta_data returns table definition for
  * table_name as an array.
  *
- * @param \PgSql\Connection $connection An PgSql\Connection instance.
+ * @param \PgSql\Connection $connection
  * @param string $table_name The name of the table.
  * @param bool $extended Flag for returning extended meta data. Default to FALSE.
  * @return array An array of the table definition.
@@ -1182,8 +1178,7 @@ function pg_query(?\PgSql\Connection $connection = null, ?string $query = null):
  * use pg_set_error_verbosity and pg_last_error
  * and then parse the result.
  *
- * @param \PgSql\Result $result An PgSql\Result instance, returned by pg_query,
- * pg_query_params or pg_execute(among others).
+ * @param \PgSql\Result $result
  * @param int $field_code Possible field_code values are: PGSQL_DIAG_SEVERITY,
  * PGSQL_DIAG_SQLSTATE, PGSQL_DIAG_MESSAGE_PRIMARY,
  * PGSQL_DIAG_MESSAGE_DETAIL,
@@ -1212,8 +1207,7 @@ function pg_result_error_field(\PgSql\Result $result, int $field_code): ?string
  * pg_result_seek sets the internal row offset in
  * the result instance.
  *
- * @param \PgSql\Result $result An PgSql\Result instance, returned by pg_query,
- * pg_query_params or pg_execute(among others).
+ * @param \PgSql\Result $result
  * @param int $row Row to move the internal offset to in the PgSql\Result instance.
  * Rows are numbered starting from zero.
  * @throws PgsqlException
@@ -1256,7 +1250,7 @@ function pg_result_seek(\PgSql\Result $result, int $row): void
  * JSON, Array, Regex, etc. These parameters should be handled
  * according to their contexts. i.e. Escape/validate values.
  *
- * @param \PgSql\Connection $connection An PgSql\Connection instance.
+ * @param \PgSql\Connection $connection
  * @param string $table_name Name of the table from which to select rows.
  * @param array $conditions An array whose keys are field names in the table table_name,
  * and whose values are the conditions that a row must meet to be retrieved.
@@ -1296,7 +1290,7 @@ function pg_select(\PgSql\Connection $connection, string $table_name, array $con
 /**
  *
  *
- * @param \PgSql\Connection $connection An PgSql\Connection instance.
+ * @param \PgSql\Connection $connection
  * @param int $size
  * @throws PgsqlException
  *
@@ -1315,7 +1309,7 @@ function pg_set_chunked_rows_size(\PgSql\Connection $connection, int $size): voi
  * pg_socket returns a read only resource
  * corresponding to the socket underlying the given PostgreSQL connection.
  *
- * @param \PgSql\Connection $connection An PgSql\Connection instance.
+ * @param \PgSql\Connection $connection
  * @return resource A socket resource on success.
  * @throws PgsqlException
  *
@@ -1392,7 +1386,7 @@ function pg_trace(string $filename, string $mode = "w", ?\PgSql\Connection $conn
  * JSON, Array, Regex, etc. These parameters should be handled
  * according to their contexts. i.e. Escape/validate values.
  *
- * @param \PgSql\Connection $connection An PgSql\Connection instance.
+ * @param \PgSql\Connection $connection
  * @param string $table_name Name of the table into which to update rows.
  * @param array $values An array whose keys are field names in the table table_name,
  * and whose values are what matched rows are to be updated to.

@@ -84,17 +84,13 @@ function passthru(string $command, ?int &$result_code = null): void
  *
  * @param resource $process The proc_open resource that will
  * be closed.
- * @return int Returns the termination status of the process that was run.
- * @throws ExecException
+ * @return int
  *
  */
 function proc_close($process): int
 {
     error_clear_last();
     $safeResult = \proc_close($process);
-    if ($safeResult === -1) {
-        throw ExecException::createFromPhpError();
-    }
     return $safeResult;
 }
 
@@ -150,11 +146,12 @@ function proc_nice(int $priority): void
  * Each element can be:
  *
  * An array describing the pipe to pass to the process. The first
- * element is the descriptor type and the second element is an option for
+ * element is the descriptor type and the following elements are options for
  * the given type. Valid types are pipe (the second
  * element is either r to pass the read end of the pipe
  * to the process, or w to pass the write end) and
- * file (the second element is a filename).
+ * file (the second element is a filename, and the third
+ * element is the file mode, same as fopen).
  * Note that anything else than w is treated like r.
  *
  *
@@ -228,7 +225,7 @@ function proc_open(string $command, array $descriptor_spec, ?array &$pipes, ?str
 
 
 /**
- * This function is identical to the backtick operator.
+ *
  *
  * @param string $command The command that will be executed.
  * @return null|string A string containing the output from the executed command or NULL if an error occurs or the command produces no output.

@@ -16,7 +16,7 @@ use Safe\Exceptions\InotifyException;
  * @param resource $inotify_instance Resource returned by
  * inotify_init
  * @param string $pathname File or directory to watch
- * @param int $mask Events to watch for. See Predefined Constants.
+ * @param int $mask Events to watch for. See &ReservedConstants;.
  * @return int The return value is a unique (inotify instance wide) watch descriptor.
  * @throws InotifyException
  *

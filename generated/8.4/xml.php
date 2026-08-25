@@ -104,7 +104,7 @@ function xml_parser_set_option(\XMLParser $parser, int $option, $value): void
  * Sets the character data handler function for the XML parser
  * parser.
  *
- * @param \XMLParser $parser The XML parser.
+ * @param \XMLParser $parser
  * @param callable $handler
  * If NULL is passed, the handler is reset to its default state.
  *
@@ -113,10 +113,6 @@ function xml_parser_set_option(\XMLParser $parser, int $option, $value): void
  * however this is deprecated as of PHP 8.4.0.
  *
  *
- *
- *
- * If handler is a callable,
- * the callable is set as the handler.
  *
  *
  * If handler is a string,
@@ -171,7 +167,7 @@ function xml_set_character_data_handler(\XMLParser $parser, callable $handler): 
  * Sets the default handler function for the XML parser
  * parser.
  *
- * @param \XMLParser $parser The XML parser.
+ * @param \XMLParser $parser
  * @param callable $handler
  * If NULL is passed, the handler is reset to its default state.
  *
@@ -180,10 +176,6 @@ function xml_set_character_data_handler(\XMLParser $parser, callable $handler): 
  * however this is deprecated as of PHP 8.4.0.
  *
  *
- *
- *
- * If handler is a callable,
- * the callable is set as the handler.
  *
  *
  * If handler is a string,
@@ -241,7 +233,7 @@ function xml_set_default_handler(\XMLParser $parser, callable $handler): bool
  * opened. end_handler is called when an XML element
  * is closed.
  *
- * @param \XMLParser $parser The XML parser.
+ * @param \XMLParser $parser
  * @param callable $start_handler
  * If NULL is passed, the handler is reset to its default state.
  *
@@ -250,10 +242,6 @@ function xml_set_default_handler(\XMLParser $parser, callable $handler): bool
  * however this is deprecated as of PHP 8.4.0.
  *
  *
- *
- *
- * If handler is a callable,
- * the callable is set as the handler.
  *
  *
  * If handler is a string,
@@ -329,7 +317,7 @@ function xml_set_element_handler(\XMLParser $parser, callable $start_handler, ca
  * the handler for the end tag of the element in which the namespace was
  * declared.
  *
- * @param \XMLParser $parser The XML parser.
+ * @param \XMLParser $parser
  * @param callable $handler
  * If NULL is passed, the handler is reset to its default state.
  *
@@ -338,10 +326,6 @@ function xml_set_element_handler(\XMLParser $parser, callable $start_handler, ca
  * however this is deprecated as of PHP 8.4.0.
  *
  *
- *
- *
- * If handler is a callable,
- * the callable is set as the handler.
  *
  *
  * If handler is a string,
@@ -393,7 +377,7 @@ function xml_set_end_namespace_decl_handler(\XMLParser $parser, callable $handle
  * Sets the external entity reference handler function for the XML parser
  * parser.
  *
- * @param \XMLParser $parser The XML parser.
+ * @param \XMLParser $parser
  * @param callable $handler
  * If NULL is passed, the handler is reset to its default state.
  *
@@ -402,10 +386,6 @@ function xml_set_end_namespace_decl_handler(\XMLParser $parser, callable $handle
  * however this is deprecated as of PHP 8.4.0.
  *
  *
- *
- *
- * If handler is a callable,
- * the callable is set as the handler.
  *
  *
  * If handler is a string,
@@ -505,7 +485,7 @@ function xml_set_external_entity_ref_handler(\XMLParser $parser, callable $handl
  * See section 4.7 of the XML 1.0
  * spec for the definition of notation declarations.
  *
- * @param \XMLParser $parser The XML parser.
+ * @param \XMLParser $parser
  * @param callable $handler
  * If NULL is passed, the handler is reset to its default state.
  *
@@ -514,10 +494,6 @@ function xml_set_external_entity_ref_handler(\XMLParser $parser, callable $handl
  * however this is deprecated as of PHP 8.4.0.
  *
  *
- *
- *
- * If handler is a callable,
- * the callable is set as the handler.
  *
  *
  * If handler is a string,
@@ -626,7 +602,7 @@ function xml_set_object(\XMLParser $parser, object $object): bool
  * ]]>
  *
  *
- * @param \XMLParser $parser The XML parser.
+ * @param \XMLParser $parser
  * @param callable $handler
  * If NULL is passed, the handler is reset to its default state.
  *
@@ -635,10 +611,6 @@ function xml_set_object(\XMLParser $parser, object $object): bool
  * however this is deprecated as of PHP 8.4.0.
  *
  *
- *
- *
- * If handler is a callable,
- * the callable is set as the handler.
  *
  *
  * If handler is a string,
@@ -700,7 +672,7 @@ function xml_set_processing_instruction_handler(\XMLParser $parser, callable $ha
  * handler is called before the start tag handler for each namespace declared
  * in that start tag.
  *
- * @param \XMLParser $parser The XML parser.
+ * @param \XMLParser $parser
  * @param callable $handler
  * If NULL is passed, the handler is reset to its default state.
  *
@@ -709,10 +681,6 @@ function xml_set_processing_instruction_handler(\XMLParser $parser, callable $ha
  * however this is deprecated as of PHP 8.4.0.
  *
  *
- *
- *
- * If handler is a callable,
- * the callable is set as the handler.
  *
  *
  * If handler is a string,
@@ -786,7 +754,7 @@ function xml_set_start_namespace_decl_handler(\XMLParser $parser, callable $hand
  * the XML 1.0 spec for the definition of notation declared
  * external entities.
  *
- * @param \XMLParser $parser The XML parser.
+ * @param \XMLParser $parser
  * @param callable $handler
  * If NULL is passed, the handler is reset to its default state.
  *
@@ -795,10 +763,6 @@ function xml_set_start_namespace_decl_handler(\XMLParser $parser, callable $hand
  * however this is deprecated as of PHP 8.4.0.
  *
  *
- *
- *
- * If handler is a callable,
- * the callable is set as the handler.
  *
  *
  * If handler is a string,

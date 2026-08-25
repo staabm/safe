@@ -386,79 +386,9 @@ function oci_commit($connection): void
  *
  * @param string $username The Oracle user name.
  * @param string $password The password for username.
- * @param null|string $connection_string Contains
- * the Oracle instance to connect to. It can be
- * an Easy Connect
- * string, or a Connect Name from
- * the tnsnames.ora file, or the name of a local
- * Oracle instance.
- *
- * If not specified or NULL, PHP uses
- * environment variables such as TWO_TASK (on Linux)
- * or LOCAL (on Windows)
- * and ORACLE_SID to determine the
- * Oracle instance to connect to.
- *
- *
- * To use the Easy Connect naming method, PHP must be linked with Oracle
- * 10g or greater Client libraries. The Easy Connect string for Oracle
- * 10g is of the form:
- * [//]host_name[:port][/service_name]. From Oracle
- * 11g, the syntax is:
- * [//]host_name[:port][/service_name][:server_type][/instance_name].
- * Further options were introduced with Oracle 19c, including timeout and keep-alive
- * settings.  Refer to Oracle documentation.  Service names can be found by running
- * the Oracle utility lsnrctl status on the database server
- * machine.
- *
- *
- * The tnsnames.ora file can be in the Oracle Net search path,
- * which
- * includes /your/path/to/instantclient/network/admin, $ORACLE_HOME/network/admin
- * and /etc.  Alternatively set TNS_ADMIN
- * so that $TNS_ADMIN/tnsnames.ora is read.  Make sure the web
- * daemon has read access to the file.
- * @param string $encoding Determines
- * the character set used by the Oracle Client libraries.  The character
- * set does not need to match the character set used by the database.  If
- * it doesn't match, Oracle will do its best to convert data to and from
- * the database character set.  Depending on the character sets this may
- * not give usable results.  Conversion also adds some time overhead.
- *
- * If not specified, the
- * Oracle Client libraries determine a character set from
- * the NLS_LANG environment variable.
- *
- * Passing this parameter can
- * reduce the time taken to connect.
- * @param int $session_mode This
- * parameter is available since version PHP 5 (PECL OCI8 1.1) and accepts the
- * following values: OCI_DEFAULT,
- * OCI_SYSOPER and OCI_SYSDBA.
- * If either OCI_SYSOPER or
- * OCI_SYSDBA were specified, this function will try
- * to establish privileged connection using external credentials.
- * Privileged connections are disabled by default. To enable them you
- * need to set oci8.privileged_connect
- * to On.
- *
- *
- * PHP 5.3 (PECL OCI8 1.3.4) introduced the
- * OCI_CRED_EXT mode value. This tells Oracle to use
- * External or OS authentication, which must be configured in the
- * database.  The OCI_CRED_EXT flag can only be used
- * with username of "/" and a empty password.
- * oci8.privileged_connect
- * may be On or Off.
- *
- *
- * OCI_CRED_EXT may be combined with the
- * OCI_SYSOPER or
- * OCI_SYSDBA modes.
- *
- *
- * OCI_CRED_EXT is not supported on Windows for
- * security reasons.
+ * @param null|string $connection_string
+ * @param string $encoding
+ * @param int $session_mode
  * @return resource Returns a connection identifier.
  * @throws Oci8Exception
  *
@@ -488,10 +418,7 @@ function oci_connect(string $username, string $password, ?string $connection_str
  * The oci_define_by_name call must occur before
  * executing oci_execute.
  *
- * @param resource $statement A valid OCI8 statement
- * identifier created by oci_parse and executed
- * by oci_execute, or a REF
- * CURSOR statement identifier.
+ * @param resource $statement
  * @param string $column The column name used in the query.
  *
  * Use uppercase for Oracle's default, non-case sensitive column
@@ -806,79 +733,9 @@ function oci_new_collection($connection, string $type_name, ?string $schema = nu
  *
  * @param string $username The Oracle user name.
  * @param string $password The password for username.
- * @param null|string $connection_string Contains
- * the Oracle instance to connect to. It can be
- * an Easy Connect
- * string, or a Connect Name from
- * the tnsnames.ora file, or the name of a local
- * Oracle instance.
- *
- * If not specified or NULL, PHP uses
- * environment variables such as TWO_TASK (on Linux)
- * or LOCAL (on Windows)
- * and ORACLE_SID to determine the
- * Oracle instance to connect to.
- *
- *
- * To use the Easy Connect naming method, PHP must be linked with Oracle
- * 10g or greater Client libraries. The Easy Connect string for Oracle
- * 10g is of the form:
- * [//]host_name[:port][/service_name]. From Oracle
- * 11g, the syntax is:
- * [//]host_name[:port][/service_name][:server_type][/instance_name].
- * Further options were introduced with Oracle 19c, including timeout and keep-alive
- * settings.  Refer to Oracle documentation.  Service names can be found by running
- * the Oracle utility lsnrctl status on the database server
- * machine.
- *
- *
- * The tnsnames.ora file can be in the Oracle Net search path,
- * which
- * includes /your/path/to/instantclient/network/admin, $ORACLE_HOME/network/admin
- * and /etc.  Alternatively set TNS_ADMIN
- * so that $TNS_ADMIN/tnsnames.ora is read.  Make sure the web
- * daemon has read access to the file.
- * @param string $encoding Determines
- * the character set used by the Oracle Client libraries.  The character
- * set does not need to match the character set used by the database.  If
- * it doesn't match, Oracle will do its best to convert data to and from
- * the database character set.  Depending on the character sets this may
- * not give usable results.  Conversion also adds some time overhead.
- *
- * If not specified, the
- * Oracle Client libraries determine a character set from
- * the NLS_LANG environment variable.
- *
- * Passing this parameter can
- * reduce the time taken to connect.
- * @param int $session_mode This
- * parameter is available since version PHP 5 (PECL OCI8 1.1) and accepts the
- * following values: OCI_DEFAULT,
- * OCI_SYSOPER and OCI_SYSDBA.
- * If either OCI_SYSOPER or
- * OCI_SYSDBA were specified, this function will try
- * to establish privileged connection using external credentials.
- * Privileged connections are disabled by default. To enable them you
- * need to set oci8.privileged_connect
- * to On.
- *
- *
- * PHP 5.3 (PECL OCI8 1.3.4) introduced the
- * OCI_CRED_EXT mode value. This tells Oracle to use
- * External or OS authentication, which must be configured in the
- * database.  The OCI_CRED_EXT flag can only be used
- * with username of "/" and a empty password.
- * oci8.privileged_connect
- * may be On or Off.
- *
- *
- * OCI_CRED_EXT may be combined with the
- * OCI_SYSOPER or
- * OCI_SYSDBA modes.
- *
- *
- * OCI_CRED_EXT is not supported on Windows for
- * security reasons.
+ * @param null|string $connection_string
+ * @param string $encoding
+ * @param int $session_mode
  * @return resource Returns a connection identifier.
  * @throws Oci8Exception
  *
@@ -1009,79 +866,9 @@ function oci_parse($connection, string $sql)
  *
  * @param string $username The Oracle user name.
  * @param string $password The password for username.
- * @param null|string $connection_string Contains
- * the Oracle instance to connect to. It can be
- * an Easy Connect
- * string, or a Connect Name from
- * the tnsnames.ora file, or the name of a local
- * Oracle instance.
- *
- * If not specified or NULL, PHP uses
- * environment variables such as TWO_TASK (on Linux)
- * or LOCAL (on Windows)
- * and ORACLE_SID to determine the
- * Oracle instance to connect to.
- *
- *
- * To use the Easy Connect naming method, PHP must be linked with Oracle
- * 10g or greater Client libraries. The Easy Connect string for Oracle
- * 10g is of the form:
- * [//]host_name[:port][/service_name]. From Oracle
- * 11g, the syntax is:
- * [//]host_name[:port][/service_name][:server_type][/instance_name].
- * Further options were introduced with Oracle 19c, including timeout and keep-alive
- * settings.  Refer to Oracle documentation.  Service names can be found by running
- * the Oracle utility lsnrctl status on the database server
- * machine.
- *
- *
- * The tnsnames.ora file can be in the Oracle Net search path,
- * which
- * includes /your/path/to/instantclient/network/admin, $ORACLE_HOME/network/admin
- * and /etc.  Alternatively set TNS_ADMIN
- * so that $TNS_ADMIN/tnsnames.ora is read.  Make sure the web
- * daemon has read access to the file.
- * @param string $encoding Determines
- * the character set used by the Oracle Client libraries.  The character
- * set does not need to match the character set used by the database.  If
- * it doesn't match, Oracle will do its best to convert data to and from
- * the database character set.  Depending on the character sets this may
- * not give usable results.  Conversion also adds some time overhead.
- *
- * If not specified, the
- * Oracle Client libraries determine a character set from
- * the NLS_LANG environment variable.
- *
- * Passing this parameter can
- * reduce the time taken to connect.
- * @param int $session_mode This
- * parameter is available since version PHP 5 (PECL OCI8 1.1) and accepts the
- * following values: OCI_DEFAULT,
- * OCI_SYSOPER and OCI_SYSDBA.
- * If either OCI_SYSOPER or
- * OCI_SYSDBA were specified, this function will try
- * to establish privileged connection using external credentials.
- * Privileged connections are disabled by default. To enable them you
- * need to set oci8.privileged_connect
- * to On.
- *
- *
- * PHP 5.3 (PECL OCI8 1.3.4) introduced the
- * OCI_CRED_EXT mode value. This tells Oracle to use
- * External or OS authentication, which must be configured in the
- * database.  The OCI_CRED_EXT flag can only be used
- * with username of "/" and a empty password.
- * oci8.privileged_connect
- * may be On or Off.
- *
- *
- * OCI_CRED_EXT may be combined with the
- * OCI_SYSOPER or
- * OCI_SYSDBA modes.
- *
- *
- * OCI_CRED_EXT is not supported on Windows for
- * security reasons.
+ * @param null|string $connection_string
+ * @param string $encoding
+ * @param int $session_mode
  * @return resource Returns a connection identifier.
  * @throws Oci8Exception
  *
@@ -1146,10 +933,6 @@ function oci_register_taf_callback($connection, callable $callback): void
 /**
  * Returns the data from column in the current row,
  * fetched by oci_fetch.
- *
- * For details on the data type mapping performed by
- * the OCI8 extension, see the datatypes
- * supported by the driver
  *
  * @param resource $statement
  * @param mixed $column Can be either use the column number (1-based) or the column name.
@@ -1238,9 +1021,7 @@ function oci_server_version($connection): string
  *
  * The value may be retained across persistent connections.
  *
- * @param resource $connection An Oracle connection identifier,
- * returned by oci_connect, oci_pconnect,
- * or oci_new_connect.
+ * @param resource $connection
  * @param string $action User chosen string up to 32 bytes long.
  * @throws Oci8Exception
  *
@@ -1280,9 +1061,7 @@ function oci_set_action($connection, string $action): void
  * The oci_set_call_timeout function is available
  * when OCI8 uses Oracle 18 (or later) Client libraries.
  *
- * @param resource $connection An Oracle connection identifier,
- * returned by oci_connect, oci_pconnect,
- * or oci_new_connect.
+ * @param resource $connection
  * @param int $timeout The maximum time in milliseconds that any single round-trip between PHP and Oracle Database may take.
  * @throws Oci8Exception
  *
@@ -1315,9 +1094,7 @@ function oci_set_call_timeout($connection, int $timeout): void
  *
  * The value may be retained across page requests that use the same persistent connection.
  *
- * @param resource $connection An Oracle connection identifier,
- * returned by oci_connect, oci_pconnect,
- * or oci_new_connect.
+ * @param resource $connection
  * @param string $client_id User chosen string up to 64 bytes long.
  * @throws Oci8Exception
  *
@@ -1344,9 +1121,7 @@ function oci_set_client_identifier($connection, string $client_id): void
  *
  * The value may be retained across persistent connections.
  *
- * @param resource $connection An Oracle connection identifier,
- * returned by oci_connect, oci_pconnect,
- * or oci_new_connect.
+ * @param resource $connection
  * @param string $client_info User chosen string up to 64 bytes long.
  * @throws Oci8Exception
  *
@@ -1374,9 +1149,7 @@ function oci_set_client_info($connection, string $client_info): void
  * The oci_set_db_operation function is available
  * when OCI8 uses Oracle 12 (or later) Client libraries and Oracle Database 12 (or later).
  *
- * @param resource $connection An Oracle connection identifier,
- * returned by oci_connect, oci_pconnect,
- * or oci_new_connect.
+ * @param resource $connection
  * @param string $action User chosen string.
  * @throws Oci8Exception
  *
@@ -1439,9 +1212,7 @@ function oci_set_edition(string $edition): void
  *
  * The value may be retained across persistent connections.
  *
- * @param resource $connection An Oracle connection identifier,
- * returned by oci_connect, oci_pconnect,
- * or oci_new_connect.
+ * @param resource $connection
  * @param string $name User chosen string up to 48 bytes long.
  * @throws Oci8Exception
  *
@@ -1474,10 +1245,7 @@ function oci_set_module_name($connection, string $name): void
  *
  * The LOB prefetch value should only be set with Oracle Database 12.2 or later.
  *
- * @param resource $statement A valid OCI8 statement
- * identifier created by oci_parse and executed
- * by oci_execute, or a REF
- * CURSOR statement identifier.
+ * @param resource $statement
  * @param int $prefetch_lob_size The number of bytes of each LOB to be prefetched, &gt;= 0
  * @throws Oci8Exception
  *
@@ -1538,10 +1306,7 @@ function oci_set_prefetch_lob($statement, int $prefetch_lob_size): void
  * client oraaccess.xml configuration file.  Refer
  * to Oracle documentation for more detail.
  *
- * @param resource $statement A valid OCI8 statement
- * identifier created by oci_parse and executed
- * by oci_execute, or a REF
- * CURSOR statement identifier.
+ * @param resource $statement
  * @param int $rows The number of rows to be prefetched, &gt;= 0
  * @throws Oci8Exception
  *

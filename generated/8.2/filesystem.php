@@ -188,10 +188,7 @@ function fclose($stream): void
  * Note that this function is only effectively different in POSIX systems.
  * In Windows, this function is aliased to fsync.
  *
- * @param resource $stream The file pointer must be valid, and must point to
- * a file successfully opened by fopen or
- * fsockopen (and not yet closed by
- * fclose).
+ * @param resource $stream
  * @throws FilesystemException
  *
  */
@@ -209,10 +206,7 @@ function fdatasync($stream): void
  * This function forces a write of all buffered output to the resource
  * pointed to by the file stream.
  *
- * @param resource $stream The file pointer must be valid, and must point to
- * a file successfully opened by fopen or
- * fsockopen (and not yet closed by
- * fclose).
+ * @param resource $stream
  * @throws FilesystemException
  *
  */
@@ -620,8 +614,7 @@ function filetype(string $filename): string
  * or it will not work). By default, this function will block until the
  * requested lock is acquired; this may be controlled with the LOCK_NB option documented below.
  *
- * @param resource $stream A file system pointer resource
- * that is typically created using fopen.
+ * @param resource $stream
  * @param int $operation operation is one of the following:
  *
  *
@@ -852,8 +845,7 @@ function flock($stream, int $operation, ?int &$would_block = null): void
  * @param bool $use_include_path The optional third use_include_path parameter
  * can be set to '1' or TRUE if you want to search for the file in the
  * include_path, too.
- * @param null|resource $context A context stream
- * resource.
+ * @param null|resource $context
  * @return resource Returns a file pointer resource on success
  * @throws FilesystemException
  *
@@ -905,8 +897,7 @@ function fopen(string $filename, string $mode, bool $use_include_path = false, $
  *
  *
  *
- * @param resource $stream A file system pointer resource
- * that is typically created using fopen.
+ * @param resource $stream
  * @param int $length Up to length number of bytes read.
  * @return string Returns the read string.
  * @throws FilesystemException
@@ -929,8 +920,7 @@ function fread($stream, int $length): string
  * stat function except that it operates
  * on an open file pointer instead of a filename.
  *
- * @param resource $stream A file system pointer resource
- * that is typically created using fopen.
+ * @param resource $stream
  * @return array Returns an array with the statistics of the file; the format of the array
  * is described in detail on the stat manual page.
  * Returns FALSE on failure.
@@ -952,10 +942,7 @@ function fstat($stream): array
  * This function synchronizes changes to the file, including its meta-data. This is similar to fflush,
  * but it also instructs the operating system to write to the storage media.
  *
- * @param resource $stream The file pointer must be valid, and must point to
- * a file successfully opened by fopen or
- * fsockopen (and not yet closed by
- * fclose).
+ * @param resource $stream
  * @throws FilesystemException
  *
  */
@@ -1024,8 +1011,7 @@ function ftruncate($stream, int $size): void
 /**
  *
  *
- * @param resource $stream A file system pointer resource
- * that is typically created using fopen.
+ * @param resource $stream
  * @param string $data The string that is to be written.
  * @param int|null $length If length is an integer, writing will stop
  * after length bytes have been written or the
@@ -1262,8 +1248,7 @@ function lstat(string $filename): array
  * umask.
  * @param bool $recursive If TRUE, then any parent directories to the directory specified will
  * also be created, with the same permissions.
- * @param null|resource $context A context stream
- * resource.
+ * @param null|resource $context
  * @throws FilesystemException
  *
  */
@@ -1298,14 +1283,6 @@ function mkdir(string $directory, int $permissions = 0777, bool $recursive = fal
  * @param int $scanner_mode Can either be INI_SCANNER_NORMAL (default) or
  * INI_SCANNER_RAW. If INI_SCANNER_RAW
  * is supplied, then option values will not be parsed.
- *
- *
- * As of PHP 5.6.1 can also be specified as INI_SCANNER_TYPED.
- * In this mode boolean, null and integer types are preserved when possible.
- * String values "true", "on" and "yes"
- * are converted to TRUE. "false", "off", "no"
- * and "none" are considered FALSE. "null" is converted to NULL
- * in typed mode. Also, all numeric strings are converted to integer type if it is possible.
  * @return array The settings are returned as an associative array on success.
  * @throws FilesystemException
  *
@@ -1335,14 +1312,6 @@ function parse_ini_file(string $filename, bool $process_sections = false, int $s
  * @param int $scanner_mode Can either be INI_SCANNER_NORMAL (default) or
  * INI_SCANNER_RAW. If INI_SCANNER_RAW
  * is supplied, then option values will not be parsed.
- *
- *
- * As of PHP 5.6.1 can also be specified as INI_SCANNER_TYPED.
- * In this mode boolean, null and integer types are preserved when possible.
- * String values "true", "on" and "yes"
- * are converted to TRUE. "false", "off", "no"
- * and "none" are considered FALSE. "null" is converted to NULL
- * in typed mode. Also, all numeric strings are converted to integer type if it is possible.
  * @return array The settings are returned as an associative array on success.
  * @throws FilesystemException
  *
@@ -1421,8 +1390,7 @@ function popen(string $command, string $mode)
  * @param string $filename The filename being read.
  * @param bool $use_include_path You can use the optional second parameter and set it to TRUE, if
  * you want to search for the file in the include_path, too.
- * @param null|resource $context A context stream
- * resource.
+ * @param null|resource $context
  * @return int Returns the number of bytes read from the file on success
  * @throws FilesystemException
  *
@@ -1517,8 +1485,7 @@ function realpath(string $path): string
  * Otherwise rename fails and issues E_WARNING.
  *
  *
- * @param null|resource $context A context stream
- * resource.
+ * @param null|resource $context
  * @throws FilesystemException
  *
  */
@@ -1561,8 +1528,7 @@ function rewind($stream): void
  * A E_WARNING level error will be generated on failure.
  *
  * @param string $directory Path to the directory.
- * @param null|resource $context A context stream
- * resource.
+ * @param null|resource $context
  * @throws FilesystemException
  *
  */
@@ -1692,8 +1658,7 @@ function touch(string $filename, ?int $mtime = null, ?int $atime = null): void
  *
  * If the file is a symlink, the symlink will be deleted. On Windows, to delete
  * a symlink to a directory, rmdir has to be used instead.
- * @param null|resource $context A context stream
- * resource.
+ * @param null|resource $context
  * @throws FilesystemException
  *
  */

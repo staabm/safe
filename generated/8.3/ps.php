@@ -11,10 +11,6 @@ use Safe\Exceptions\PsException;
  * with its lower left corner at (llx, lly) and its upper right corner at
  * (urx, ury). The rectangle has by default a thin blue border.
  *
- * The note will not be visible if the document
- * is printed or viewed but it will show up if the document is converted to
- * pdf by either Acrobat Distiller™ or Ghostview.
- *
  * @param resource $psdoc Resource identifier of the postscript file
  * as returned by ps_new.
  * @param float $llx The x-coordinate of the lower left corner.
@@ -44,10 +40,6 @@ function ps_add_launchlink($psdoc, float $llx, float $lly, float $urx, float $ur
  * (llx, lly) and its upper
  * right corner at (urx, ury).
  * The rectangle has by default a thin blue border.
- *
- * The note will not be visible if the document
- * is printed or viewed but it will show up if the document is converted to
- * pdf by either Acrobat Distiller™ or Ghostview.
  *
  * @param resource $psdoc Resource identifier of the postscript file
  * as returned by ps_new.
@@ -79,10 +71,6 @@ function ps_add_locallink($psdoc, float $llx, float $lly, float $urx, float $ury
  * a page. They
  * are shown either folded or unfolded. If folded, the specified icon
  * is used as a placeholder.
- *
- * The note will not be visible if the document
- * is printed or viewed but it will show up if the document is converted to
- * pdf by either Acrobat Distiller™ or Ghostview.
  *
  * @param resource $psdoc Resource identifier of the postscript file
  * as returned by ps_new.
@@ -122,10 +110,6 @@ function ps_add_note($psdoc, float $llx, float $lly, float $urx, float $ury, str
  * right corner at (urx, ury).
  * The rectangle has by default a thin blue border.
  *
- * The note will not be visible if the document
- * is printed or viewed but it will show up if the document is converted to
- * pdf by either Acrobat Distiller™ or Ghostview.
- *
  * @param resource $psdoc Resource identifier of the postscript file
  * as returned by ps_new.
  * @param float $llx The x-coordinate of the lower left corner.
@@ -159,10 +143,6 @@ function ps_add_pdflink($psdoc, float $llx, float $lly, float $urx, float $ury, 
  * its upper right corner at (urx,
  * ury). The rectangle has by default a thin
  * blue border.
- *
- * The note will not be visible if the document
- * is printed or viewed but it will show up if the document is converted to
- * pdf by either Acrobat Distiller™ or Ghostview.
  *
  * @param resource $psdoc Resource identifier of the postscript file
  * as returned by ps_new.

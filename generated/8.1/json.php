@@ -16,9 +16,6 @@ use Safe\Exceptions\JsonException;
  * a resource.
  *
  * All string data must be UTF-8 encoded.
- *
- * PHP implements a superset of JSON as specified in the original
- * RFC 7159.
  * @param int $flags Bitmask consisting of
  * JSON_FORCE_OBJECT,
  * JSON_HEX_QUOT,

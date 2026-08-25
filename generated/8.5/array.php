@@ -9,6 +9,7 @@ use Safe\Exceptions\ArrayException;
  *
  * @param array $array
  * @param callable $callback The callback function to call to check each element, which must be
+ * of the following signature:
  *
  * boolcallback
  * mixedvalue

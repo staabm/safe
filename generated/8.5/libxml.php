@@ -46,14 +46,12 @@ use Safe\Exceptions\LibxmlException;
  *
  * This callable should return a resource, a string from which a resource can be
  * opened. If NULL is returned, the entity reference resolution will fail.
- * @throws LibxmlException
+ * @return bool Always returns TRUE.
  *
  */
-function libxml_set_external_entity_loader(callable $resolver_function): void
+function libxml_set_external_entity_loader(callable $resolver_function): bool
 {
     error_clear_last();
     $safeResult = \libxml_set_external_entity_loader($resolver_function);
-    if ($safeResult === false) {
-        throw LibxmlException::createFromPhpError();
-    }
+    return $safeResult;
 }

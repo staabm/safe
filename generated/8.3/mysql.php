@@ -10,19 +10,7 @@ use Safe\Exceptions\MysqlException;
  * link_identifier isn't specified, the last opened
  * link is used.
  *
- *
- * Open non-persistent MySQL connections and result sets are automatically destroyed when a
- * PHP script finishes its execution. So, while explicitly closing open
- * connections and freeing result sets is optional, doing so is recommended.
- * This will immediately return resources to PHP and MySQL, which can
- * improve performance. For related information, see
- * freeing resources
- *
- * @param null|resource $link_identifier The MySQL connection. If the
- * link identifier is not specified, the last link opened by
- * mysql_connect is assumed. If no connection is found or
- * established, an E_WARNING level error is
- * generated.
+ * @param null|resource $link_identifier
  * @throws MysqlException
  *
  */
@@ -102,12 +90,7 @@ function mysql_connect(?string $server = null, ?string $username = null, ?string
  * identifier.
  *
  * @param string $database_name The name of the database being created.
- * @param null|resource $link_identifier The MySQL connection. If the
- * link identifier is not specified, the last link opened by
- * mysql_connect is assumed. If no such link is found, it
- * will try to create one as if mysql_connect had been called
- * with no arguments. If no connection is found or established, an
- * E_WARNING level error is generated.
+ * @param null|resource $link_identifier
  * @throws MysqlException
  *
  */
@@ -135,9 +118,7 @@ function mysql_create_db(string $database_name, $link_identifier = null): void
  * fail with an E_WARNING and
  * mysql_data_seek will return FALSE.
  *
- * @param resource $result The result resource that
- * is being evaluated. This result comes from a call to
- * mysql_query.
+ * @param resource $result
  * @param int $row_number The desired row number of the new result pointer.
  * @throws MysqlException
  *
@@ -184,12 +165,7 @@ function mysql_db_name($result, int $row, $field = null): string
  * @param string $query The MySQL query.
  *
  * Data inside the query should be properly escaped.
- * @param null|resource $link_identifier The MySQL connection. If the
- * link identifier is not specified, the last link opened by
- * mysql_connect is assumed. If no such link is found, it
- * will try to create one as if mysql_connect had been called
- * with no arguments. If no connection is found or established, an
- * E_WARNING level error is generated.
+ * @param null|resource $link_identifier
  * @return bool|resource Returns a positive MySQL result resource to the query result. The function also returns TRUE/FALSE for
  * INSERT/UPDATE/DELETE
  * queries to indicate success/failure.
@@ -215,12 +191,7 @@ function mysql_db_query(string $database, string $query, $link_identifier = null
  * DROP DATABASE statement instead.
  *
  * @param string $database_name The name of the database that will be deleted.
- * @param null|resource $link_identifier The MySQL connection. If the
- * link identifier is not specified, the last link opened by
- * mysql_connect is assumed. If no such link is found, it
- * will try to create one as if mysql_connect had been called
- * with no arguments. If no connection is found or established, an
- * E_WARNING level error is generated.
+ * @param null|resource $link_identifier
  * @throws MysqlException
  *
  */
@@ -246,9 +217,7 @@ function mysql_drop_db(string $database_name, $link_identifier = null): void
  * mysql_fetch_object in an array, starting at
  * offset 0.
  *
- * @param resource $result The result resource that
- * is being evaluated. This result comes from a call to
- * mysql_query.
+ * @param resource $result
  * @return array An array of lengths on success.
  * @throws MysqlException
  *
@@ -270,13 +239,8 @@ function mysql_fetch_lengths($result): array
  * per flag separated by a single space, so that you can split the
  * returned value using explode.
  *
- * @param resource $result The result resource that
- * is being evaluated. This result comes from a call to
- * mysql_query.
- * @param int $field_offset The numerical field offset. The
- * field_offset starts at 0. If
- * field_offset does not exist, an error of level
- * E_WARNING is also issued.
+ * @param resource $result
+ * @param int $field_offset
  * @return string Returns a string of flags associated with the result.
  *
  * The following flags are reported, if your version of MySQL
@@ -304,13 +268,8 @@ function mysql_field_flags($result, int $field_offset): string
  * mysql_field_len returns the length of the
  * specified field.
  *
- * @param resource $result The result resource that
- * is being evaluated. This result comes from a call to
- * mysql_query.
- * @param int $field_offset The numerical field offset. The
- * field_offset starts at 0. If
- * field_offset does not exist, an error of level
- * E_WARNING is also issued.
+ * @param resource $result
+ * @param int $field_offset
  * @return int The length of the specified field index on success.
  * @throws MysqlException
  *
@@ -330,13 +289,8 @@ function mysql_field_len($result, int $field_offset): int
  * mysql_field_name returns the name of the
  * specified field index.
  *
- * @param resource $result The result resource that
- * is being evaluated. This result comes from a call to
- * mysql_query.
- * @param int $field_offset The numerical field offset. The
- * field_offset starts at 0. If
- * field_offset does not exist, an error of level
- * E_WARNING is also issued.
+ * @param resource $result
+ * @param int $field_offset
  * @return string The name of the specified field index on success.
  * @throws MysqlException
  *
@@ -358,13 +312,8 @@ function mysql_field_name($result, int $field_offset): string
  * offset, the field offset specified in
  * mysql_field_seek will be returned.
  *
- * @param resource $result The result resource that
- * is being evaluated. This result comes from a call to
- * mysql_query.
- * @param int $field_offset The numerical field offset. The
- * field_offset starts at 0. If
- * field_offset does not exist, an error of level
- * E_WARNING is also issued.
+ * @param resource $result
+ * @param int $field_offset
  * @throws MysqlException
  *
  */
@@ -387,9 +336,7 @@ function mysql_field_seek($result, int $field_offset): void
  * that return large result sets.  All associated result memory is
  * automatically freed at the end of the script's execution.
  *
- * @param resource $result The result resource that
- * is being evaluated. This result comes from a call to
- * mysql_query.
+ * @param resource $result
  * @throws MysqlException
  *
  */
@@ -407,12 +354,7 @@ function mysql_free_result($result): void
  * Describes the type of connection in use for the connection, including the
  * server host name.
  *
- * @param null|resource $link_identifier The MySQL connection. If the
- * link identifier is not specified, the last link opened by
- * mysql_connect is assumed. If no such link is found, it
- * will try to create one as if mysql_connect had been called
- * with no arguments. If no connection is found or established, an
- * E_WARNING level error is generated.
+ * @param null|resource $link_identifier
  * @return string Returns a string describing the type of MySQL connection in use for the
  * connection.
  * @throws MysqlException
@@ -432,12 +374,7 @@ function mysql_get_host_info($link_identifier = null): string
 /**
  * Retrieves the MySQL protocol.
  *
- * @param null|resource $link_identifier The MySQL connection. If the
- * link identifier is not specified, the last link opened by
- * mysql_connect is assumed. If no such link is found, it
- * will try to create one as if mysql_connect had been called
- * with no arguments. If no connection is found or established, an
- * E_WARNING level error is generated.
+ * @param null|resource $link_identifier
  * @return int Returns the MySQL protocol on success.
  * @throws MysqlException
  *
@@ -456,12 +393,7 @@ function mysql_get_proto_info($link_identifier = null): int
 /**
  * Retrieves the MySQL server version.
  *
- * @param null|resource $link_identifier The MySQL connection. If the
- * link identifier is not specified, the last link opened by
- * mysql_connect is assumed. If no such link is found, it
- * will try to create one as if mysql_connect had been called
- * with no arguments. If no connection is found or established, an
- * E_WARNING level error is generated.
+ * @param null|resource $link_identifier
  * @return string Returns the MySQL server version on success.
  * @throws MysqlException
  *
@@ -480,12 +412,7 @@ function mysql_get_server_info($link_identifier = null): string
 /**
  * Returns detailed information about the last query.
  *
- * @param null|resource $link_identifier The MySQL connection. If the
- * link identifier is not specified, the last link opened by
- * mysql_connect is assumed. If no such link is found, it
- * will try to create one as if mysql_connect had been called
- * with no arguments. If no connection is found or established, an
- * E_WARNING level error is generated.
+ * @param null|resource $link_identifier
  * @return string Returns information about the statement on success. See the example below for which statements provide information,
  * and what the returned value may look like. Statements that are not listed
  * will return FALSE.
@@ -507,12 +434,7 @@ function mysql_info($link_identifier = null): string
  * Returns a result pointer containing the databases available from the
  * current mysql daemon.
  *
- * @param null|resource $link_identifier The MySQL connection. If the
- * link identifier is not specified, the last link opened by
- * mysql_connect is assumed. If no such link is found, it
- * will try to create one as if mysql_connect had been called
- * with no arguments. If no connection is found or established, an
- * E_WARNING level error is generated.
+ * @param null|resource $link_identifier
  * @return resource Returns a result pointer resource on success. Use the mysql_tablename function to traverse
  * this result pointer, or any function for result tables, such as
  * mysql_fetch_array.
@@ -539,12 +461,7 @@ function mysql_list_dbs($link_identifier = null)
  *
  * @param string $database_name The name of the database that's being queried.
  * @param string $table_name The name of the table that's being queried.
- * @param null|resource $link_identifier The MySQL connection. If the
- * link identifier is not specified, the last link opened by
- * mysql_connect is assumed. If no such link is found, it
- * will try to create one as if mysql_connect had been called
- * with no arguments. If no connection is found or established, an
- * E_WARNING level error is generated.
+ * @param null|resource $link_identifier
  * @return resource A result pointer resource on success.
  *
  * The returned result can be used with mysql_field_flags,
@@ -568,12 +485,7 @@ function mysql_list_fields(string $database_name, string $table_name, $link_iden
 /**
  * Retrieves the current MySQL server threads.
  *
- * @param null|resource $link_identifier The MySQL connection. If the
- * link identifier is not specified, the last link opened by
- * mysql_connect is assumed. If no such link is found, it
- * will try to create one as if mysql_connect had been called
- * with no arguments. If no connection is found or established, an
- * E_WARNING level error is generated.
+ * @param null|resource $link_identifier
  * @return resource A result pointer resource on success.
  * @throws MysqlException
  *
@@ -597,12 +509,7 @@ function mysql_list_processes($link_identifier = null)
  * [FROM db_name] [LIKE 'pattern'] statement instead.
  *
  * @param string $database The name of the database
- * @param null|resource $link_identifier The MySQL connection. If the
- * link identifier is not specified, the last link opened by
- * mysql_connect is assumed. If no such link is found, it
- * will try to create one as if mysql_connect had been called
- * with no arguments. If no connection is found or established, an
- * E_WARNING level error is generated.
+ * @param null|resource $link_identifier
  * @return resource A result pointer resource on success.
  *
  * Use the mysql_tablename function to
@@ -625,9 +532,7 @@ function mysql_list_tables(string $database, $link_identifier = null)
 /**
  * Retrieves the number of fields from a query.
  *
- * @param resource $result The result resource that
- * is being evaluated. This result comes from a call to
- * mysql_query.
+ * @param resource $result
  * @return int Returns the number of fields in the result set resource on
  * success.
  * @throws MysqlException
@@ -650,9 +555,7 @@ function mysql_num_fields($result): int
  * To retrieve the number of rows affected by a INSERT, UPDATE, REPLACE or
  * DELETE query, use mysql_affected_rows.
  *
- * @param resource $result The result resource that
- * is being evaluated. This result comes from a call to
- * mysql_query.
+ * @param resource $result
  * @return int The number of rows in a result set on success.
  * @throws MysqlException
  *
@@ -678,12 +581,7 @@ function mysql_num_rows($result): int
  *
  * The query string should not end with a semicolon.
  * Data inside the query should be properly escaped.
- * @param null|resource $link_identifier The MySQL connection. If the
- * link identifier is not specified, the last link opened by
- * mysql_connect is assumed. If no such link is found, it
- * will try to create one as if mysql_connect had been called
- * with no arguments. If no connection is found or established, an
- * E_WARNING level error is generated.
+ * @param null|resource $link_identifier
  * @return bool|resource For SELECT, SHOW, DESCRIBE, EXPLAIN and other statements returning resultset,
  * mysql_query
  * returns a resource on success.
@@ -734,12 +632,7 @@ function mysql_query(string $query, $link_identifier = null)
  * safe before sending a query to MySQL.
  *
  * @param string $unescaped_string The string that is to be escaped.
- * @param null|resource $link_identifier The MySQL connection. If the
- * link identifier is not specified, the last link opened by
- * mysql_connect is assumed. If no such link is found, it
- * will try to create one as if mysql_connect had been called
- * with no arguments. If no connection is found or established, an
- * E_WARNING level error is generated.
+ * @param null|resource $link_identifier
  * @return string Returns the escaped string.
  * @throws MysqlException
  *
@@ -766,9 +659,7 @@ function mysql_real_escape_string(string $unescaped_string, $link_identifier = n
  * numeric offset for the field argument is much quicker than
  * specifying a fieldname or tablename.fieldname argument.
  *
- * @param resource $result The result resource that
- * is being evaluated. This result comes from a call to
- * mysql_query.
+ * @param resource $result
  * @param int $row The row number from the result that's being retrieved. Row numbers
  * start at 0.
  * @param mixed $field The name or offset of the field being retrieved.
@@ -798,12 +689,7 @@ function mysql_result($result, int $row, $field = 0): string
  * mysql_query will be made on the active database.
  *
  * @param string $database_name The name of the database that is to be selected.
- * @param null|resource $link_identifier The MySQL connection. If the
- * link identifier is not specified, the last link opened by
- * mysql_connect is assumed. If no such link is found, it
- * will try to create one as if mysql_connect had been called
- * with no arguments. If no connection is found or established, an
- * E_WARNING level error is generated.
+ * @param null|resource $link_identifier
  * @throws MysqlException
  *
  */
@@ -821,12 +707,7 @@ function mysql_select_db(string $database_name, $link_identifier = null): void
  * Sets the default character set for the current connection.
  *
  * @param string $charset A valid character set name.
- * @param null|resource $link_identifier The MySQL connection. If the
- * link identifier is not specified, the last link opened by
- * mysql_connect is assumed. If no such link is found, it
- * will try to create one as if mysql_connect had been called
- * with no arguments. If no connection is found or established, an
- * E_WARNING level error is generated.
+ * @param null|resource $link_identifier
  * @throws MysqlException
  *
  */
@@ -874,12 +755,7 @@ function mysql_tablename($result, int $i): string
  * with mysql_ping is executed, the thread ID will
  * change. This means only retrieve the thread ID when needed.
  *
- * @param null|resource $link_identifier The MySQL connection. If the
- * link identifier is not specified, the last link opened by
- * mysql_connect is assumed. If no such link is found, it
- * will try to create one as if mysql_connect had been called
- * with no arguments. If no connection is found or established, an
- * E_WARNING level error is generated.
+ * @param null|resource $link_identifier
  * @return int The thread ID on success.
  * @throws MysqlException
  *
@@ -912,12 +788,7 @@ function mysql_thread_id($link_identifier = null): int
  * @param string $query The SQL query to execute.
  *
  * Data inside the query should be properly escaped.
- * @param null|resource $link_identifier The MySQL connection. If the
- * link identifier is not specified, the last link opened by
- * mysql_connect is assumed. If no such link is found, it
- * will try to create one as if mysql_connect had been called
- * with no arguments. If no connection is found or established, an
- * E_WARNING level error is generated.
+ * @param null|resource $link_identifier
  * @return bool|resource For SELECT, SHOW, DESCRIBE or EXPLAIN statements,
  * mysql_unbuffered_query
  * returns a resource on success.

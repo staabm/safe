@@ -10,8 +10,7 @@ use Safe\Exceptions\UodbcException;
  * By default, auto-commit is on for a connection.  Disabling
  * auto-commit is equivalent with starting a transaction.
  *
- * @param resource $odbc The ODBC connection object,
- * see odbc_connect for details.
+ * @param resource $odbc
  * @param bool $enable If enable is TRUE, auto-commit is enabled, if
  * it is FALSE auto-commit is disabled.
  * @return mixed Without the enable parameter, this function returns
@@ -147,8 +146,7 @@ function odbc_binmode(int $statement, int $mode): void
 /**
  * Lists columns and associated privileges for the given table.
  *
- * @param resource $odbc The ODBC connection object,
- * see odbc_connect for details.
+ * @param resource $odbc
  * @param string $catalog The catalog ('qualifier' in ODBC 2 parlance).
  * @param string $schema The schema ('owner' in ODBC 2 parlance).
  * This parameter accepts the following search patterns:
@@ -195,8 +193,7 @@ function odbc_columnprivileges($odbc, string $catalog, string $schema, string $t
 /**
  * Lists all columns in the requested range.
  *
- * @param resource $odbc The ODBC connection object,
- * see odbc_connect for details.
+ * @param resource $odbc
  * @param null|string $catalog The catalog ('qualifier' in ODBC 2 parlance).
  * @param null|string $schema The schema ('owner' in ODBC 2 parlance).
  * This parameter accepts the following search patterns:
@@ -261,8 +258,7 @@ function odbc_columns($odbc, ?string $catalog = null, ?string $schema = null, ?s
 /**
  * Commits all pending transactions on the connection.
  *
- * @param resource $odbc The ODBC connection object,
- * see odbc_connect for details.
+ * @param resource $odbc
  * @throws UodbcException
  *
  */
@@ -342,8 +338,7 @@ function odbc_cursor($statement): string
  * This function will return the list of available DSN (after calling it
  * several times).
  *
- * @param resource $odbc The ODBC connection object,
- * see odbc_connect for details.
+ * @param resource $odbc
  * @param int $fetch_type The fetch_type can be one of two constant types:
  * SQL_FETCH_FIRST, SQL_FETCH_NEXT.
  * Use SQL_FETCH_FIRST the first time this function is
@@ -367,8 +362,7 @@ function odbc_data_source($odbc, int $fetch_type): array
 /**
  * Sends an SQL statement to the database server.
  *
- * @param resource $odbc The ODBC connection object,
- * see odbc_connect for details.
+ * @param resource $odbc
  * @param string $query The SQL statement.
  * @return resource Returns an ODBC result identifier if the SQL command was executed
  * successfully.
@@ -548,8 +542,7 @@ function odbc_field_type($statement, int $field): string
  * foreign keys in other tables that refer to the primary key in the
  * specified table
  *
- * @param resource $odbc The ODBC connection object,
- * see odbc_connect for details.
+ * @param resource $odbc
  * @param string $pk_catalog The catalog ('qualifier' in ODBC 2 parlance) of the primary key table.
  * @param string $pk_schema The schema ('owner' in ODBC 2 parlance) of the primary key table.
  * @param string $pk_table The primary key table.
@@ -593,8 +586,7 @@ function odbc_foreignkeys($odbc, string $pk_catalog, string $pk_schema, string $
 /**
  * Retrieves information about data types supported by the data source.
  *
- * @param resource $odbc The ODBC connection object,
- * see odbc_connect for details.
+ * @param resource $odbc
  * @param int $data_type The data type, which can be used to restrict the information to a
  * single data type.
  * @return resource Returns an ODBC result identifier.
@@ -715,8 +707,7 @@ function odbc_pconnect(string $dsn, string $user, string $password, int $cursor_
  * defined by the ODBC specification.  However, the Unified ODBC driver
  * currently only supports parameters of type IN to stored procedures.
  *
- * @param resource $odbc The ODBC connection object,
- * see odbc_connect for details.
+ * @param resource $odbc
  * @param string $query The query string statement being prepared.
  * @return resource Returns an ODBC result identifier if the SQL command was prepared
  * successfully.
@@ -738,8 +729,7 @@ function odbc_prepare($odbc, string $query)
  * Returns a result identifier that can be used to fetch the column names
  * that comprise the primary key for a table.
  *
- * @param resource $odbc The ODBC connection object,
- * see odbc_connect for details.
+ * @param resource $odbc
  * @param string $catalog The catalog ('qualifier' in ODBC 2 parlance).
  * @param string $schema The schema ('owner' in ODBC 2 parlance).
  * @param string $table
@@ -772,8 +762,7 @@ function odbc_primarykeys($odbc, string $catalog, string $schema, string $table)
 /**
  * Retrieve information about parameters to procedures.
  *
- * @param  $odbc The ODBC connection object,
- * see odbc_connect for details.
+ * @param  $odbc
  * @param null|string $catalog The catalog ('qualifier' in ODBC 2 parlance).
  * @param null|string $schema The schema ('owner' in ODBC 2 parlance).
  * This parameter accepts the following search patterns:
@@ -841,8 +830,7 @@ function odbc_procedurecolumns($odbc, ?string $catalog = null, ?string $schema =
 /**
  * Lists all procedures in the requested range.
  *
- * @param  $odbc The ODBC connection object,
- * see odbc_connect for details.
+ * @param  $odbc
  * @param null|string $catalog The catalog ('qualifier' in ODBC 2 parlance).
  * @param null|string $schema The schema ('owner' in ODBC 2 parlance).
  * This parameter accepts the following search patterns:
@@ -940,8 +928,7 @@ function odbc_result($statement, $field)
 /**
  * Rolls back all pending statements on the connection.
  *
- * @param resource $odbc The ODBC connection object,
- * see odbc_connect for details.
+ * @param resource $odbc
  * @throws UodbcException
  *
  */
@@ -1000,8 +987,7 @@ function odbc_setoption($odbc, int $which, int $option, int $value): void
  * row in the table, or columns that are automatically updated when any
  * value in the row is updated by a transaction.
  *
- * @param resource $odbc The ODBC connection object,
- * see odbc_connect for details.
+ * @param resource $odbc
  * @param int $type
  * @param string $catalog The catalog ('qualifier' in ODBC 2 parlance).
  * @param string $schema The schema ('owner' in ODBC 2 parlance).
@@ -1042,8 +1028,7 @@ function odbc_specialcolumns($odbc, int $type, string $catalog, string $schema, 
 /**
  * Get statistics about a table and its indexes.
  *
- * @param resource $odbc The ODBC connection object,
- * see odbc_connect for details.
+ * @param resource $odbc
  * @param string $catalog The catalog ('qualifier' in ODBC 2 parlance).
  * @param string $schema The schema ('owner' in ODBC 2 parlance).
  * @param string $table The table name.
@@ -1089,8 +1074,7 @@ function odbc_statistics($odbc, string $catalog, string $schema, string $table, 
  * Lists tables in the requested range and the privileges associated
  * with each table.
  *
- * @param resource $odbc The ODBC connection object,
- * see odbc_connect for details.
+ * @param resource $odbc
  * @param string $catalog The catalog ('qualifier' in ODBC 2 parlance).
  * @param string $schema The schema ('owner' in ODBC 2 parlance).
  * This parameter accepts the following search patterns:
@@ -1168,8 +1152,7 @@ function odbc_tableprivileges($odbc, string $catalog, string $schema, string $ta
  *
  *
  *
- * @param resource $odbc The ODBC connection object,
- * see odbc_connect for details.
+ * @param resource $odbc
  * @param null|string $catalog The catalog ('qualifier' in ODBC 2 parlance).
  * @param null|string $schema The schema ('owner' in ODBC 2 parlance).
  * This parameter accepts the following search patterns:

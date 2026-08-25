@@ -11,10 +11,6 @@ use Safe\Exceptions\PsException;
  * with its lower left corner at (llx, lly) and its upper right corner at
  * (urx, ury). The rectangle has by default a thin blue border.
  *
- * The note will not be visible if the document
- * is printed or viewed but it will show up if the document is converted to
- * pdf by either Acrobat Distiller™ or Ghostview.
- *
  * @param resource $psdoc Resource identifier of the postscript file
  * as returned by ps_new.
  * @param float $llx The x-coordinate of the lower left corner.
@@ -44,10 +40,6 @@ function ps_add_launchlink($psdoc, float $llx, float $lly, float $urx, float $ur
  * (llx, lly) and its upper
  * right corner at (urx, ury).
  * The rectangle has by default a thin blue border.
- *
- * The note will not be visible if the document
- * is printed or viewed but it will show up if the document is converted to
- * pdf by either Acrobat Distiller™ or Ghostview.
  *
  * @param resource $psdoc Resource identifier of the postscript file
  * as returned by ps_new.
@@ -79,10 +71,6 @@ function ps_add_locallink($psdoc, float $llx, float $lly, float $urx, float $ury
  * a page. They
  * are shown either folded or unfolded. If folded, the specified icon
  * is used as a placeholder.
- *
- * The note will not be visible if the document
- * is printed or viewed but it will show up if the document is converted to
- * pdf by either Acrobat Distiller™ or Ghostview.
  *
  * @param resource $psdoc Resource identifier of the postscript file
  * as returned by ps_new.
@@ -122,10 +110,6 @@ function ps_add_note($psdoc, float $llx, float $lly, float $urx, float $ury, str
  * right corner at (urx, ury).
  * The rectangle has by default a thin blue border.
  *
- * The note will not be visible if the document
- * is printed or viewed but it will show up if the document is converted to
- * pdf by either Acrobat Distiller™ or Ghostview.
- *
  * @param resource $psdoc Resource identifier of the postscript file
  * as returned by ps_new.
  * @param float $llx The x-coordinate of the lower left corner.
@@ -159,10 +143,6 @@ function ps_add_pdflink($psdoc, float $llx, float $lly, float $urx, float $ury, 
  * its upper right corner at (urx,
  * ury). The rectangle has by default a thin
  * blue border.
- *
- * The note will not be visible if the document
- * is printed or viewed but it will show up if the document is converted to
- * pdf by either Acrobat Distiller™ or Ghostview.
  *
  * @param resource $psdoc Resource identifier of the postscript file
  * as returned by ps_new.
@@ -805,10 +785,7 @@ function ps_get_parameter($psdoc, string $name, ?float $modifier = null): string
  *
  * @param resource $psdoc Resource identifier of the postscript file
  * as returned by ps_new.
- * @param string $text text should not contain any non alpha
- * characters. Possible positions for breaks are returned in an array of
- * interger numbers. Each number is the position of the char in
- * text after which a hyphenation can take place.
+ * @param string $text
  * @return array An array of integers indicating the position of possible breaks in
  * the text.
  * @throws PsException
@@ -826,8 +803,6 @@ function ps_hyphenate($psdoc, string $text): array
 
 
 /**
- * This function is
- * currently not documented; only its argument list is available.
  *
  *
  * @param resource $psdoc Resource identifier of the postscript file
@@ -1168,7 +1143,7 @@ function ps_set_border_style($psdoc, string $style, float $width): void
  * file has been already written. It must be called before the first page
  * or the first call of ps_findfont.
  *
- * @param resource $p Resource identifier of the postscript file
+ * @param resource $psdoc Resource identifier of the postscript file
  * as returned by ps_new.
  * @param string $key The name of the information field to set. The values which can be
  * set are Keywords, Subject,
@@ -1176,7 +1151,7 @@ function ps_set_border_style($psdoc, string $style, float $width): void
  * Author, BoundingBox, and
  * Orientation. Be aware that some of them has a
  * meaning to PostScript viewers.
- * @param string $val The value of the information field. The field
+ * @param string $value The value of the information field. The field
  * Orientation can be set to either
  * Portrait or Landscape. The
  * BoundingBox is a string consisting of four numbers.
@@ -1190,10 +1165,10 @@ function ps_set_border_style($psdoc, string $style, float $width): void
  * @throws PsException
  *
  */
-function ps_set_info($p, string $key, string $val): void
+function ps_set_info($psdoc, string $key, string $value): void
 {
     error_clear_last();
-    $safeResult = \ps_set_info($p, $key, $val);
+    $safeResult = \ps_set_info($psdoc, $key, $value);
     if ($safeResult === false) {
         throw PsException::createFromPhpError();
     }
@@ -1377,8 +1352,6 @@ function ps_setdash($psdoc, float $on, float $off): void
 
 
 /**
- * This function is
- * currently not documented; only its argument list is available.
  *
  *
  * @param resource $psdoc Resource identifier of the postscript file
@@ -1526,8 +1499,6 @@ function ps_setmiterlimit($psdoc, float $value): void
 
 
 /**
- * This function is
- * currently not documented; only its argument list is available.
  *
  *
  * @param resource $psdoc Resource identifier of the postscript file
@@ -1683,8 +1654,6 @@ function ps_show_xy($psdoc, string $text, float $x, float $y): void
 
 
 /**
- * This function is
- * currently not documented; only its argument list is available.
  *
  *
  * @param resource $psdoc

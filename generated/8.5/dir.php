@@ -53,8 +53,7 @@ function chroot(string $directory): void
  * given directory is opened.
  *
  * @param string $directory Directory to open
- * @param null|resource $context A context stream
- * resource.
+ * @param null|resource $context
  * @return \Directory Returns an instance of Directory, or FALSE in case of error.
  * @throws DirException
  *
@@ -99,15 +98,11 @@ function getcwd(): string
 
 
 /**
- * Opens up a directory handle to be used in subsequent
- * closedir, readdir, and
- * rewinddir calls.
  *
- * @param string $directory The directory path that is to be opened
- * @param null|resource $context For a description of the context parameter,
- * refer to the streams section of
- * the manual.
- * @return resource Returns a directory handle resource on success
+ *
+ * @param string $directory
+ * @param null|resource $context
+ * @return resource
  * @throws DirException
  *
  */

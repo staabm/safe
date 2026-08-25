@@ -53,8 +53,7 @@ function chroot(string $directory): void
  * given directory is opened.
  *
  * @param string $directory Directory to open
- * @param null|resource $context A context stream
- * resource.
+ * @param null|resource $context
  * @return \Directory Returns an instance of Directory, or FALSE in case of error.
  * @throws DirException
  *

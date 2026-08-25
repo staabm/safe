@@ -92,10 +92,9 @@ function apache_lookup_uri(string $filename): object
 
 
 /**
- * Fetches all HTTP request headers from the current request. Works in the
- * Apache, FastCGI, CLI, and FPM webservers.
  *
- * @return array|false An associative array of all the HTTP headers in the current request.
+ *
+ * @return array|false
  *
  */
 function apache_request_headers()
@@ -107,10 +106,9 @@ function apache_request_headers()
 
 
 /**
- * Fetch all HTTP response headers.  Works in the
- * Apache, FastCGI, CLI, and FPM webservers.
  *
- * @return array|false An array of all Apache response headers on success.
+ *
+ * @return array|false
  *
  */
 function apache_response_headers()

@@ -214,8 +214,6 @@ function preg_grep(string $pattern, array $array, int $flags = 0): array
  *
  *
  *
- * The above example will output:
- *
  * So, $out[0] contains an array of strings that matched the full pattern,
  * and $out[1] contains an array of strings enclosed by tags.
  *
@@ -238,8 +236,6 @@ function preg_grep(string $pattern, array $array, int $flags = 0): array
  *
  *
  *
- * The above example will output:
- *
  * Orders results so that $matches[0] is an array of first set
  * of matches, $matches[1] is an array of second set of matches,
  * and so on.
@@ -255,8 +251,6 @@ function preg_grep(string $pattern, array $array, int $flags = 0): array
  * ]]>
  *
  *
- *
- * The above example will output:
  *
  * If this flag is passed, for every occurring match the appendant string
  * offset (in bytes) will also be returned. Note that this changes the value of
@@ -316,8 +310,6 @@ function preg_grep(string $pattern, array $array, int $flags = 0): array
  *
  *
  *
- * The above example will output:
- *
  * If this flag is passed, unmatched subpatterns are reported as NULL;
  * otherwise they are reported as an empty string.
  *
@@ -344,8 +336,6 @@ function preg_grep(string $pattern, array $array, int $flags = 0): array
  *
  *
  *
- * The above example will output:
- *
  * So, $out[0] contains an array of strings that matched the full pattern,
  * and $out[1] contains an array of strings enclosed by tags.
  *
@@ -367,8 +357,6 @@ function preg_grep(string $pattern, array $array, int $flags = 0): array
  * ]]>
  *
  *
- *
- * The above example will output:
  * @return int Returns the number of full pattern matches (which might be zero).
  * @throws PcreException
  *
@@ -527,8 +515,6 @@ function preg_match_all(string $pattern, string $subject, ?array &$matches = nul
  *
  *
  *
- * The above example will output:
- *
  * If this flag is passed, unmatched subpatterns are reported as NULL;
  * otherwise they are reported as an empty string.
  *
@@ -560,8 +546,6 @@ function preg_match_all(string $pattern, string $subject, ?array &$matches = nul
  * ]]>
  *
  *
- *
- * The above example will output:
  * @param int $offset If this flag is passed, for every occurring match the appendant string
  * offset (in bytes) will also be returned. Note that this changes the value of
  * matches into an array where every element is an
@@ -603,8 +587,6 @@ function preg_match_all(string $pattern, string $subject, ?array &$matches = nul
  * ]]>
  *
  *
- *
- * The above example will output:
  * @return int preg_match returns 1 if the pattern
  * matches given subject, 0 if it does not.
  * @throws PcreException

@@ -214,8 +214,6 @@ function preg_grep(string $pattern, array $array, int $flags = 0): array
  *
  *
  *
- * The above example will output:
- *
  * So, $out[0] contains an array of strings that matched the full pattern,
  * and $out[1] contains an array of strings enclosed by tags.
  *
@@ -238,8 +236,6 @@ function preg_grep(string $pattern, array $array, int $flags = 0): array
  *
  *
  *
- * The above example will output:
- *
  * Orders results so that $matches[0] is an array of first set
  * of matches, $matches[1] is an array of second set of matches,
  * and so on.
@@ -255,8 +251,6 @@ function preg_grep(string $pattern, array $array, int $flags = 0): array
  * ]]>
  *
  *
- *
- * The above example will output:
  *
  * If this flag is passed, for every occurring match the appendant string
  * offset (in bytes) will also be returned. Note that this changes the value of
@@ -316,13 +310,8 @@ function preg_grep(string $pattern, array $array, int $flags = 0): array
  *
  *
  *
- * The above example will output:
- *
  * If this flag is passed, unmatched subpatterns are reported as NULL;
  * otherwise they are reported as an empty string.
- *
- * If no order flag is given, PREG_PATTERN_ORDER is
- * assumed.
  * @param int $offset Orders results so that $matches[0] is an array of full
  * pattern matches, $matches[1] is an array of strings matched by
  * the first parenthesized subpattern, and so on.
@@ -343,8 +332,6 @@ function preg_grep(string $pattern, array $array, int $flags = 0): array
  * and $out[1] contains an array of strings enclosed by tags.
  *
  *
- *
- * The above example will output:
  *
  * So, $out[0] contains an array of strings that matched the full pattern,
  * and $out[1] contains an array of strings enclosed by tags.
@@ -367,8 +354,6 @@ function preg_grep(string $pattern, array $array, int $flags = 0): array
  * ]]>
  *
  *
- *
- * The above example will output:
  * @return int Returns the number of full pattern matches (which might be zero).
  * @throws PcreException
  *
@@ -449,8 +434,12 @@ function preg_match_all(string $pattern, string $subject, ?array &$matches = nul
  * PREG_UNMATCHED_AS_NULL
  *
  *
- * If this flag is passed, unmatched subpatterns are reported as NULL;
- * otherwise they are reported as an empty string.
+ * If this flag is passed, unmatched subpatterns are reported as NULL
+ * and are always included in the results (including trailing ones).
+ * Without this flag, unmatched subpatterns that are followed by a
+ * matched subpattern are reported as an empty string,
+ * while trailing unmatched subpatterns are omitted from the results
+ * entirely.
  *
  *
  *
@@ -476,6 +465,22 @@ function preg_match_all(string $pattern, string $subject, ?array &$matches = nul
  * NULL
  * [3]=>
  * string(1) "c"
+ * }
+ * array(2) {
+ * [0]=>
+ * string(1) "a"
+ * [1]=>
+ * string(1) "a"
+ * }
+ * array(4) {
+ * [0]=>
+ * string(1) "a"
+ * [1]=>
+ * string(1) "a"
+ * [2]=>
+ * NULL
+ * [3]=>
+ * NULL
  * }
  * ]]>
  *
@@ -527,10 +532,12 @@ function preg_match_all(string $pattern, string $subject, ?array &$matches = nul
  *
  *
  *
- * The above example will output:
- *
- * If this flag is passed, unmatched subpatterns are reported as NULL;
- * otherwise they are reported as an empty string.
+ * If this flag is passed, unmatched subpatterns are reported as NULL
+ * and are always included in the results (including trailing ones).
+ * Without this flag, unmatched subpatterns that are followed by a
+ * matched subpattern are reported as an empty string,
+ * while trailing unmatched subpatterns are omitted from the results
+ * entirely.
  *
  *
  *
@@ -557,11 +564,25 @@ function preg_match_all(string $pattern, string $subject, ?array &$matches = nul
  * [3]=>
  * string(1) "c"
  * }
+ * array(2) {
+ * [0]=>
+ * string(1) "a"
+ * [1]=>
+ * string(1) "a"
+ * }
+ * array(4) {
+ * [0]=>
+ * string(1) "a"
+ * [1]=>
+ * string(1) "a"
+ * [2]=>
+ * NULL
+ * [3]=>
+ * NULL
+ * }
  * ]]>
  *
  *
- *
- * The above example will output:
  * @param int $offset If this flag is passed, for every occurring match the appendant string
  * offset (in bytes) will also be returned. Note that this changes the value of
  * matches into an array where every element is an
@@ -603,8 +624,6 @@ function preg_match_all(string $pattern, string $subject, ?array &$matches = nul
  * ]]>
  *
  *
- *
- * The above example will output:
  * @return int preg_match returns 1 if the pattern
  * matches given subject, 0 if it does not.
  * @throws PcreException

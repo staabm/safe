@@ -7,8 +7,7 @@ use Safe\Exceptions\CurlException;
 /**
  * Copies a cURL handle keeping the same preferences.
  *
- * @param \CurlHandle $handle A cURL handle returned by
- * curl_init.
+ * @param \CurlHandle $handle
  * @return \CurlHandle Returns a new cURL handle.
  * @throws CurlException
  *
@@ -27,8 +26,7 @@ function curl_copy_handle(\CurlHandle $handle): \CurlHandle
 /**
  * This function URL encodes the given string according to RFC 3986.
  *
- * @param \CurlHandle $handle A cURL handle returned by
- * curl_init.
+ * @param \CurlHandle $handle
  * @param string $string The string to be encoded.
  * @return string Returns escaped string.
  * @throws CurlException
@@ -51,8 +49,7 @@ function curl_escape(\CurlHandle $handle, string $string): string
  * This function should be called after initializing a cURL session and all
  * the options for the session are set.
  *
- * @param \CurlHandle $handle A cURL handle returned by
- * curl_init.
+ * @param \CurlHandle $handle
  * @return bool|string Returns TRUE on success. However, if the CURLOPT_RETURNTRANSFER
  * option is set, it will return
  * the result on success.
@@ -73,8 +70,7 @@ function curl_exec(\CurlHandle $handle)
 /**
  * Gets information about the last transfer.
  *
- * @param \CurlHandle $handle A cURL handle returned by
- * curl_init.
+ * @param \CurlHandle $handle
  * @param int|null $option This may be one of the following constants:
  *
  *
@@ -587,8 +583,7 @@ function curl_init(?string $url = null): \CurlHandle
  * queued_messages will contain the number of remaining messages after this
  * function was called.
  *
- * @param \CurlMultiHandle $multi_handle A cURL multi handle returned by
- * curl_multi_init.
+ * @param \CurlMultiHandle $multi_handle
  * @param int|null $queued_messages Number of messages that are still in the queue
  * @return array On success, returns an associative array for the message.
  *
@@ -799,8 +794,7 @@ function curl_multi_setopt(\CurlMultiHandle $multi_handle, int $option, $value):
 /**
  * Sets an option on the given cURL session handle.
  *
- * @param \CurlHandle $handle A cURL handle returned by
- * curl_init.
+ * @param \CurlHandle $handle
  * @param int $option The CURLOPT_XXX option to set.
  * @param mixed $value The value to be set on option.
  *
@@ -3179,8 +3173,7 @@ function curl_setopt(\CurlHandle $handle, int $option, $value): void
 /**
  * Return an integer containing the last share curl error number.
  *
- * @param \CurlShareHandle $share_handle A cURL share handle returned by
- * curl_share_init.
+ * @param \CurlShareHandle $share_handle
  * @return int Returns an integer containing the last share curl error number.
  * @throws CurlException
  *
@@ -3199,8 +3192,7 @@ function curl_share_errno(\CurlShareHandle $share_handle): int
 /**
  * Sets an option on the given cURL share handle.
  *
- * @param \CurlShareHandle $share_handle A cURL share handle returned by
- * curl_share_init.
+ * @param \CurlShareHandle $share_handle
  * @param int $option
  *
  *
@@ -3275,8 +3267,7 @@ function curl_share_setopt(\CurlShareHandle $share_handle, int $option, $value):
 /**
  * This function decodes the given URL encoded string.
  *
- * @param \CurlHandle $handle A cURL handle returned by
- * curl_init.
+ * @param \CurlHandle $handle
  * @param string $string The URL encoded string to be decoded.
  * @return string Returns decoded string.
  * @throws CurlException
@@ -3304,8 +3295,7 @@ function curl_unescape(\CurlHandle $handle, string $string): string
  * A small amount of traffic is usually sent to keep a connection alive.
  * HTTP/2 maintains its connection by sending a HTTP/2 PING frame.
  *
- * @param \CurlHandle $handle A cURL handle returned by
- * curl_init.
+ * @param \CurlHandle $handle
  * @throws CurlException
  *
  */

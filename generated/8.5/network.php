@@ -75,7 +75,7 @@ function closelog(): bool
  * type
  *
  * String containing the record type.  Additional attributes will also be contained
- * in the resulting array dependant on the value of type. See table below.
+ * in the resulting array dependent on the value of type. See table below.
  *
  *
  *
@@ -483,8 +483,8 @@ function long2ip(int $ip)
  *
  *
  *
- * Name
- * Description
+ * &Name;
+ * &Description;
  *
  *
  *
@@ -530,8 +530,8 @@ function long2ip(int $ip)
  *
  *
  *
- * Name
- * Description
+ * &Name;
+ * &Description;
  *
  *
  *

@@ -83,12 +83,12 @@ function stream_copy_to_stream($from, $to, ?int $length = null, int $offset = 0)
 
 
 /**
- * Adds filtername to the list of filters
+ * Adds filter_name to the list of filters
  * attached to stream.
  *
  * @param resource $stream The target stream.
- * @param string $filtername The filter name.
- * @param int $read_write By default, stream_filter_append will
+ * @param string $filter_name The filter name.
+ * @param int $mode By default, stream_filter_append will
  * attach the filter to the read filter chain
  * if the file was opened for reading (i.e. File Mode:
  * r, and/or +).  The filter
@@ -98,7 +98,7 @@ function stream_copy_to_stream($from, $to, ?int $length = null, int $offset = 0)
  * STREAM_FILTER_READ,
  * STREAM_FILTER_WRITE, and/or
  * STREAM_FILTER_ALL can also be passed to the
- * read_write parameter to override this behavior.
+ * mode parameter to override this behavior.
  * @param mixed $params This filter will be added with the specified
  * params to the end of
  * the list and will therefore be called last during stream operations.
@@ -109,19 +109,19 @@ function stream_copy_to_stream($from, $to, ?int $length = null, int $offset = 0)
  * stream_filter_remove.
  *
  * FALSE is returned if stream is not a resource or
- * if filtername cannot be located.
+ * if filter_name cannot be located.
  * @throws StreamException
  *
  */
-function stream_filter_append($stream, string $filtername, ?int $read_write = null, $params = null)
+function stream_filter_append($stream, string $filter_name, ?int $mode = null, $params = null)
 {
     error_clear_last();
     if ($params !== null) {
-        $safeResult = \stream_filter_append($stream, $filtername, $read_write, $params);
-    } elseif ($read_write !== null) {
-        $safeResult = \stream_filter_append($stream, $filtername, $read_write);
+        $safeResult = \stream_filter_append($stream, $filter_name, $mode, $params);
+    } elseif ($mode !== null) {
+        $safeResult = \stream_filter_append($stream, $filter_name, $mode);
     } else {
-        $safeResult = \stream_filter_append($stream, $filtername);
+        $safeResult = \stream_filter_append($stream, $filter_name);
     }
     if ($safeResult === false) {
         throw StreamException::createFromPhpError();
@@ -131,12 +131,12 @@ function stream_filter_append($stream, string $filtername, ?int $read_write = nu
 
 
 /**
- * Adds filtername to the list of filters
+ * Adds filter_name to the list of filters
  * attached to stream.
  *
  * @param resource $stream The target stream.
- * @param string $filtername The filter name.
- * @param int $read_write By default, stream_filter_prepend will
+ * @param string $filter_name The filter name.
+ * @param int $mode By default, stream_filter_prepend will
  * attach the filter to the read filter chain
  * if the file was opened for reading (i.e. File Mode:
  * r, and/or +).  The filter
@@ -146,7 +146,7 @@ function stream_filter_append($stream, string $filtername, ?int $read_write = nu
  * STREAM_FILTER_READ,
  * STREAM_FILTER_WRITE, and/or
  * STREAM_FILTER_ALL can also be passed to the
- * read_write parameter to override this behavior.
+ * mode parameter to override this behavior.
  * See stream_filter_append for an example of
  * using this parameter.
  * @param mixed $params This filter will be added with the specified params
@@ -158,19 +158,19 @@ function stream_filter_append($stream, string $filtername, ?int $read_write = nu
  * stream_filter_remove.
  *
  * FALSE is returned if stream is not a resource or
- * if filtername cannot be located.
+ * if filter_name cannot be located.
  * @throws StreamException
  *
  */
-function stream_filter_prepend($stream, string $filtername, ?int $read_write = null, $params = null)
+function stream_filter_prepend($stream, string $filter_name, ?int $mode = null, $params = null)
 {
     error_clear_last();
     if ($params !== null) {
-        $safeResult = \stream_filter_prepend($stream, $filtername, $read_write, $params);
-    } elseif ($read_write !== null) {
-        $safeResult = \stream_filter_prepend($stream, $filtername, $read_write);
+        $safeResult = \stream_filter_prepend($stream, $filter_name, $mode, $params);
+    } elseif ($mode !== null) {
+        $safeResult = \stream_filter_prepend($stream, $filter_name, $mode);
     } else {
-        $safeResult = \stream_filter_prepend($stream, $filtername);
+        $safeResult = \stream_filter_prepend($stream, $filter_name);
     }
     if ($safeResult === false) {
         throw StreamException::createFromPhpError();
@@ -646,11 +646,6 @@ function stream_socket_sendto($socket, string $data, int $flags = 0, string $add
  * hostname or IP address followed by a colon and a port number.  For
  * Unix domain sockets, the target portion should
  * point to the socket file on the filesystem.
- *
- * Depending on the environment, Unix domain sockets may not be available.
- * A list of available transports can be retrieved using
- * stream_get_transports. See
- * for a list of bulitin transports.
  * @param int|null $error_code If the optional error_code and error_message
  * arguments are present they will be set to indicate the actual system
  * level error that occurred in the system-level socket(),
@@ -771,10 +766,7 @@ function stream_wrapper_restore(string $protocol): void
 
 
 /**
- * Allows you to disable an already defined stream wrapper. Once the wrapper
- * has been disabled you may override it with a user-defined wrapper using
- * stream_wrapper_register or reenable it later on with
- * stream_wrapper_restore.
+ *
  *
  * @param string $protocol
  * @throws StreamException
