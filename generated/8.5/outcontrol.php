@@ -34,7 +34,7 @@ function ob_clean(): void
  * This function calls the output handler
  * (with the PHP_OUTPUT_HANDLER_CLEAN and
  * PHP_OUTPUT_HANDLER_FINAL flags),
- * discards it's return value,
+ * discards its return value,
  * discards the contents of the active output buffer
  * and turns off the active output buffer.
  *

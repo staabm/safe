@@ -10,7 +10,7 @@ use Safe\Exceptions\PgsqlException;
  * or pg_send_execute. You cannot cancel a query executed using
  * pg_query.
  *
- * @param \PgSql\Connection $connection An PgSql\Connection instance.
+ * @param \PgSql\Connection $connection
  * @throws PgsqlException
  *
  */
@@ -18,6 +18,25 @@ function pg_cancel_query(\PgSql\Connection $connection): void
 {
     error_clear_last();
     $safeResult = \pg_cancel_query($connection);
+    if ($safeResult === false) {
+        throw PgsqlException::createFromPhpError();
+    }
+}
+
+
+/**
+ *
+ *
+ * @param \PgSql\Connection $connection
+ * @param string $user
+ * @param string $password
+ * @throws PgsqlException
+ *
+ */
+function pg_change_password(\PgSql\Connection $connection, string $user, string $password): void
+{
+    error_clear_last();
+    $safeResult = \pg_change_password($connection, $user, $password);
     if ($safeResult === false) {
         throw PgsqlException::createFromPhpError();
     }
@@ -86,7 +105,7 @@ function pg_connect(string $connection_string, int $flags = 0): \PgSql\Connectio
  * pg_connection_reset resets the connection.
  * It is useful for error recovery.
  *
- * @param \PgSql\Connection $connection An PgSql\Connection instance.
+ * @param \PgSql\Connection $connection
  * @throws PgsqlException
  *
  */
@@ -110,7 +129,7 @@ function pg_connection_reset(\PgSql\Connection $connection): void
  * values and the corresponding datatypes must be
  * compatible. Returns an array with the converted values on success.
  *
- * @param \PgSql\Connection $connection An PgSql\Connection instance.
+ * @param \PgSql\Connection $connection
  * @param string $table_name Name of the table against which to convert types.
  * @param array $values Data to be converted.
  * @param int $flags Any number of PGSQL_CONV_IGNORE_DEFAULT,
@@ -136,9 +155,9 @@ function pg_convert(\PgSql\Connection $connection, string $table_name, array $va
  * rows. It issues a COPY FROM SQL command
  * internally to insert records.
  *
- * @param \PgSql\Connection $connection An PgSql\Connection instance.
+ * @param \PgSql\Connection $connection
  * @param string $table_name Name of the table into which to copy the rows.
- * @param array $rows An array of data to be copied into table_name.
+ * @param array $rows An iterable data to be copied into table_name.
  * Each value in rows becomes a row in table_name.
  * Each value in rows should be a delimited string of the values
  * to insert into each field.  Values should be linefeed terminated.
@@ -164,7 +183,7 @@ function pg_copy_from(\PgSql\Connection $connection, string $table_name, array $
  * issues COPY TO SQL command internally to
  * retrieve records.
  *
- * @param \PgSql\Connection $connection An PgSql\Connection instance.
+ * @param \PgSql\Connection $connection
  * @param string $table_name Name of the table from which to copy the data into rows.
  * @param string $separator The token that separates values for each field in each element of
  * rows.  Default is \t.
@@ -203,7 +222,7 @@ function pg_copy_to(\PgSql\Connection $connection, string $table_name, string $s
  * JSON, Array, Regex, etc. These parameters should be handled
  * according to their contexts. i.e. Escape/validate values.
  *
- * @param \PgSql\Connection $connection An PgSql\Connection instance.
+ * @param \PgSql\Connection $connection
  * @param string $table_name Name of the table from which to delete rows.
  * @param array $conditions An array whose keys are field names in the table table_name,
  * and whose values are the values of those fields that are to be deleted.
@@ -262,6 +281,84 @@ function pg_end_copy(?\PgSql\Connection $connection = null): void
 
 
 /**
+ * pg_escape_identifier escapes an identifier
+ * (e.g. table, field names) for querying the database.  It returns an
+ * escaped identifier string for PostgreSQL
+ * server. pg_escape_identifier adds double
+ * quotes before and after data. Users should not add double
+ * quotes. Use of this function is recommended for identifier
+ * parameters in query. For SQL literals (i.e. parameters except
+ * bytea), pg_escape_literal
+ * or pg_escape_string must be used. For bytea
+ * type fields, pg_escape_bytea must be used
+ * instead.
+ *
+ * @param \PgSql\Connection $connection An PgSql\Connection instance.
+ * When connection is unspecified, the default connection is used.
+ * The default connection is the last connection made by pg_connect
+ * or pg_pconnect.
+ * As of PHP 8.1.0, using the default connection is deprecated.
+ * @param string $string A string containing text to be escaped.
+ * @return string A string containing the escaped data.
+ * @throws PgsqlException
+ *
+ */
+function pg_escape_identifier(?\PgSql\Connection $connection = null, ?string $string = null): string
+{
+    error_clear_last();
+    if ($string !== null) {
+        $safeResult = \pg_escape_identifier($connection, $string);
+    } elseif ($connection !== null) {
+        $safeResult = \pg_escape_identifier($connection);
+    } else {
+        $safeResult = \pg_escape_identifier();
+    }
+    if ($safeResult === false) {
+        throw PgsqlException::createFromPhpError();
+    }
+    return $safeResult;
+}
+
+
+/**
+ * pg_escape_literal escapes a literal for
+ * querying the PostgreSQL database. It returns an escaped literal in
+ * the PostgreSQL format. pg_escape_literal adds
+ * quotes before and after data. Users should not add quotes. Use of
+ * this function is recommended instead
+ * of pg_escape_string.  If the type of the
+ * column is bytea, pg_escape_bytea must be used
+ * instead. For escaping identifiers (e.g. table, field
+ * names), pg_escape_identifier must be used.
+ *
+ * @param \PgSql\Connection $connection An PgSql\Connection instance.
+ * When connection is unspecified, the default connection is used.
+ * The default connection is the last connection made by pg_connect
+ * or pg_pconnect.
+ * As of PHP 8.1.0, using the default connection is deprecated.
+ * @param string $string A string containing text to be escaped.
+ * @return string A string containing the escaped data.
+ * @throws PgsqlException
+ *
+ */
+function pg_escape_literal(?\PgSql\Connection $connection = null, ?string $string = null): string
+{
+    error_clear_last();
+    if ($string !== null) {
+        $safeResult = \pg_escape_literal($connection, $string);
+    } elseif ($connection !== null) {
+        $safeResult = \pg_escape_literal($connection);
+    } else {
+        $safeResult = \pg_escape_literal();
+    }
+    if ($safeResult === false) {
+        throw PgsqlException::createFromPhpError();
+    }
+    return $safeResult;
+}
+
+
+/**
  * Sends a request to execute a prepared statement with given parameters, and
  * waits for the result.
  *
@@ -271,8 +368,6 @@ function pg_end_copy(?\PgSql\Connection $connection = null): void
  * query string. This feature allows commands that will be used repeatedly to
  * be parsed and planned just once, rather than each time they are executed.
  * The statement must have been prepared previously in the current session.
- * pg_execute is supported only against PostgreSQL 7.4 or
- * higher connections; it will fail when using earlier versions.
  *
  * The parameters are identical to pg_query_params, except that the name of a
  * prepared statement is given instead of a query string.
@@ -282,7 +377,7 @@ function pg_end_copy(?\PgSql\Connection $connection = null): void
  * The default connection is the last connection made by pg_connect
  * or pg_pconnect.
  * As of PHP 8.1.0, using the default connection is deprecated.
- * @param string $stmtname The name of the prepared statement to execute.  if
+ * @param string $statement_name The name of the prepared statement to execute.  if
  * "" is specified, then the unnamed statement is executed.  The name must have
  * been previously prepared using pg_prepare,
  * pg_send_prepare or a PREPARE SQL
@@ -296,13 +391,13 @@ function pg_end_copy(?\PgSql\Connection $connection = null): void
  * @throws PgsqlException
  *
  */
-function pg_execute(?\PgSql\Connection $connection = null, ?string $stmtname = null, ?array $params = null): \PgSql\Result
+function pg_execute(?\PgSql\Connection $connection = null, ?string $statement_name = null, ?array $params = null): \PgSql\Result
 {
     error_clear_last();
     if ($params !== null) {
-        $safeResult = \pg_execute($connection, $stmtname, $params);
-    } elseif ($stmtname !== null) {
-        $safeResult = \pg_execute($connection, $stmtname);
+        $safeResult = \pg_execute($connection, $statement_name, $params);
+    } elseif ($statement_name !== null) {
+        $safeResult = \pg_execute($connection, $statement_name);
     } elseif ($connection !== null) {
         $safeResult = \pg_execute($connection);
     } else {
@@ -320,8 +415,7 @@ function pg_execute(?\PgSql\Connection $connection = null, ?string $stmtname = n
  * field number that corresponds to the
  * field in the given result instance.
  *
- * @param \PgSql\Result $result An PgSql\Result instance, returned by pg_query,
- * pg_query_params or pg_execute(among others).
+ * @param \PgSql\Result $result
  * @param string $field The name of the field.
  * The given name is treated like an identifier in an SQL command,
  * that is, it is downcased unless double-quoted.
@@ -344,8 +438,7 @@ function pg_field_num(\PgSql\Result $result, string $field): int
  * pg_field_table returns the name of the table that field
  * belongs to, or the table's oid if oid_only is TRUE.
  *
- * @param \PgSql\Result $result An PgSql\Result instance, returned by pg_query,
- * pg_query_params or pg_execute(among others).
+ * @param \PgSql\Result $result
  * @param int $field Field number, starting from 0.
  * @param bool $oid_only By default the tables name that field belongs to is returned but
  * if oid_only is set to TRUE, then the
@@ -369,7 +462,7 @@ function pg_field_table(\PgSql\Result $result, int $field, bool $oid_only = fals
  * pg_flush flushes any outbound query data waiting to be
  * sent on the connection.
  *
- * @param \PgSql\Connection $connection An PgSql\Connection instance.
+ * @param \PgSql\Connection $connection
  * @return mixed Returns TRUE if the flush was successful or no data was waiting to be
  * flushed, 0 if part of the pending data was flushed but
  * more remains.
@@ -395,8 +488,7 @@ function pg_flush(\PgSql\Connection $connection)
  * consumption during script execution is a problem.   Otherwise, all result memory will
  * be automatically freed when the script ends.
  *
- * @param \PgSql\Result $result An PgSql\Result instance, returned by pg_query,
- * pg_query_params or pg_execute(among others).
+ * @param \PgSql\Result $result
  * @throws PgsqlException
  *
  */
@@ -459,7 +551,7 @@ function pg_host(?\PgSql\Connection $connection = null): string
  * JSON, Array, Regex, etc. These parameters should be handled
  * according to their contexts. i.e. Escape/validate values.
  *
- * @param \PgSql\Connection $connection An PgSql\Connection instance.
+ * @param \PgSql\Connection $connection
  * @param string $table_name Name of the table into which to insert rows.  The table table_name must at least
  * have as many columns as values has elements.
  * @param array $values An array whose keys are field names in the table table_name,
@@ -508,8 +600,7 @@ function pg_insert(\PgSql\Connection $connection, string $table_name, array $val
  * the value of the most recently used sequence in the session.  This avoids
  * the need for naming the sequence, table or column altogether.
  *
- * @param \PgSql\Result $result An PgSql\Result instance, returned by pg_query,
- * pg_query_params or pg_execute(among others).
+ * @param \PgSql\Result $result
  * @return string An int or string containing the OID assigned to the most recently inserted
  * row in the specified connection or
  * no available OID.
@@ -533,7 +624,7 @@ function pg_last_oid(\PgSql\Result $result): string
  * To use the large object interface, it is necessary to
  * enclose it within a transaction block.
  *
- * @param \PgSql\Lob $lob An PgSql\Lob instance, returned by pg_lo_open.
+ * @param \PgSql\Lob $lob
  * @throws PgsqlException
  *
  */
@@ -561,16 +652,16 @@ function pg_lo_close(\PgSql\Lob $lob): void
  * or pg_pconnect.
  * As of PHP 8.1.0, using the default connection is deprecated.
  * @param int $oid The OID of the large object in the database.
- * @param string $pathname The full path and file name of the file in which to write the
+ * @param string $filename The full path and file name of the file in which to write the
  * large object on the client filesystem.
  * @throws PgsqlException
  *
  */
-function pg_lo_export(?\PgSql\Connection $connection = null, ?int $oid = null, ?string $pathname = null): void
+function pg_lo_export(?\PgSql\Connection $connection = null, ?int $oid = null, ?string $filename = null): void
 {
     error_clear_last();
-    if ($pathname !== null) {
-        $safeResult = \pg_lo_export($connection, $oid, $pathname);
+    if ($filename !== null) {
+        $safeResult = \pg_lo_export($connection, $oid, $filename);
     } elseif ($oid !== null) {
         $safeResult = \pg_lo_export($connection, $oid);
     } elseif ($connection !== null) {
@@ -597,9 +688,9 @@ function pg_lo_export(?\PgSql\Connection $connection = null, ?int $oid = null, ?
  * The default connection is the last connection made by pg_connect
  * or pg_pconnect.
  * As of PHP 8.1.0, using the default connection is deprecated.
- * @param string $pathname The full path and file name of the file on the client
+ * @param string $filename The full path and file name of the file on the client
  * filesystem from which to read the large object data.
- * @param  $object_id If an object_id is given the function
+ * @param  $oid If an oid is given the function
  * will try to create a large object with this id, else a free
  * object id is assigned by the server. The parameter
  * relies on functionality that first
@@ -608,13 +699,13 @@ function pg_lo_export(?\PgSql\Connection $connection = null, ?int $oid = null, ?
  * @throws PgsqlException
  *
  */
-function pg_lo_import(?\PgSql\Connection $connection = null, ?string $pathname = null, $object_id = null): int
+function pg_lo_import(?\PgSql\Connection $connection = null, ?string $filename = null, $oid = null): int
 {
     error_clear_last();
-    if ($object_id !== null) {
-        $safeResult = \pg_lo_import($connection, $pathname, $object_id);
-    } elseif ($pathname !== null) {
-        $safeResult = \pg_lo_import($connection, $pathname);
+    if ($oid !== null) {
+        $safeResult = \pg_lo_import($connection, $filename, $oid);
+    } elseif ($filename !== null) {
+        $safeResult = \pg_lo_import($connection, $filename);
     } elseif ($connection !== null) {
         $safeResult = \pg_lo_import($connection);
     } else {
@@ -665,7 +756,7 @@ function pg_lo_open(\PgSql\Connection $connection, int $oid, string $mode): \PgS
  * To use the large object interface, it is necessary to
  * enclose it within a transaction block.
  *
- * @param \PgSql\Lob $lob An PgSql\Lob instance, returned by pg_lo_open.
+ * @param \PgSql\Lob $lob
  * @param int $length An optional maximum number of bytes to return.
  * @return string A string containing length bytes from the
  * large object.
@@ -689,7 +780,7 @@ function pg_lo_read(\PgSql\Lob $lob, int $length = 8192): string
  * To use the large object interface, it is necessary to
  * enclose it within a transaction block.
  *
- * @param \PgSql\Lob $lob An PgSql\Lob instance, returned by pg_lo_open.
+ * @param \PgSql\Lob $lob
  * @param int $offset The number of bytes to seek.
  * @param int $whence One of the constants PGSQL_SEEK_SET (seek from object start),
  * PGSQL_SEEK_CUR (seek from current position)
@@ -713,7 +804,7 @@ function pg_lo_seek(\PgSql\Lob $lob, int $offset, int $whence = SEEK_CUR): void
  * To use the large object interface, it is necessary to
  * enclose it within a transaction block.
  *
- * @param \PgSql\Lob $lob An PgSql\Lob instance, returned by pg_lo_open.
+ * @param \PgSql\Lob $lob
  * @param int $size The number of bytes to truncate.
  * @throws PgsqlException
  *
@@ -761,7 +852,7 @@ function pg_lo_unlink(\PgSql\Connection $connection, int $oid): void
  * To use the large object interface, it is necessary to
  * enclose it within a transaction block.
  *
- * @param \PgSql\Lob $lob An PgSql\Lob instance, returned by pg_lo_open.
+ * @param \PgSql\Lob $lob
  * @param string $data The data to be written to the large object.  If length is
  * an int and is less than the length of data, only
  * length bytes will be written.
@@ -791,7 +882,7 @@ function pg_lo_write(\PgSql\Lob $lob, string $data, ?int $length = null): int
  * pg_meta_data returns table definition for
  * table_name as an array.
  *
- * @param \PgSql\Connection $connection An PgSql\Connection instance.
+ * @param \PgSql\Connection $connection
  * @param string $table_name The name of the table.
  * @param bool $extended Flag for returning extended meta data. Default to FALSE.
  * @return array An array of the table definition.
@@ -817,42 +908,34 @@ function pg_meta_data(\PgSql\Connection $connection, string $table_name, bool $e
  * used to interrogate these settings. It returns the current value of a
  * parameter if known, or FALSE if the parameter is not known.
  *
- * Parameters reported as of PostgreSQL 8.0 include server_version,
+ * Parameters reported by the server include server_version,
  * server_encoding, client_encoding,
  * is_superuser, session_authorization,
  * DateStyle, TimeZone, and integer_datetimes.
- * (server_encoding, TimeZone, and
- * integer_datetimes were not reported by releases before 8.0.) Note that
+ * Note that
  * server_version, server_encoding and integer_datetimes
  * cannot change after PostgreSQL startup.
- *
- * PostgreSQL 7.3 or lower servers do not report parameter settings,
- * pg_parameter_status
- * includes logic to obtain values for server_version and
- * client_encoding
- * anyway. Applications are encouraged to use pg_parameter_status rather than ad
- * hoc code to determine these values.
  *
  * @param \PgSql\Connection $connection An PgSql\Connection instance.
  * When connection is unspecified, the default connection is used.
  * The default connection is the last connection made by pg_connect
  * or pg_pconnect.
  * As of PHP 8.1.0, using the default connection is deprecated.
- * @param string $param_name Possible param_name values include server_version,
+ * @param string $name Possible name values include server_version,
  * server_encoding, client_encoding,
  * is_superuser, session_authorization,
  * DateStyle, TimeZone, and
  * integer_datetimes.  Note that this value is case-sensitive.
  * @return string A string containing the value of the parameter or invalid
- * param_name.
+ * name.
  * @throws PgsqlException
  *
  */
-function pg_parameter_status(?\PgSql\Connection $connection = null, ?string $param_name = null): string
+function pg_parameter_status(?\PgSql\Connection $connection = null, ?string $name = null): string
 {
     error_clear_last();
-    if ($param_name !== null) {
-        $safeResult = \pg_parameter_status($connection, $param_name);
+    if ($name !== null) {
+        $safeResult = \pg_parameter_status($connection, $name);
     } elseif ($connection !== null) {
         $safeResult = \pg_parameter_status($connection);
     } else {
@@ -954,11 +1037,9 @@ function pg_ping(?\PgSql\Connection $connection = null): void
  * pg_execute or pg_send_execute.
  * This feature allows commands that will be used repeatedly to
  * be parsed and planned just once, rather than each time they are executed.
- * pg_prepare is supported only against PostgreSQL 7.4 or
- * higher connections; it will fail when using earlier versions.
  *
- * The function creates a prepared statement named stmtname from the query
- * string, which must contain a single SQL command. stmtname may be "" to
+ * The function creates a prepared statement named statement_name from the query
+ * string, which must contain a single SQL command. statement_name may be "" to
  * create an unnamed statement, in which case any pre-existing unnamed
  * statement is automatically replaced; otherwise it is an error if the
  * statement name is already defined in the current session. If any parameters
@@ -976,7 +1057,7 @@ function pg_ping(?\PgSql\Connection $connection = null): void
  * The default connection is the last connection made by pg_connect
  * or pg_pconnect.
  * As of PHP 8.1.0, using the default connection is deprecated.
- * @param string $stmtname The name to give the prepared statement.  Must be unique per-connection.  If
+ * @param string $statement_name The name to give the prepared statement.  Must be unique per-connection.  If
  * "" is specified, then an unnamed statement is created, overwriting any
  * previously defined unnamed statement.
  * @param string $query The parameterized SQL statement.  Must contain only a single statement
@@ -986,13 +1067,13 @@ function pg_ping(?\PgSql\Connection $connection = null): void
  * @throws PgsqlException
  *
  */
-function pg_prepare(?\PgSql\Connection $connection = null, ?string $stmtname = null, ?string $query = null): \PgSql\Result
+function pg_prepare(?\PgSql\Connection $connection = null, ?string $statement_name = null, ?string $query = null): \PgSql\Result
 {
     error_clear_last();
     if ($query !== null) {
-        $safeResult = \pg_prepare($connection, $stmtname, $query);
-    } elseif ($stmtname !== null) {
-        $safeResult = \pg_prepare($connection, $stmtname);
+        $safeResult = \pg_prepare($connection, $statement_name, $query);
+    } elseif ($statement_name !== null) {
+        $safeResult = \pg_prepare($connection, $statement_name);
     } elseif ($connection !== null) {
         $safeResult = \pg_prepare($connection);
     } else {
@@ -1023,16 +1104,16 @@ function pg_prepare(?\PgSql\Connection $connection = null, ?string $stmtname = n
  * The default connection is the last connection made by pg_connect
  * or pg_pconnect.
  * As of PHP 8.1.0, using the default connection is deprecated.
- * @param string $data A line of text to be sent directly to the PostgreSQL backend.  A NULL
+ * @param string $query A line of text to be sent directly to the PostgreSQL backend.  A NULL
  * terminator is added automatically.
  * @throws PgsqlException
  *
  */
-function pg_put_line(?\PgSql\Connection $connection = null, ?string $data = null): void
+function pg_put_line(?\PgSql\Connection $connection = null, ?string $query = null): void
 {
     error_clear_last();
-    if ($data !== null) {
-        $safeResult = \pg_put_line($connection, $data);
+    if ($query !== null) {
+        $safeResult = \pg_put_line($connection, $query);
     } elseif ($connection !== null) {
         $safeResult = \pg_put_line($connection);
     } else {
@@ -1051,8 +1132,6 @@ function pg_put_line(?\PgSql\Connection $connection = null, ?string $data = null
  * pg_query_params is like pg_query,
  * but offers additional functionality: parameter
  * values can be specified separately from the command string proper.
- * pg_query_params is supported only against PostgreSQL 7.4 or
- * higher connections; it will fail when using earlier versions.
  *
  * If parameters are used, they are referred to in the
  * query string as $1, $2, etc. The same parameter may
@@ -1173,8 +1252,7 @@ function pg_query(?\PgSql\Connection $connection = null, ?string $query = null):
 
 /**
  * pg_result_error_field returns one of the detailed error message
- * fields associated with result instance. It is only available
- * against a PostgreSQL 7.4 or above server.  The error field is specified by
+ * fields associated with result instance. The error field is specified by
  * the field_code.
  *
  * Because pg_query and pg_query_params return FALSE if the query fails,
@@ -1185,14 +1263,13 @@ function pg_query(?\PgSql\Connection $connection = null, ?string $query = null):
  * use pg_set_error_verbosity and pg_last_error
  * and then parse the result.
  *
- * @param \PgSql\Result $result An PgSql\Result instance, returned by pg_query,
- * pg_query_params or pg_execute(among others).
+ * @param \PgSql\Result $result
  * @param int $field_code Possible field_code values are: PGSQL_DIAG_SEVERITY,
  * PGSQL_DIAG_SQLSTATE, PGSQL_DIAG_MESSAGE_PRIMARY,
  * PGSQL_DIAG_MESSAGE_DETAIL,
  * PGSQL_DIAG_MESSAGE_HINT, PGSQL_DIAG_STATEMENT_POSITION,
- * PGSQL_DIAG_INTERNAL_POSITION (PostgreSQL 8.0+ only),
- * PGSQL_DIAG_INTERNAL_QUERY (PostgreSQL 8.0+ only),
+ * PGSQL_DIAG_INTERNAL_POSITION,
+ * PGSQL_DIAG_INTERNAL_QUERY,
  * PGSQL_DIAG_CONTEXT, PGSQL_DIAG_SOURCE_FILE,
  * PGSQL_DIAG_SOURCE_LINE or
  * PGSQL_DIAG_SOURCE_FUNCTION.
@@ -1215,8 +1292,7 @@ function pg_result_error_field(\PgSql\Result $result, int $field_code): ?string
  * pg_result_seek sets the internal row offset in
  * the result instance.
  *
- * @param \PgSql\Result $result An PgSql\Result instance, returned by pg_query,
- * pg_query_params or pg_execute(among others).
+ * @param \PgSql\Result $result
  * @param int $row Row to move the internal offset to in the PgSql\Result instance.
  * Rows are numbered starting from zero.
  * @throws PgsqlException
@@ -1259,7 +1335,7 @@ function pg_result_seek(\PgSql\Result $result, int $row): void
  * JSON, Array, Regex, etc. These parameters should be handled
  * according to their contexts. i.e. Escape/validate values.
  *
- * @param \PgSql\Connection $connection An PgSql\Connection instance.
+ * @param \PgSql\Connection $connection
  * @param string $table_name Name of the table from which to select rows.
  * @param array $conditions An array whose keys are field names in the table table_name,
  * and whose values are the conditions that a row must meet to be retrieved.
@@ -1299,7 +1375,7 @@ function pg_select(\PgSql\Connection $connection, string $table_name, array $con
 /**
  *
  *
- * @param \PgSql\Connection $connection An PgSql\Connection instance.
+ * @param \PgSql\Connection $connection
  * @param int $size
  * @throws PgsqlException
  *
@@ -1315,10 +1391,53 @@ function pg_set_chunked_rows_size(\PgSql\Connection $connection, int $size): voi
 
 
 /**
+ * Determines the verbosity of messages returned by pg_last_error
+ * and pg_result_error.
+ *
+ * pg_set_error_verbosity sets the verbosity mode, returning the connection's previous
+ * setting. In PGSQL_ERRORS_TERSE mode, returned messages include severity, primary text, and
+ * position only; this will normally fit on a single line. The default mode (PGSQL_ERRORS_DEFAULT)
+ * produces messages that include the above plus any detail, hint, or context
+ * fields (these may span multiple lines). The PGSQL_ERRORS_VERBOSE mode includes all available
+ * fields. Changing the verbosity does not affect the messages available from
+ * already-existing result objects, only subsequently-created ones.
+ *
+ * @param \PgSql\Connection $connection An PgSql\Connection instance.
+ * When connection is unspecified, the default connection is used.
+ * The default connection is the last connection made by pg_connect
+ * or pg_pconnect.
+ * As of PHP 8.1.0, using the default connection is deprecated.
+ * @param int $verbosity The required verbosity: PGSQL_ERRORS_TERSE,
+ * PGSQL_ERRORS_DEFAULT
+ * or PGSQL_ERRORS_VERBOSE.
+ * @return int The previous verbosity level: PGSQL_ERRORS_TERSE,
+ * PGSQL_ERRORS_DEFAULT
+ * or PGSQL_ERRORS_VERBOSE.
+ * @throws PgsqlException
+ *
+ */
+function pg_set_error_verbosity(?\PgSql\Connection $connection = null, ?int $verbosity = null): int
+{
+    error_clear_last();
+    if ($verbosity !== null) {
+        $safeResult = \pg_set_error_verbosity($connection, $verbosity);
+    } elseif ($connection !== null) {
+        $safeResult = \pg_set_error_verbosity($connection);
+    } else {
+        $safeResult = \pg_set_error_verbosity();
+    }
+    if ($safeResult === false) {
+        throw PgsqlException::createFromPhpError();
+    }
+    return $safeResult;
+}
+
+
+/**
  * pg_socket returns a read only resource
  * corresponding to the socket underlying the given PostgreSQL connection.
  *
- * @param \PgSql\Connection $connection An PgSql\Connection instance.
+ * @param \PgSql\Connection $connection
  * @return resource A socket resource on success.
  * @throws PgsqlException
  *
@@ -1395,7 +1514,7 @@ function pg_trace(string $filename, string $mode = "w", ?\PgSql\Connection $conn
  * JSON, Array, Regex, etc. These parameters should be handled
  * according to their contexts. i.e. Escape/validate values.
  *
- * @param \PgSql\Connection $connection An PgSql\Connection instance.
+ * @param \PgSql\Connection $connection
  * @param string $table_name Name of the table into which to update rows.
  * @param array $values An array whose keys are field names in the table table_name,
  * and whose values are what matched rows are to be updated to.

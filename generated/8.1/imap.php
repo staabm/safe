@@ -27,7 +27,7 @@ function imap_8bit(string $string): string
 /**
  * Appends a string message to the specified folder.
  *
- * @param \IMAP\Connection $imap An IMAP\Connection instance.
+ * @param \IMAP\Connection $imap
  * @param string $folder The mailbox name, see imap_open for more
  * information
  * @param string $message The message to be append, as a string
@@ -106,7 +106,7 @@ function imap_binary(string $string): string
  * analyze its structure and imap_fetchbody to
  * extract a copy of a single body component.
  *
- * @param \IMAP\Connection $imap An IMAP\Connection instance.
+ * @param \IMAP\Connection $imap
  * @param int $message_num The message number
  * @param int $flags The optional flags are a bit mask
  * with one or more of the following:
@@ -146,7 +146,7 @@ function imap_body(\IMAP\Connection $imap, int $message_num, int $flags = 0): st
 /**
  * Read the structure of a specified body section of a specific message.
  *
- * @param \IMAP\Connection $imap An IMAP\Connection instance.
+ * @param \IMAP\Connection $imap
  * @param int $message_num The message number
  * @param string $section The body section to read
  * @return \stdClass Returns the information in an object.
@@ -170,7 +170,7 @@ function imap_bodystruct(\IMAP\Connection $imap, int $message_num, string $secti
 /**
  * Checks information about the current mailbox.
  *
- * @param \IMAP\Connection $imap An IMAP\Connection instance.
+ * @param \IMAP\Connection $imap
  * @return \stdClass Returns the information in an object with following properties:
  *
  *
@@ -221,7 +221,7 @@ function imap_check(\IMAP\Connection $imap): \stdClass
  * flag to the flags set for the
  * messages in the specified sequence.
  *
- * @param \IMAP\Connection $imap An IMAP\Connection instance.
+ * @param \IMAP\Connection $imap
  * @param string $sequence A sequence of message numbers. You can enumerate desired messages
  * with the X,Y syntax, or retrieve all messages
  * within an interval with the X:Y syntax
@@ -253,7 +253,7 @@ function imap_clearflag_full(\IMAP\Connection $imap, string $sequence, string $f
 /**
  * Closes the imap stream.
  *
- * @param \IMAP\Connection $imap An IMAP\Connection instance.
+ * @param \IMAP\Connection $imap
  * @param int $flags If set to CL_EXPUNGE, the function will silently
  * expunge the mailbox before closing, removing all messages marked for
  * deletion. You can achieve the same thing by using
@@ -274,7 +274,7 @@ function imap_close(\IMAP\Connection $imap, int $flags = 0): void
 /**
  * Creates a new mailbox specified by mailbox.
  *
- * @param \IMAP\Connection $imap An IMAP\Connection instance.
+ * @param \IMAP\Connection $imap
  * @param string $mailbox The mailbox name, see imap_open for more
  * information. Names containing international characters should be
  * encoded by imap_utf7_encode
@@ -294,7 +294,7 @@ function imap_createmailbox(\IMAP\Connection $imap, string $mailbox): void
 /**
  * Deletes the specified mailbox.
  *
- * @param \IMAP\Connection $imap An IMAP\Connection instance.
+ * @param \IMAP\Connection $imap
  * @param string $mailbox The mailbox name, see imap_open for more
  * information
  * @throws ImapException
@@ -315,7 +315,7 @@ function imap_deletemailbox(\IMAP\Connection $imap, string $mailbox): void
  * sequence and returns an overview of their
  * contents.
  *
- * @param \IMAP\Connection $imap An IMAP\Connection instance.
+ * @param \IMAP\Connection $imap
  * @param string $sequence A message sequence description. You can enumerate desired messages
  * with the X,Y syntax, or retrieve all messages
  * within an interval with the X:Y syntax
@@ -431,7 +431,7 @@ function imap_fetch_overview(\IMAP\Connection $imap, string $sequence, int $flag
  * Fetch of a particular section of the body of the specified messages.
  * Body parts are not decoded by this function.
  *
- * @param \IMAP\Connection $imap An IMAP\Connection instance.
+ * @param \IMAP\Connection $imap
  * @param int $message_num The message number
  * @param string $section The part number. It is a string of integers delimited by period which
  * index into a body part list as per the IMAP4 specification
@@ -475,7 +475,7 @@ function imap_fetchbody(\IMAP\Connection $imap, int $message_num, string $sectio
  * This function causes a fetch of the complete, unfiltered RFC2822 format header of the specified
  * message.
  *
- * @param \IMAP\Connection $imap An IMAP\Connection instance.
+ * @param \IMAP\Connection $imap
  * @param int $message_num The message number
  * @param int $flags The possible flags are:
  *
@@ -519,7 +519,7 @@ function imap_fetchheader(\IMAP\Connection $imap, int $message_num, int $flags =
 /**
  * Fetch the MIME headers of a particular section of the body of the specified messages.
  *
- * @param \IMAP\Connection $imap An IMAP\Connection instance.
+ * @param \IMAP\Connection $imap
  * @param int $message_num The message number
  * @param string $section The part number. It is a string of integers delimited by period which
  * index into a body part list as per the IMAP4 specification
@@ -562,7 +562,7 @@ function imap_fetchmime(\IMAP\Connection $imap, int $message_num, string $sectio
 /**
  * Fetches all the structured information for a given message.
  *
- * @param \IMAP\Connection $imap An IMAP\Connection instance.
+ * @param \IMAP\Connection $imap
  * @param int $message_num The message number
  * @param int $flags This optional parameter only has a single option,
  * FT_UID, which tells the function to treat the
@@ -709,7 +709,7 @@ function imap_fetchstructure(\IMAP\Connection $imap, int $message_num, int $flag
 /**
  * Purges the cache of entries of a specific type.
  *
- * @param \IMAP\Connection $imap An IMAP\Connection instance.
+ * @param \IMAP\Connection $imap
  * @param int $flags Specifies the cache to purge. It may one or a combination
  * of the following constants:
  * IMAP_GC_ELT (message cache elements),
@@ -731,7 +731,7 @@ function imap_gc(\IMAP\Connection $imap, int $flags): void
 /**
  * Gets the ACL for a given mailbox.
  *
- * @param \IMAP\Connection $imap An IMAP\Connection instance.
+ * @param \IMAP\Connection $imap
  * @param string $mailbox The mailbox name, see imap_open for more
  * information
  * @return array Returns an associative array of "folder" =&gt; "acl" pairs.
@@ -752,23 +752,10 @@ function imap_getacl(\IMAP\Connection $imap, string $mailbox): array
 /**
  * Gets information on the mailboxes.
  *
- * @param \IMAP\Connection $imap An IMAP\Connection instance.
+ * @param \IMAP\Connection $imap
  * @param string $reference reference should normally be just the server
  * specification as described in imap_open
- * @param string $pattern Specifies where in the mailbox hierarchy
- * to start searching.
- *
- * There are two special characters you can
- * pass as part of the pattern:
- * '*' and '%'.
- * '*' means to return all mailboxes. If you pass
- * pattern as '*', you will
- * get a list of the entire mailbox hierarchy.
- * '%'
- * means to return the current level only.
- * '%' as the pattern
- * parameter will return only the top level
- * mailboxes; '~/mail/%' on UW_IMAPD will return every mailbox in the ~/mail directory, but none in subfolders of that directory.
+ * @param string $pattern
  * @return array Returns an array of objects containing mailbox information. Each
  * object has the attributes name, specifying
  * the full name of the mailbox; delimiter,
@@ -841,23 +828,10 @@ function imap_getmailboxes(\IMAP\Connection $imap, string $reference, string $pa
  * Identical to imap_getmailboxes, except that it only
  * returns mailboxes that the user is subscribed to.
  *
- * @param \IMAP\Connection $imap An IMAP\Connection instance.
+ * @param \IMAP\Connection $imap
  * @param string $reference reference should normally be just the server
  * specification as described in imap_open
- * @param string $pattern Specifies where in the mailbox hierarchy
- * to start searching.
- *
- * There are two special characters you can
- * pass as part of the pattern:
- * '*' and '%'.
- * '*' means to return all mailboxes. If you pass
- * pattern as '*', you will
- * get a list of the entire mailbox hierarchy.
- * '%'
- * means to return the current level only.
- * '%' as the pattern
- * parameter will return only the top level
- * mailboxes; '~/mail/%' on UW_IMAPD will return every mailbox in the ~/mail directory, but none in subfolders of that directory.
+ * @param string $pattern
  * @return array Returns an array of objects containing mailbox information. Each
  * object has the attributes name, specifying
  * the full name of the mailbox; delimiter,
@@ -924,7 +898,7 @@ function imap_getsubscribed(\IMAP\Connection $imap, string $reference, string $p
 /**
  * Gets information about the given message number by reading its headers.
  *
- * @param \IMAP\Connection $imap An IMAP\Connection instance.
+ * @param \IMAP\Connection $imap
  * @param int $message_num The message number
  * @param int $from_length Number of characters for the fetchfrom property.
  * Must be greater than or equal to zero.
@@ -1149,7 +1123,7 @@ function imap_headerinfo(\IMAP\Connection $imap, int $message_num, int $from_len
 /**
  * Returns headers for all messages in a mailbox.
  *
- * @param \IMAP\Connection $imap An IMAP\Connection instance.
+ * @param \IMAP\Connection $imap
  * @return array Returns an array of string formatted with header info. One
  * element per mail message.
  * Returns FALSE on failure.
@@ -1175,23 +1149,10 @@ function imap_headers(\IMAP\Connection $imap): array
  * but it will additionally check for the presence of the string
  * content inside the mailbox data.
  *
- * @param \IMAP\Connection $imap An IMAP\Connection instance.
+ * @param \IMAP\Connection $imap
  * @param string $reference reference should normally be just the server
  * specification as described in imap_open
- * @param string $pattern Specifies where in the mailbox hierarchy
- * to start searching.
- *
- * There are two special characters you can
- * pass as part of the pattern:
- * '*' and '%'.
- * '*' means to return all mailboxes. If you pass
- * pattern as '*', you will
- * get a list of the entire mailbox hierarchy.
- * '%'
- * means to return the current level only.
- * '%' as the pattern
- * parameter will return only the top level
- * mailboxes; '~/mail/%' on UW_IMAPD will return every mailbox in the ~/mail directory, but none in subfolders of that directory.
+ * @param string $pattern
  * @param string $content The searched string
  * @return array Returns an array containing the names of the mailboxes that have
  * content in the text of the mailbox.
@@ -1212,23 +1173,10 @@ function imap_listscan(\IMAP\Connection $imap, string $reference, string $patter
 /**
  * Gets an array of all the mailboxes that you have subscribed.
  *
- * @param \IMAP\Connection $imap An IMAP\Connection instance.
+ * @param \IMAP\Connection $imap
  * @param string $reference reference should normally be just the server
  * specification as described in imap_open
- * @param string $pattern Specifies where in the mailbox hierarchy
- * to start searching.
- *
- * There are two special characters you can
- * pass as part of the pattern:
- * '*' and '%'.
- * '*' means to return all mailboxes. If you pass
- * pattern as '*', you will
- * get a list of the entire mailbox hierarchy.
- * '%'
- * means to return the current level only.
- * '%' as the pattern
- * parameter will return only the top level
- * mailboxes; '~/mail/%' on UW_IMAPD will return every mailbox in the ~/mail directory, but none in subfolders of that directory.
+ * @param string $pattern
  * @return array Returns an array of all the subscribed mailboxes.
  * @throws ImapException
  *
@@ -1366,7 +1314,7 @@ function imap_mail_compose(array $envelope, array $bodies): string
  * Copies mail messages specified by message_nums
  * to specified mailbox.
  *
- * @param \IMAP\Connection $imap An IMAP\Connection instance.
+ * @param \IMAP\Connection $imap
  * @param string $message_nums message_nums is a range not just message
  * numbers (as described in RFC2060).
  * @param string $mailbox The mailbox name, see imap_open for more
@@ -1402,7 +1350,7 @@ function imap_mail_copy(\IMAP\Connection $imap, string $message_nums, string $ma
  * Moves mail messages specified by message_nums to the
  * specified mailbox.
  *
- * @param \IMAP\Connection $imap An IMAP\Connection instance.
+ * @param \IMAP\Connection $imap
  * @param string $message_nums message_nums is a range not just message numbers
  * (as described in RFC2060).
  * @param string $mailbox The mailbox name, see imap_open for more
@@ -1474,7 +1422,7 @@ function imap_mail(string $to, string $subject, string $message, ?string $additi
  * all messages in the mailbox, which will take some additional time to
  * execute.
  *
- * @param \IMAP\Connection $imap An IMAP\Connection instance.
+ * @param \IMAP\Connection $imap
  * @return \stdClass Returns the information in an object with following properties:
  *
  * Mailbox properties
@@ -1580,7 +1528,7 @@ function imap_mutf7_to_utf8(string $string): string
 /**
  * Gets the number of messages in the current mailbox.
  *
- * @param \IMAP\Connection $imap An IMAP\Connection instance.
+ * @param \IMAP\Connection $imap
  * @return int Return the number of messages in the current mailbox, as an integer.
  * @throws ImapException
  *
@@ -1835,7 +1783,7 @@ function imap_qprint(string $string): string
  * imap_open for the format of
  * mbox names).
  *
- * @param \IMAP\Connection $imap An IMAP\Connection instance.
+ * @param \IMAP\Connection $imap
  * @param string $from The old mailbox name, see imap_open for more
  * information
  * @param string $to The new mailbox name, see imap_open for more
@@ -1878,7 +1826,7 @@ function imap_rfc822_write_address(?string $mailbox, ?string $hostname, ?string 
 /**
  * Saves a part or the whole body of the specified message.
  *
- * @param \IMAP\Connection $imap An IMAP\Connection instance.
+ * @param \IMAP\Connection $imap
  * @param int|resource|string $file The path to the saved file as a string, or a valid file descriptor
  * returned by fopen.
  * @param int $message_num The message number
@@ -1920,7 +1868,7 @@ function imap_savebody(\IMAP\Connection $imap, $file, int $message_num, string $
 /**
  * Sets an upper limit quota on a per mailbox basis.
  *
- * @param \IMAP\Connection $imap An IMAP\Connection instance.
+ * @param \IMAP\Connection $imap
  * @param string $quota_root The mailbox to have a quota set. This should follow the IMAP standard
  * format for a mailbox: user.name.
  * @param int $mailbox_size The maximum size (in KB) for the quota_root
@@ -1940,7 +1888,7 @@ function imap_set_quota(\IMAP\Connection $imap, string $quota_root, int $mailbox
 /**
  * Sets the ACL for a giving mailbox.
  *
- * @param \IMAP\Connection $imap An IMAP\Connection instance.
+ * @param \IMAP\Connection $imap
  * @param string $mailbox The mailbox name, see imap_open for more
  * information
  * @param string $user_id The user to give the rights to.
@@ -1964,7 +1912,7 @@ function imap_setacl(\IMAP\Connection $imap, string $mailbox, string $user_id, s
  * flags set for the messages in the specified
  * sequence.
  *
- * @param \IMAP\Connection $imap An IMAP\Connection instance.
+ * @param \IMAP\Connection $imap
  * @param string $sequence A sequence of message numbers. You can enumerate desired messages
  * with the X,Y syntax, or retrieve all messages
  * within an interval with the X:Y syntax
@@ -1997,7 +1945,7 @@ function imap_setflag_full(\IMAP\Connection $imap, string $sequence, string $fla
 /**
  * Gets and sorts message numbers by the given parameters.
  *
- * @param \IMAP\Connection $imap An IMAP\Connection instance.
+ * @param \IMAP\Connection $imap
  * @param int $criteria Criteria can be one (and only one) of the following:
  *
  *
@@ -2079,7 +2027,7 @@ function imap_sort(\IMAP\Connection $imap, int $criteria, int $reverse, int $fla
 /**
  * Gets status information about the given mailbox.
  *
- * @param \IMAP\Connection $imap An IMAP\Connection instance.
+ * @param \IMAP\Connection $imap
  * @param string $mailbox The mailbox name, see imap_open for more
  * information
  * @param int $flags Valid flags are:
@@ -2145,7 +2093,7 @@ function imap_status(\IMAP\Connection $imap, string $mailbox, int $flags): \stdC
 /**
  * Subscribe to a new mailbox.
  *
- * @param \IMAP\Connection $imap An IMAP\Connection instance.
+ * @param \IMAP\Connection $imap
  * @param string $mailbox The mailbox name, see imap_open for more
  * information
  * @throws ImapException
@@ -2164,7 +2112,7 @@ function imap_subscribe(\IMAP\Connection $imap, string $mailbox): void
 /**
  * Gets a tree of a threaded message.
  *
- * @param \IMAP\Connection $imap An IMAP\Connection instance.
+ * @param \IMAP\Connection $imap
  * @param int $flags
  * @return array imap_thread returns an associative array containing
  * a tree of messages threaded by REFERENCES.
@@ -2229,7 +2177,7 @@ function imap_timeout(int $timeout_type, int $timeout = -1)
  * Removes the deletion flag for a specified message, which is set by
  * imap_delete or imap_mail_move.
  *
- * @param \IMAP\Connection $imap An IMAP\Connection instance.
+ * @param \IMAP\Connection $imap
  * @param string $message_num The message number
  * @param int $flags
  * @throws ImapException
@@ -2248,7 +2196,7 @@ function imap_undelete(\IMAP\Connection $imap, string $message_num, int $flags =
 /**
  * Unsubscribe from the specified mailbox.
  *
- * @param \IMAP\Connection $imap An IMAP\Connection instance.
+ * @param \IMAP\Connection $imap
  * @param string $mailbox The mailbox name, see imap_open for more
  * information
  * @throws ImapException

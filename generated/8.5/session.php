@@ -57,10 +57,6 @@ function session_create_id(string $prefix = ""): string
 
 
 /**
- * session_decode decodes the serialized session data provided in
- * $data, and populates the $_SESSION superglobal
- * with the result.
- *
  * By default, the unserialization method used is internal to PHP, and is not the same as unserialize.
  * The serialization method can be set using session.serialize_handler.
  *
@@ -119,6 +115,24 @@ function session_encode(): string
 {
     error_clear_last();
     $safeResult = \session_encode();
+    if ($safeResult === false) {
+        throw SessionException::createFromPhpError();
+    }
+    return $safeResult;
+}
+
+
+/**
+ *
+ *
+ * @return int
+ * @throws SessionException
+ *
+ */
+function session_gc(): int
+{
+    error_clear_last();
+    $safeResult = \session_gc();
     if ($safeResult === false) {
         throw SessionException::createFromPhpError();
     }

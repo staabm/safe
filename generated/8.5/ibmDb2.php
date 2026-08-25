@@ -5,10 +5,9 @@ namespace Safe;
 use Safe\Exceptions\IbmDb2Exception;
 
 /**
- * Sets or gets the AUTOCOMMIT behavior of the specified connection resource.
  *
- * @param resource $connection A valid database connection resource variable as returned from
- * db2_connect or db2_pconnect.
+ *
+ * @param resource $connection
  * @param \DB2_AUTOCOMMIT_OFF|\DB2_AUTOCOMMIT_ON $value One of the following constants:
  *
  *
@@ -28,22 +27,7 @@ use Safe\Exceptions\IbmDb2Exception;
  *
  *
  *
- *
- * Turns AUTOCOMMIT off.
- *
- * Turns AUTOCOMMIT on.
- * @return \DB2_AUTOCOMMIT_OFF|\DB2_AUTOCOMMIT_ON|bool When db2_autocommit receives only the
- * connection parameter, it returns the current state
- * of AUTOCOMMIT for the requested connection as an integer value. A value of
- * DB2_AUTOCOMMIT_OFF indicates that AUTOCOMMIT is off,
- * while a value of DB2_AUTOCOMMIT_ON indicates that
- * AUTOCOMMIT is on.
- *
- * When db2_autocommit receives both the
- * connection parameter and
- * autocommit parameter, it attempts to set the
- * AUTOCOMMIT state of the requested connection to the corresponding state.
- * Returns TRUE on success.
+ * @return \DB2_AUTOCOMMIT_OFF|\DB2_AUTOCOMMIT_ON|bool
  * @throws IbmDb2Exception
  *
  */
@@ -63,37 +47,15 @@ function db2_autocommit($connection, $value = null)
 
 
 /**
- * Binds a PHP variable to an SQL statement parameter in a statement resource
- * returned by db2_prepare. This function gives you more
- * control over the parameter type, data type, precision, and scale for the
- * parameter than simply passing the variable as part of the optional input
- * array to db2_execute.
  *
- * @param resource $stmt A prepared statement returned from db2_prepare.
- * @param int $parameter_number Specifies the 1-indexed position of the parameter in the prepared
- * statement.
- * @param string $variable_name A string specifying the name of the PHP variable to bind to the
- * parameter specified by parameter_number.
- * @param int $parameter_type A constant specifying whether the PHP variable should be bound to the
- * SQL parameter as an input parameter (DB2_PARAM_IN),
- * an output parameter (DB2_PARAM_OUT), or as a
- * parameter that accepts input and returns output
- * (DB2_PARAM_INOUT). To avoid memory overhead, you can
- * also specify DB2_PARAM_FILE to bind the PHP variable
- * to the name of a file that contains large object (BLOB, CLOB, or DBCLOB)
- * data.
- * @param int $data_type A constant specifying the SQL data type that the PHP variable should be
- * bound as: one of DB2_BINARY,
- * DB2_CHAR, DB2_DOUBLE, or
- * DB2_LONG .
- * @param int $precision Specifies the precision with which the variable should be bound to the
- * database. This parameter can also be used for retrieving XML output values
- * from stored procedures. A non-negative value specifies the maximum size of
- * the XML data that will be retrieved from the database. If this parameter
- * is not used, a default of 1MB will be assumed for retrieving the XML
- * output value from the stored procedure.
- * @param int $scale Specifies the scale with which the variable should be bound to the
- * database.
+ *
+ * @param resource $stmt
+ * @param int $parameter_number
+ * @param string $variable_name
+ * @param int $parameter_type
+ * @param int $data_type
+ * @param int $precision
+ * @param int $scale
  * @throws IbmDb2Exception
  *
  */
@@ -211,8 +173,8 @@ function db2_bind_param($stmt, int $parameter_number, string $variable_name, int
  *
  *
  *
- * @param resource $connection Specifies an active DB2 client connection.
- * @return \stdClass Returns an object on a successful call
+ * @param resource $connection
+ * @return \stdClass
  * @throws IbmDb2Exception
  *
  */
@@ -228,15 +190,9 @@ function db2_client_info($connection): \stdClass
 
 
 /**
- * This function closes a DB2 client connection created with
- * db2_connect and returns the corresponding
- * resources to the database server.
  *
- * If you attempt to close a persistent DB2 client connection created with
- * db2_pconnect, the close request is ignored and the
- * persistent DB2 client connection remains available for the next caller.
  *
- * @param resource $connection Specifies an active DB2 client connection.
+ * @param resource $connection
  * @throws IbmDb2Exception
  *
  */
@@ -251,13 +207,9 @@ function db2_close($connection): void
 
 
 /**
- * Commits an in-progress transaction on the specified connection resource and
- * begins a new transaction. PHP applications normally default to AUTOCOMMIT
- * mode, so db2_commit is not necessary unless AUTOCOMMIT
- * has been turned off for the connection resource.
  *
- * @param resource $connection A valid database connection resource variable as returned from
- * db2_connect or db2_pconnect.
+ *
+ * @param resource $connection
  * @throws IbmDb2Exception
  *
  */
@@ -272,26 +224,10 @@ function db2_commit($connection): void
 
 
 /**
- * db2_execute executes an SQL statement that was
- * prepared by db2_prepare.
  *
- * If the SQL statement returns a result set, for example, a SELECT statement
- * or a CALL to a stored procedure that returns one or more result sets, you
- * can retrieve a row as an array from the stmt resource
- * using db2_fetch_assoc,
- * db2_fetch_both, or
- * db2_fetch_array. Alternatively, you can use
- * db2_fetch_row to move the result set pointer to the
- * next row and fetch a column at a time from that row with
- * db2_result.
  *
- * Refer to db2_prepare for a brief discussion of the
- * advantages of using db2_prepare and
- * db2_execute rather than db2_exec.
- *
- * @param resource $stmt A prepared statement returned from db2_prepare.
- * @param array $parameters An array of input parameters matching any parameter markers contained
- * in the prepared statement.
+ * @param resource $stmt
+ * @param array $parameters
  * @throws IbmDb2Exception
  *
  */
@@ -306,12 +242,9 @@ function db2_execute($stmt, array $parameters = []): void
 
 
 /**
- * Frees the system and database resources that are associated with a result
- * set. These resources are freed implicitly when a script finishes, but you
- * can call db2_free_result to explicitly free the result
- * set resources before the end of the script.
  *
- * @param resource $stmt A valid statement resource.
+ *
+ * @param resource $stmt
  * @throws IbmDb2Exception
  *
  */
@@ -326,12 +259,9 @@ function db2_free_result($stmt): void
 
 
 /**
- * Frees the system and database resources that are associated with a statement
- * resource. These resources are freed implicitly when a script finishes, but
- * you can call db2_free_stmt to explicitly free the
- * statement resources before the end of the script.
  *
- * @param resource $stmt A valid statement resource.
+ *
+ * @param resource $stmt
  * @throws IbmDb2Exception
  *
  */
@@ -346,13 +276,9 @@ function db2_free_stmt($stmt): void
 
 
 /**
- * Retrieves the value of a specified option value for a statement resource
- * or a connection resource.
  *
- * @param resource $resource A valid statement resource as returned from
- * db2_prepare or a valid connection resource as
- * returned from db2_connect or
- * db2_pconnect.
+ *
+ * @param resource $resource
  * @param string $option A valid statement or connection options. The following new options are available
  * as of ibm_db2 version 1.6.0. They provide useful tracking information
  * that can be set during execution with db2_get_option.
@@ -435,15 +361,6 @@ function db2_free_stmt($stmt): void
  *
  *
  *
- * Prior versions of ibm_db2 do not support these new options.
- *
- * When the value in each option is being set, some servers might not handle
- * the entire length provided and might truncate the value.
- *
- * To ensure that the data specified in each option is converted correctly
- * when transmitted to a host system, use only the characters A through Z,
- * 0 through 9, and the underscore (_) or period (.).
- *
  * SQL_ATTR_INFO_USERID - A pointer to a null-terminated
  * character string used to identify the client user ID sent to the host
  * database server when using DB2 Connect.
@@ -455,10 +372,6 @@ function db2_free_stmt($stmt): void
  *
  *
  *
- * DB2 for z/OS and OS/390 servers support up to a length of 16 characters.
- * This user-id is not to be confused with the authentication user-id, it is for
- * identification purposes only and is not used for any authorization.
- *
  * SQL_ATTR_INFO_ACCTSTR - A pointer to a null-terminated
  * character string used to identify the client accounting string sent to the
  * host database server when using DB2 Connect.
@@ -467,8 +380,6 @@ function db2_free_stmt($stmt): void
  * DB2 for z/OS and OS/390 servers support up to a length of 200 characters.
  *
  *
- *
- * DB2 for z/OS and OS/390 servers support up to a length of 200 characters.
  *
  * SQL_ATTR_INFO_APPLNAME - A pointer to a null-terminated
  * character string used to identify the client application name sent to the
@@ -479,8 +390,6 @@ function db2_free_stmt($stmt): void
  *
  *
  *
- * DB2 for z/OS and OS/390 servers support up to a length of 32 characters.
- *
  * SQL_ATTR_INFO_WRKSTNNAME - A pointer to a null-terminated
  * character string used to identify the client workstation name sent to the
  * host database server when using DB2 Connect.
@@ -489,9 +398,7 @@ function db2_free_stmt($stmt): void
  * DB2 for z/OS and OS/390 servers support up to a length of 18 characters.
  *
  *
- *
- * DB2 for z/OS and OS/390 servers support up to a length of 18 characters.
- * @return string Returns the current setting of the connection attribute provided on success.
+ * @return string
  * @throws IbmDb2Exception
  *
  */
@@ -507,23 +414,10 @@ function db2_get_option($resource, string $option): string
 
 
 /**
- * Returns the number of rows deleted, inserted, or updated by an SQL
- * statement.
  *
- * To determine the number of rows that will be returned by a SELECT
- * statement, issue SELECT COUNT(*) with the same predicates as your
- * intended SELECT statement and retrieve the value.
  *
- * If your application logic checks the number of rows returned by a SELECT
- * statement and branches if the number of rows is 0, consider modifying your
- * application to attempt to return the first row with one of
- * db2_fetch_assoc, db2_fetch_both,
- * db2_fetch_array, or db2_fetch_row,
- * and branch if the fetch function returns FALSE.
- *
- * @param resource $stmt A valid stmt resource containing a result set.
- * @return int Returns the number of rows affected by the last SQL statement issued by
- * the specified statement handle
+ * @param resource $stmt
+ * @return int
  * @throws IbmDb2Exception
  *
  */
@@ -549,14 +443,7 @@ function db2_num_rows($stmt): int
  *
  *
  *
- * If you have a persistent DB2 client connection created with
- * db2_pconnect, you may use this function to close the
- * connection. To avoid substantial connection performance penalties, this
- * function should only be used in rare cases when the persistent connection
- * has become unresponsive or the persistent connection will not be needed for
- * a long period of time.
- *
- * @param resource $connection Specifies an active DB2 client connection.
+ * @param resource $connection
  * @throws IbmDb2Exception
  *
  */
@@ -571,13 +458,9 @@ function db2_pclose($connection): void
 
 
 /**
- * Rolls back an in-progress transaction on the specified connection resource and
- * begins a new transaction. PHP applications normally default to AUTOCOMMIT
- * mode, so db2_rollback normally has no effect unless
- * AUTOCOMMIT has been turned off for the connection resource.
  *
- * @param resource $connection A valid database connection resource variable as returned from
- * db2_connect or db2_pconnect.
+ *
+ * @param resource $connection
  * @throws IbmDb2Exception
  *
  */
@@ -837,8 +720,8 @@ function db2_rollback($connection): void
  *
  *
  *
- * @param resource $connection Specifies an active DB2 client connection.
- * @return \stdClass Returns an object on a successful call
+ * @param resource $connection
+ * @return \stdClass
  * @throws IbmDb2Exception
  *
  */
@@ -854,13 +737,9 @@ function db2_server_info($connection): \stdClass
 
 
 /**
- * Sets options for a statement resource or a connection resource. You
- * cannot set options for result set resources.
  *
- * @param resource $resource A valid statement resource as returned from
- * db2_prepare or a valid connection resource as
- * returned from db2_connect or
- * db2_pconnect.
+ *
+ * @param resource $resource
  * @param array $options An associative array containing valid statement or connection
  * options. This parameter can be used to change autocommit values,
  * cursor types (scrollable or forward), and to specify the case of
@@ -954,54 +833,6 @@ function db2_server_info($connection): \stdClass
  *
  *
  *
- * Passing DB2_AUTOCOMMIT_ON turns
- * autocommit on for the specified connection resource.
- *
- * Passing DB2_AUTOCOMMIT_OFF turns
- * autocommit off for the specified connection resource.
- *
- * Passing DB2_FORWARD_ONLY specifies a
- * forward-only cursor for a statement resource. This is the
- * default cursor type, and is supported by all database
- * servers.
- *
- * Passing DB2_SCROLLABLE specifies a
- * scrollable cursor for a statement resource. Scrollable
- * cursors enable result set rows to be accessed in
- * non-sequential order, but are only supported by
- * IBM DB2 Universal Database databases.
- *
- * Passing DB2_BINARY specifies that
- * binary data will be returned as is. This is the default
- * mode. This is the equivalent of setting
- * ibm_db2.binmode=1 in php.ini.
- *
- * Passing DB2_CONVERT specifies that
- * binary data will be converted to hexadecimal encoding,
- * and will be returned as such. This is the equivalent of
- * setting ibm_db2.binmode=2 in php.ini.
- *
- * Passing DB2_PASSTHRU specifies that
- * binary data will be converted to NULL. This is the
- * equivalent of setting ibm_db2.binmode=3
- * in php.ini.
- *
- * Passing DB2_CASE_LOWER specifies that
- * column names of the result set are returned in lower case.
- *
- * Passing DB2_CASE_UPPER specifies that
- * column names of the result set are returned in upper case.
- *
- * Passing DB2_CASE_NATURAL specifies that
- * column names of the result set are returned in natural
- * case.
- *
- * Passing DB2_DEFERRED_PREPARE_ON turns deferred
- * prepare on for the specified statement resource.
- *
- * Passing DB2_DEFERRED_PREPARE_OFF turns deferred
- * prepare off for the specified statement resource.
- *
  * The following new i5/OS options are available in ibm_db2 version 1.5.1
  * and later. These options apply only when running PHP and ibm_db2 natively on i5 systems.
  *
@@ -1022,14 +853,6 @@ function db2_server_info($connection): \stdClass
  *
  *
  *
- * DB2_I5_FETCH_ON - Cursors are read-only
- * and cannot be used for positioned updates or deletes. This
- * is the default unless SQL_ATTR_FOR_FETCH_ONLY
- * environment has been set to SQL_FALSE.
- *
- * DB2_I5_FETCH_OFF - Cursors can be used
- * for positioned updates and deletes.
- *
  * The following new option is available in ibm_db2 version 1.8.0 and later.
  *
  *
@@ -1048,14 +871,6 @@ function db2_server_info($connection): \stdClass
  *
  *
  *
- *
- * DB2_ROWCOUNT_PREFETCH_ON - Client can request
- * the full row count prior to fetching, which means that
- * db2_num_rows returns the number of rows selected
- * even when a ROLLFORWARD_ONLY cursor is used.
- *
- * DB2_ROWCOUNT_PREFETCH_OFF - Client cannot request
- * the full row count prior to fetching.
  *
  * The following new options are available in ibm_db2 version 1.7.0 and later.
  *
@@ -1080,14 +895,6 @@ function db2_server_info($connection): \stdClass
  *
  *
  *
- *
- * To switch the user to a trusted user, pass the User ID (String)
- * of the trusted user as the value of this key. This option can
- * be set on a connection resource only. To use this option, trusted
- * context must be enabled on the connection resource.
- *
- * The password (String) that corresponds to the user specified
- * by the trusted_user key.
  *
  * The following new options are available in ibm_db2 version 1.6.0 and later.
  * These options provide useful tracking information that can be accessed during
@@ -1168,13 +975,6 @@ function db2_server_info($connection): \stdClass
  *
  *
  *
- * When the value in each option is being set, some servers might not handle
- * the entire length provided and might truncate the value.
- *
- * To ensure that the data specified in each option is converted correctly
- * when transmitted to a host system, use only the characters A through Z,
- * 0 through 9, and the underscore (_) or period (.).
- *
  * SQL_ATTR_INFO_USERID - A pointer to a null-terminated
  * character string used to identify the client user ID sent to the host
  * database server when using DB2 Connect.
@@ -1186,10 +986,6 @@ function db2_server_info($connection): \stdClass
  *
  *
  *
- * DB2 for z/OS and OS/390 servers support up to a length of 16 characters.
- * This user-id is not to be confused with the authentication user-id, it is for
- * identification purposes only and is not used for any authorization.
- *
  * SQL_ATTR_INFO_ACCTSTR - A pointer to a null-terminated
  * character string used to identify the client accounting string sent to the
  * host database server when using DB2 Connect.
@@ -1198,8 +994,6 @@ function db2_server_info($connection): \stdClass
  * DB2 for z/OS and OS/390 servers support up to a length of 200 characters.
  *
  *
- *
- * DB2 for z/OS and OS/390 servers support up to a length of 200 characters.
  *
  * SQL_ATTR_INFO_APPLNAME - A pointer to a null-terminated
  * character string used to identify the client application name sent to the
@@ -1210,8 +1004,6 @@ function db2_server_info($connection): \stdClass
  *
  *
  *
- * DB2 for z/OS and OS/390 servers support up to a length of 32 characters.
- *
  * SQL_ATTR_INFO_WRKSTNNAME - A pointer to a null-terminated
  * character string used to identify the client workstation name sent to the
  * host database server when using DB2 Connect.
@@ -1220,13 +1012,7 @@ function db2_server_info($connection): \stdClass
  * DB2 for z/OS and OS/390 servers support up to a length of 18 characters.
  *
  *
- *
- * DB2 for z/OS and OS/390 servers support up to a length of 18 characters.
- * @param int $type Passing DB2_AUTOCOMMIT_ON turns
- * autocommit on for the specified connection resource.
- *
- * Passing DB2_AUTOCOMMIT_OFF turns
- * autocommit off for the specified connection resource.
+ * @param int $type
  * @throws IbmDb2Exception
  *
  */

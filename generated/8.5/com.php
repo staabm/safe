@@ -157,7 +157,7 @@ function com_print_typeinfo(object $variant, ?string $dispatch_interface = null,
 /**
  * Converts variant from a VT_DATE
  * (or similar) value into a Unix timestamp.  This allows easier
- * interopability between the Unix-ish parts of PHP and COM.
+ * interoperability between the Unix-ish parts of PHP and COM.
  *
  * @param object $variant The variant.
  * @return int Returns a unix timestamp.

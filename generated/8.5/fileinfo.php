@@ -5,41 +5,26 @@ namespace Safe;
 use Safe\Exceptions\FileinfoException;
 
 /**
- * This function closes the instance opened by finfo_open.
  *
- * @param \finfo $finfo An finfo instance, returned by finfo_open.
- * @throws FileinfoException
+ *
+ * @param \finfo $finfo
+ * @return bool
  *
  */
-function finfo_close(\finfo $finfo): void
+function finfo_close(\finfo $finfo): bool
 {
     error_clear_last();
     $safeResult = \finfo_close($finfo);
-    if ($safeResult === false) {
-        throw FileinfoException::createFromPhpError();
-    }
+    return $safeResult;
 }
 
 
 /**
- * Procedural style
  *
- * Object-oriented style (constructor):
  *
- * This function opens a magic database and returns its instance.
- *
- * @param int $flags One or disjunction of more Fileinfo
- * constants.
- * @param null|string $magic_database Name of a magic database file, usually something like
- * /path/to/magic.mime. If not specified, the
- * MAGIC environment variable is used. If the
- * environment variable isn't set, then PHP's bundled magic database will
- * be used.
- *
- * Passing NULL or an empty string will be equivalent to the default
- * value.
- * @return \finfo (Procedural style only)
- * Returns an finfo instance on success.
+ * @param int $flags
+ * @param null|string $magic_database
+ * @return \finfo
  * @throws FileinfoException
  *
  */
@@ -59,12 +44,10 @@ function finfo_open(int $flags = FILEINFO_NONE, ?string $magic_database = null):
 
 
 /**
- * Returns the MIME content type for a file as determined by using
- * information from the magic.mime file.
  *
- * @param resource|string $filename Path to the tested file.
- * @return string Returns the content type in MIME format, like
- * text/plain or application/octet-stream.
+ *
+ * @param resource|string $filename
+ * @return string
  * @throws FileinfoException
  *
  */

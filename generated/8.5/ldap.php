@@ -62,7 +62,7 @@ function ldap_add(\LDAP\Connection $ldap, string $dn, array $entry, ?array $cont
 
 
 /**
- * Binds to the LDAP directory with specified RDN and password.
+ *
  *
  * @param \LDAP\Connection $ldap An LDAP\Connection instance, returned by ldap_connect.
  * @param null|string $dn
@@ -164,17 +164,13 @@ function ldap_control_paged_result($link, int $pagesize, bool $iscritical = fals
  *
  * @param \LDAP\Connection $ldap An LDAP\Connection instance, returned by ldap_connect.
  * @param \LDAP\Result $result An LDAP\Result instance, returned by ldap_list or ldap_search.
- * @return int Returns number of entries in the result.
- * @throws LdapException
+ * @return int
  *
  */
 function ldap_count_entries(\LDAP\Connection $ldap, \LDAP\Result $result): int
 {
     error_clear_last();
     $safeResult = \ldap_count_entries($ldap, $result);
-    if ($safeResult === false) {
-        throw LdapException::createFromPhpError();
-    }
     return $safeResult;
 }
 
@@ -227,7 +223,7 @@ function ldap_dn2ufn(string $dn): string
  *
  * @param \LDAP\Connection $ldap An LDAP\Connection instance, returned by ldap_connect.
  * @param string $user dn of the user to change the password of.
- * @param string $old_password The old password of this user. May be ommited depending of server configuration.
+ * @param string $old_password
  * @param string $new_password The new password for this user. May be omitted or empty to have a generated password.
  * @param array|null $controls If provided, a password policy request control is send with the request and this is
  * filled with an array of LDAP Controls
@@ -241,6 +237,40 @@ function ldap_exop_passwd(\LDAP\Connection $ldap, string $user = "", string $old
 {
     error_clear_last();
     $safeResult = \ldap_exop_passwd($ldap, $user, $old_password, $new_password, $controls);
+    if ($safeResult === false) {
+        throw LdapException::createFromPhpError();
+    }
+    return $safeResult;
+}
+
+
+/**
+ *
+ *
+ * @param \LDAP\Connection $ldap
+ * @param string $request_oid
+ * @param null|string $request_data
+ * @param array|null $controls
+ * @param null|string $response_data
+ * @param null|string $response_oid
+ * @return \LDAP\Result|bool
+ * @throws LdapException
+ *
+ */
+function ldap_exop_sync(\LDAP\Connection $ldap, string $request_oid, ?string $request_data = null, ?array $controls = null, ?string &$response_data = null, ?string &$response_oid = null)
+{
+    error_clear_last();
+    if ($response_oid !== null) {
+        $safeResult = \ldap_exop_sync($ldap, $request_oid, $request_data, $controls, $response_data, $response_oid);
+    } elseif ($response_data !== null) {
+        $safeResult = \ldap_exop_sync($ldap, $request_oid, $request_data, $controls, $response_data);
+    } elseif ($controls !== null) {
+        $safeResult = \ldap_exop_sync($ldap, $request_oid, $request_data, $controls);
+    } elseif ($request_data !== null) {
+        $safeResult = \ldap_exop_sync($ldap, $request_oid, $request_data);
+    } else {
+        $safeResult = \ldap_exop_sync($ldap, $request_oid);
+    }
     if ($safeResult === false) {
         throw LdapException::createFromPhpError();
     }
@@ -268,20 +298,15 @@ function ldap_exop_whoami(\LDAP\Connection $ldap)
 
 
 /**
- * Performs an extended operation on the specified ldap with
- * request_oid the OID of the operation and
- * request_data the data.
  *
- * @param \LDAP\Connection $ldap An LDAP\Connection instance, returned by ldap_connect.
- * @param string $request_oid The extended operation request OID. You may use one of LDAP_EXOP_START_TLS, LDAP_EXOP_MODIFY_PASSWD, LDAP_EXOP_REFRESH, LDAP_EXOP_WHO_AM_I, LDAP_EXOP_TURN, or a string with the OID of the operation you want to send.
- * @param null|string $request_data The extended operation request data. May be NULL for some operations like LDAP_EXOP_WHO_AM_I, may also need to be BER encoded.
- * @param array|null $controls Array of LDAP Controls to send with the request.
- * @param null|string $response_data Will be filled with the extended operation response data if provided.
- * If not provided you may use ldap_parse_exop on the result object
- * later to get this data.
- * @param null|string $response_oid Will be filled with the response OID if provided, usually equal to the request OID.
- * @return bool|resource When used with response_data, returns TRUE on success.
- * When used without response_data, returns a result identifier.
+ *
+ * @param \LDAP\Connection $ldap
+ * @param string $request_oid
+ * @param null|string $request_data
+ * @param array|null $controls
+ * @param null|string $response_data
+ * @param null|string $response_oid
+ * @return bool|resource
  * @throws LdapException
  *
  */
@@ -491,7 +516,9 @@ function ldap_get_entries(\LDAP\Connection $ldap, \LDAP\Result $result): array
 /**
  * Sets value to the value of the specified option.
  *
- * @param \LDAP\Connection $ldap An LDAP\Connection instance, returned by ldap_connect.
+ * @param \LDAP\Connection|null $ldap Either an LDAP\Connection instance, returned by
+ * ldap_connect, to get the option for that connection,
+ * or NULL to get the global option.
  * @param int $option The parameter option can be one of:
  *
  *
@@ -654,6 +681,11 @@ function ldap_get_entries(\LDAP\Connection $ldap, \LDAP\Result $result): array
  * 7.1
  *
  *
+ * LDAP_OPT_X_TLS_PROTOCOL_MAX
+ * int
+ * 8.4
+ *
+ *
  * LDAP_OPT_X_TLS_RANDOM_FILE
  * string
  * 7.1
@@ -670,7 +702,7 @@ function ldap_get_entries(\LDAP\Connection $ldap, \LDAP\Result $result): array
  * @throws LdapException
  *
  */
-function ldap_get_option(\LDAP\Connection $ldap, int $option, &$value = null): void
+function ldap_get_option(?\LDAP\Connection $ldap, int $option, &$value = null): void
 {
     error_clear_last();
     $safeResult = \ldap_get_option($ldap, $option, $value);
@@ -757,7 +789,7 @@ function ldap_get_values(\LDAP\Connection $ldap, \LDAP\ResultEntry $entry, strin
  *
  * @param \LDAP\Connection $ldap An LDAP\Connection instance, returned by ldap_connect.
  * @param string $dn The distinguished name of an LDAP entity.
- * @param array $entry An associative array listing the attirbute values to add. If an attribute was not existing yet it will be added. If an attribute is existing you can only add values to it if it supports multiple values.
+ * @param array $entry
  * @param array|null $controls Array of LDAP Controls to send with the request.
  * @throws LdapException
  *
@@ -1066,7 +1098,7 @@ function ldap_sasl_bind(\LDAP\Connection $ldap, ?string $dn = null, ?string $pas
 
 
 /**
- * Sets the value of the specified option to be value.
+ *
  *
  * @param null|resource $ldap Either an LDAP\Connection instance, returned by
  * ldap_connect, to set the option for that connection,
@@ -1213,6 +1245,11 @@ function ldap_sasl_bind(\LDAP\Connection $ldap, ?string $dn = null, ?string $pas
  * PHP 7.1.0
  *
  *
+ * LDAP_OPT_X_TLS_PROTOCOL_MAX
+ * int
+ * PHP 8.4.0
+ *
+ *
  * LDAP_OPT_X_TLS_RANDOM_FILE
  * string
  * PHP 7.1.0
@@ -1239,6 +1276,10 @@ function ldap_sasl_bind(\LDAP\Connection $ldap, ?string $dn = null, ?string $pas
  * iscritical defaults to FALSE
  * if not supplied. See draft-ietf-ldapext-ldap-c-api-xx.txt
  * for details. See also the second example below.
+ *
+ * All TLS options must be set globally before
+ * ldap_connect for ldaps connection or
+ * for the connection before ldap_start_tls.
  * @param mixed $value The new value for the specified option.
  * @throws LdapException
  *

@@ -11,9 +11,7 @@ use Safe\Exceptions\MbstringException;
  * This function complements mb_ord.
  *
  * @param int $codepoint A Unicode codepoint value, e.g. 128024 for U+1F418 ELEPHANT
- * @param null|string $encoding The encoding
- * parameter is the character encoding. If it is omitted or NULL, the internal character
- * encoding value will be used.
+ * @param null|string $encoding
  * @return string A string containing the requested character, if it can be represented in the specified
  * encoding.
  * @throws MbstringException
@@ -439,9 +437,7 @@ function mb_internal_encoding(?string $encoding = null)
  * This function complements mb_chr.
  *
  * @param string $string A string
- * @param null|string $encoding The encoding
- * parameter is the character encoding. If it is omitted or NULL, the internal character
- * encoding value will be used.
+ * @param null|string $encoding
  * @return int The Unicode code point for the first character of string.
  * @throws MbstringException
  *
@@ -487,9 +483,7 @@ function mb_parse_str(string $string, ?array &$result): void
 /**
  * Set/Get character encoding for a multibyte regex.
  *
- * @param null|string $encoding The encoding
- * parameter is the character encoding. If it is omitted or NULL, the internal character
- * encoding value will be used.
+ * @param null|string $encoding
  * @return bool|string
  * @throws MbstringException
  *

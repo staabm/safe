@@ -483,8 +483,8 @@ function long2ip(int $ip)
  *
  *
  *
- * Name
- * Description
+ * &Name;
+ * &Description;
  *
  *
  *
@@ -530,8 +530,8 @@ function long2ip(int $ip)
  *
  *
  *
- * Name
- * Description
+ * &Name;
+ * &Description;
  *
  *
  *

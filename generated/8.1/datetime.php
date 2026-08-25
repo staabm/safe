@@ -364,10 +364,7 @@ function date_sunset(int $timestamp, int $returnFormat = SUNFUNCS_RET_STRING, ?f
  * is optional and defaults to the value of time.
  *
  * @param string $format Format accepted by DateTimeInterface::format.
- * @param int|null $timestamp The optional timestamp parameter is an
- * int Unix timestamp that defaults to the current
- * local time if timestamp is omitted or NULL. In other
- * words, it defaults to the value of time.
+ * @param int|null $timestamp
  * @return string Returns a formatted date string. If a non-numeric value is used for
  * timestamp, FALSE is returned and an
  * E_WARNING level error is emitted.
@@ -452,10 +449,7 @@ function gmmktime(int $hour, ?int $minute = null, ?int $second = null, ?int $mon
  * 01:00:00".
  *
  * @param string $format See description in strftime.
- * @param int|null $timestamp The optional timestamp parameter is an
- * int Unix timestamp that defaults to the current
- * local time if timestamp is omitted or NULL. In other
- * words, it defaults to the value of time.
+ * @param int|null $timestamp
  * @return string Returns a string formatted according to the given format string
  * using the given timestamp or the current
  * local time if no timestamp is given.  Month and weekday names and
@@ -575,10 +569,7 @@ function gmstrftime(string $format, ?int $timestamp = null): string
  *
  *
  *
- * @param int|null $timestamp The optional timestamp parameter is an
- * int Unix timestamp that defaults to the current
- * local time if timestamp is omitted or NULL. In other
- * words, it defaults to the value of time.
+ * @param int|null $timestamp
  * @return int Returns an int on success.
  *
  * As idate always returns an int and
@@ -957,10 +948,7 @@ function mktime(int $hour, ?int $minute = null, ?int $second = null, ?int $month
  *
  * The %z and %Z modifiers both
  * return the time zone name instead of the offset or abbreviation.
- * @param int|null $timestamp The optional timestamp parameter is an
- * int Unix timestamp that defaults to the current
- * local time if timestamp is omitted or NULL. In other
- * words, it defaults to the value of time.
+ * @param int|null $timestamp
  * @return string Returns a string formatted according format
  * using the given timestamp or the current
  * local time if no timestamp is given.  Month and weekday names and

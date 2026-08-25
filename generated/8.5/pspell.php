@@ -7,7 +7,7 @@ use Safe\Exceptions\PspellException;
 /**
  *
  *
- * @param int $dictionary An PSpell\Dictionary instance.
+ * @param int $dictionary
  * @param string $word The added word.
  * @throws PspellException
  *
@@ -25,7 +25,7 @@ function pspell_add_to_personal(int $dictionary, string $word): void
 /**
  *
  *
- * @param int $dictionary An PSpell\Dictionary instance.
+ * @param int $dictionary
  * @param string $word The added word.
  * @throws PspellException
  *
@@ -43,7 +43,7 @@ function pspell_add_to_session(int $dictionary, string $word): void
 /**
  *
  *
- * @param int $dictionary An PSpell\Dictionary instance.
+ * @param int $dictionary
  * @throws PspellException
  *
  */
@@ -140,7 +140,7 @@ function pspell_config_dict_dir(int $config, string $directory): void
 /**
  *
  *
- * @param int $config An PSpell\Config instance.
+ * @param int $config
  * @param int $min_length Words less than min_length characters will be skipped.
  * @throws PspellException
  *
@@ -158,7 +158,7 @@ function pspell_config_ignore(int $config, int $min_length): void
 /**
  *
  *
- * @param int $config An PSpell\Config instance.
+ * @param int $config
  * @param int $mode The mode parameter is the mode in which spellchecker will work.
  * There are several modes available:
  *
@@ -202,7 +202,7 @@ function pspell_config_mode(int $config, int $mode): void
  * pspell_config_personal should be used on a config
  * before calling pspell_new_config.
  *
- * @param int $config An PSpell\Config instance.
+ * @param int $config
  * @param string $filename The personal wordlist. If the file does not exist, it will be created.
  * The file should be writable by whoever PHP runs as (e.g. nobody).
  * @throws PspellException
@@ -230,7 +230,7 @@ function pspell_config_personal(int $config, string $filename): void
  * pspell_config_repl should be used on a config
  * before calling pspell_new_config.
  *
- * @param int $config An PSpell\Config instance.
+ * @param int $config
  * @param string $filename The file should be writable by whoever PHP runs as (e.g. nobody).
  * @throws PspellException
  *
@@ -255,7 +255,7 @@ function pspell_config_repl(int $config, string $filename): void
  * pspell_config_runtogether should be used on a config
  * before calling pspell_new_config.
  *
- * @param int $config An PSpell\Config instance.
+ * @param int $config
  * @param bool $allow TRUE if run-together words should be treated as legal compounds,
  * FALSE otherwise.
  * @throws PspellException
@@ -283,7 +283,7 @@ function pspell_config_runtogether(int $config, bool $allow): void
  * pspell_config_save_repl should be used on a config
  * before calling pspell_new_config.
  *
- * @param int $config An PSpell\Config instance.
+ * @param int $config
  * @param bool $save TRUE if replacement pairs should be saved, FALSE otherwise.
  * @throws PspellException
  *
@@ -464,7 +464,7 @@ function pspell_new(string $language, string $spelling = "", string $jargon = ""
 /**
  *
  *
- * @param int $dictionary An PSpell\Dictionary instance.
+ * @param int $dictionary
  * @throws PspellException
  *
  */
@@ -481,7 +481,7 @@ function pspell_save_wordlist(int $dictionary): void
 /**
  *
  *
- * @param int $dictionary An PSpell\Dictionary instance.
+ * @param int $dictionary
  * @param string $misspelled The misspelled word.
  * @param string $correct The fixed spelling for the misspelled word.
  * @throws PspellException
